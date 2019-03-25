@@ -1,4 +1,4 @@
-package main
+package db
 
 import (
 	"github.com/jinzhu/gorm"
@@ -11,7 +11,7 @@ type Product struct {
 	Price uint
 }
 
-func main() {
+func Main() {
 	db, err := gorm.Open("sqlite3", "test.db")
 	if err != nil {
 		panic("failed to connect database")
