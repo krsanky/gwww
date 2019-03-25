@@ -19,6 +19,7 @@ func main() {
 		switch arg1 := os.Args[1]; arg1 {
 		case "web":
 			web.TestWeb()
+			web.Main()
 		case "db":
 			db.Main()
 			db.TestBeets()
