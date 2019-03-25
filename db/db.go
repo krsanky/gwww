@@ -1,14 +1,22 @@
 package db
 
 import (
+	"fmt"
+
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 )
+
+var beets_db_file = "/home/wise/go/src/oldcode.org/gow/db/beets.db"
 
 type Product struct {
 	gorm.Model
 	Code  string
 	Price uint
+}
+
+func TestBeets() {
+	fmt.Printf("test beets: %s\n", beets_db_file)
 }
 
 func Main() {
