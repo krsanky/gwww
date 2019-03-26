@@ -2,19 +2,25 @@ package web
 
 import (
 	"fmt"
-	"log"
+	"io"
+	"net"
 	"net/http"
+	"net/http/fcgi"
 )
 
-func TestWeb() {
-	fmt.Printf("test web\n")
-}
+func homeView(w http.ResponseWriter, r *http.Request) {
+	headers := w.Header()
+	headers.Add("Content-Type", "text/html")
+	//r.ParseForm()
 
-func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hi there, I love %s!", r.URL.Path[1:])
+	io.WriteString(w, fmt.Sprintln("<p>Auth OK</p>"))
 }
 
 func Main() {
-	http.HandleFunc("/", handler)
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	listener, err := net.Listen("tcp", "127.0.0.1:8088")
+	if err != nil {
+		panic(err)
+	}
+	http.HandleFunc("/", homeView)
+	fcgi.Serve(listener, nil)
 }
