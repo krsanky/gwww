@@ -7,13 +7,10 @@ import (
 	"net/http/fcgi"
 )
 
-func homeView(w http.ResponseWriter, r *http.Request) {
+func handler(w http.ResponseWriter, r *http.Request) {
 	headers := w.Header()
 	headers.Add("Content-Type", "text/html")
-	//r.ParseForm()
-
-	//io.WriteString(w, fmt.Sprintln("<p>Auth OK</p>"))
-	fmt.Fprintf(w, "Hi there, I love %s!", r.URL.Path[1:])
+	fmt.Fprintf(w, "HHHHHHHHHHHHHHHHHHHHHHH %s ----!", r.URL.Path[1:])
 }
 
 func Main() {
@@ -21,6 +18,6 @@ func Main() {
 	if err != nil {
 		panic(err)
 	}
-	http.HandleFunc("/", homeView)
+	http.HandleFunc("/", handler)
 	fcgi.Serve(listener, nil)
 }
