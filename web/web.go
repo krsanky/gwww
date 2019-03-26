@@ -2,7 +2,6 @@ package web
 
 import (
 	"fmt"
-	"io"
 	"net"
 	"net/http"
 	"net/http/fcgi"
@@ -13,7 +12,8 @@ func homeView(w http.ResponseWriter, r *http.Request) {
 	headers.Add("Content-Type", "text/html")
 	//r.ParseForm()
 
-	io.WriteString(w, fmt.Sprintln("<p>Auth OK</p>"))
+	//io.WriteString(w, fmt.Sprintln("<p>Auth OK</p>"))
+	fmt.Fprintf(w, "Hi there, I love %s!", r.URL.Path[1:])
 }
 
 func Main() {
