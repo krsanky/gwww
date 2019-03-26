@@ -18,8 +18,7 @@ func main() {
 	if len(os.Args) >= 2 {
 		switch arg1 := os.Args[1]; arg1 {
 		case "web":
-			web.Main()
-			//web.Main2()
+			web.Serve()
 		case "db":
 			db.Main()
 			db.TestBeets()
