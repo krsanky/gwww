@@ -8,10 +8,21 @@ import (
 	"text/template"
 )
 
-func handler(w http.ResponseWriter, r *http.Request) {
+var tmpls map[string]*template.Template
+
+func init() {
+	tmpls = make(map[string]*template.Template)
+}
+
+func index(w http.ResponseWriter, r *http.Request) {
 	headers := w.Header()
 	headers.Add("Content-Type", "text/html")
-	fmt.Fprintf(w, "HHHHHHHHHHHHHHHHHHHHHHH %s ----!", r.URL.Path[1:])
+	_, ok := tmpls["index"]
+	if (!ok) {
+		tmpls["index"] = template.Must(template.ParseFiles("tmpl/base.html", "tmpl/index.html"))
+	}
+	tmpls["index"].Execute(w, nil)
+	//fmt.Fprintf(w, "<script>console.log('script');</script>\n")
 }
 
 func h1(w http.ResponseWriter, r *http.Request) {
@@ -20,16 +31,13 @@ func h1(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "<h1>H1</h1>\n")
 }
 
-//tmpl := make(map[string]*template.Template)
-//tmpl["index.html"] = template.Must(template.ParseFiles("index.html", "base.html"))
-//tmpl["index.html"].ExecuteTemplate(w, "base.html", data)
 func other(w http.ResponseWriter, r *http.Request) {
 	tmpl := make(map[string]*template.Template)
-	tmpl["other.html"] = template.Must(template.ParseFiles("tmpl/other.html", "tmpl/base.html"))
+	tmpl["other.html"] = template.Must(template.ParseFiles("tmpl/base.html", "tmpl/other.html"))
 	headers := w.Header()
 	headers.Add("Content-Type", "text/html")
-	//fmt.Fprintf(w, "<h1>other</h1>\n")
-	tmpl["other.html"].ExecuteTemplate(w, "base.html", nil)
+	//tmpl["other.html"].ExecuteTemplate(w, "name-of-define-block", nil)
+	tmpl["other.html"].Execute(w, nil)
 }
 
 func Serve() {
@@ -37,7 +45,7 @@ func Serve() {
 	if err != nil {
 		panic(err)
 	}
-	http.HandleFunc("/", handler)
+	http.HandleFunc("/", index)
 	http.HandleFunc("/h1", h1)
 	http.HandleFunc("/other", other)
 	fcgi.Serve(listener, nil)

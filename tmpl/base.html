@@ -1,14 +1,33 @@
 <!DOCTYPE html>
-<html>
+<head>
+<meta charset='utf-8' />
+<meta name='viewport' content='width=device-width, initial-scale=1' />
+<title>{{block "title" .}}default-title-{{end}}</title>
 
-<head>{{block "head" .}}
-<title>default-title</title>
-{{end}}
+<link rel="stylesheet" href="/static/style.css">
+
+<script src="/static/jquery-3.3.1.min.js"></script>
+<script src="/static/mousetrap.min.js"></script>
+<script src="/static/script.js"></script>
+<script src="/static/hn.js"></script>
+
 </head>
-
-<body>{{block "body" .}}
-<p>default body</p>
-{{end}}
+<body>
+<header class="navbar">
+	<section class="navbar-section">
+		<a href="/" class="btn btn-link">Home</a>
+		<a href="/index" class="btn btn-link">Alpha</a>
+	</section>
+	<section id="id123" class="navbar-center">
+		<!-- centered logo or brand -->
+		<a href="https://oldcode.org/">oldcode</a>
+	</section>
+	<section class="navbar-section">
+		<a href="/other" class="btn btn-link">Delta</a>
+		<a href="/other" class="btn btn-link">Bravo</a>
+	</section>
+</header>
+{{block "main" .}}-- block main --{{end}}
 </body>
-
 </html>
+
