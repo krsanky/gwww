@@ -7,6 +7,8 @@ import (
 	"net/http/fcgi"
 	"strings"
 	"text/template"
+
+	svg "github.com/ajstarks/svgo"
 )
 
 var tmpls map[string]*template.Template
@@ -75,6 +77,14 @@ func page3(w http.ResponseWriter, r *http.Request) {
 	RenderPage("page3", w, data)
 }
 
+func circle(w http.ResponseWriter, req *http.Request) {
+	w.Header().Set("Content-Type", "image/svg+xml")
+	s := svg.New(w)
+	s.Start(500, 500)
+	s.Circle(250, 250, 125, "fill:none;stroke:black")
+	s.End()
+}
+
 func Serve() {
 	listener, err := net.Listen("tcp", "127.0.0.1:8088")
 	if err != nil {
@@ -86,6 +96,7 @@ func Serve() {
 	http.HandleFunc("/page3", page3)
 	http.HandleFunc("/page4",
 		func(w http.ResponseWriter, r *http.Request) { RenderPage("page4", w, nil) })
+	http.HandleFunc("/circle", circle)
 
 	fcgi.Serve(listener, nil)
 }
