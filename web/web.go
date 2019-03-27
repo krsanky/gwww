@@ -19,7 +19,7 @@ func init() {
 	tmpls = make(map[string]*template.Template)
 }
 
-func RenderPage(page string, w http.ResponseWriter) {
+func RenderPage(page string, w http.ResponseWriter, data interface{}) {
 	headers := w.Header()
 	headers.Add("Content-Type", "text/html")
 	_, ok := tmpls[page]
@@ -28,7 +28,7 @@ func RenderPage(page string, w http.ResponseWriter) {
 		tmpls[page] = template.Must(template.ParseFiles("tmpl/base.html",
 			strings.Join(ss, "")))
 	}
-	tmpls[page].Execute(w, nil)
+	tmpls[page].Execute(w, data)
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
@@ -61,7 +61,18 @@ func other(w http.ResponseWriter, r *http.Request) {
 }
 
 func page3(w http.ResponseWriter, r *http.Request) {
-	RenderPage("page3", w)
+	data := struct {
+		Title1 string
+		Items  []string
+	}{
+		Title1: "My page",
+		Items: []string{
+			"My photos",
+			"My blog",
+		},
+	}
+
+	RenderPage("page3", w, data)
 }
 
 func Serve() {
@@ -73,5 +84,8 @@ func Serve() {
 	http.HandleFunc("/h1", h1)
 	http.HandleFunc("/other", other)
 	http.HandleFunc("/page3", page3)
+	http.HandleFunc("/page4",
+		func(w http.ResponseWriter, r *http.Request) { RenderPage("page4", w, nil) })
+
 	fcgi.Serve(listener, nil)
 }

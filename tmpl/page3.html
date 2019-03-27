@@ -1,2 +1,10 @@
 {{define "title"}}page3{{end}}
-{{define "main"}}<h2>page3!</h2>{{end}}
+{{define "main"}}
+<h2>page3!</h2>
+--{{.Title1}}--
+<ul>
+{{range .Items}}
+<li>{{.}}</li>
+{{end}}
+</ul>
+{{end}}
