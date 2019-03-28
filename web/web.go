@@ -90,13 +90,15 @@ func Serve() {
 	if err != nil {
 		panic(err)
 	}
-	http.HandleFunc("/", index)
-	http.HandleFunc("/h1", h1)
-	http.HandleFunc("/other", other)
-	http.HandleFunc("/page3", page3)
-	http.HandleFunc("/page4",
-		func(w http.ResponseWriter, r *http.Request) { RenderPage("page4", w, nil) })
-	http.HandleFunc("/circle", circle)
 
-	fcgi.Serve(listener, nil)
+	mux := http.NewServeMux()
+	mux.HandleFunc("/", index)
+	mux.HandleFunc("/h1", h1)
+	mux.HandleFunc("/other", other)
+	mux.HandleFunc("/page3", page3)
+	mux.HandleFunc("/page4",
+		func(w http.ResponseWriter, r *http.Request) { RenderPage("page4", w, nil) })
+	mux.HandleFunc("/circle", circle)
+
+	fcgi.Serve(listener, mux)
 }
