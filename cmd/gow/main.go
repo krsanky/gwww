@@ -20,8 +20,8 @@ func main() {
 		case "web":
 			web.Serve()
 		case "db":
-			db.Main()
-			db.TestBeets()
+			//db.TestBeets()
+			db.TestSql()
 		default:
 			usage()
 		}

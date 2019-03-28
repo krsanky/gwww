@@ -7,7 +7,7 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 )
 
-var beets_db_file = "/home/wise/go/src/oldcode.org/gow/db/beets.db"
+var beets_db_file = "/home/wise/go/src/oldcode.org/gow/beets.db"
 
 type Product struct {
 	gorm.Model
@@ -15,8 +15,34 @@ type Product struct {
 	Price uint
 }
 
+func TestSql() {
+	fmt.Printf("test (sql) beets: %s\n", beets_db_file)
+	db, err := gorm.Open("sqlite3", beets_db_file)
+	if err != nil {
+		panic("failed to connect database")
+	}
+	defer db.Close()
+
+	type Result struct {
+		Id int
+		Title string
+	}
+	var result Result
+	db.Raw("SELECT id, title from items where id = 10").Scan(&result)
+	fmt.Printf("id:%d title:%s\n", result.Id, result.Title)
+}
+
 func TestBeets() {
 	fmt.Printf("test beets: %s\n", beets_db_file)
+	db, err := gorm.Open("sqlite3", beets_db_file)
+	if err != nil {
+		panic("failed to connect database")
+	}
+	defer db.Close()
+
+	item := Item{}
+	db.First(&item, 10)
+	fmt.Printf("item:%s %d a:%s aa:%s\n", item.Title, item.ID, item.Artist, item.AlbumArtist)
 }
 
 func Main() {
