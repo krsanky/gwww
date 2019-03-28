@@ -23,8 +23,14 @@ func TestSql() {
 	}
 	defer db.Close()
 
+	//var ODB *sql.DB
+	ODB := db.DB()
+	if err = ODB.Ping(); err != nil {
+		panic("failed to ping database")
+	}
+
 	type Result struct {
-		Id int
+		Id    int
 		Title string
 	}
 	var result Result
@@ -39,6 +45,10 @@ func TestBeets() {
 		panic("failed to connect database")
 	}
 	defer db.Close()
+
+	if err = db.DB().Ping(); err != nil {
+		panic("failed to ping database")
+	}
 
 	item := Item{}
 	db.First(&item, 10)
