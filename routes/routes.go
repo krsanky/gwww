@@ -16,13 +16,16 @@ func Serve() {
 	}
 
 	mux := http.NewServeMux()
+
 	mux.HandleFunc("/", web.Index)
+
 	mux.HandleFunc("/h1", web.H1)
 	mux.HandleFunc("/other", web.Other)
 	mux.HandleFunc("/page3", web.Page3)
 	mux.HandleFunc("/page4",
 		func(w http.ResponseWriter, r *http.Request) { web.RenderPage(w, "page4", nil) })
 	mux.HandleFunc("/circle", web.Circle)
+
 	mux.HandleFunc("/v1/index", v1.Index)
 
 	fcgi.Serve(listener, mux)

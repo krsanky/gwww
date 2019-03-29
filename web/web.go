@@ -22,24 +22,28 @@ func init() {
 }
 
 func RenderPage(w http.ResponseWriter, page string, data interface{}) {
-	lg.Log.Printf("RenderPage()...")
+	lg.Log.Printf("RenderPage(%s)...", page)
 	headers := w.Header()
 	headers.Add("Content-Type", "text/html")
-	_, ok := tmpls[page]
-	if !ok {
-		dir, _ := os.Getwd()
-		lg.Log.Printf("dir:%s", dir)
-		os.Chdir("tmpl/")
-		dir2, _ := os.Getwd()
-		lg.Log.Printf("dir2:%s", dir2)
-		ss := strings.Join([]string{page, "html"}, ".")
-		lg.Log.Printf("ss:%s", ss)
-		tmpls[page] = template.Must(template.ParseFiles("base.html", ss))
-		os.Chdir(dir)
+	_, tmpl_exists := tmpls[page]
+	if !tmpl_exists {
+		dir, err := os.Getwd()
+		if err != nil {
+			panic(err)
+		}
+		if e := os.Chdir("tmpl/"); e != nil {
+			panic(e)
+		}
+		p := strings.Join([]string{page, "html"}, ".")
+		tmpls[page] = template.Must(template.ParseFiles("base.html", p))
+		if  e := os.Chdir(dir); e != nil {
+			panic(e)
+		}
 	}
 	tmpls[page].Execute(w, data)
 }
 
+// these views don't need to be here, don't put more here
 func Index(w http.ResponseWriter, r *http.Request) {
 	headers := w.Header()
 	headers.Add("Content-Type", "text/html")

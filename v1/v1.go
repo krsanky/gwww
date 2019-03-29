@@ -39,7 +39,6 @@ To play the E(D bass) slide open D to 4th fret.
 `
 
 func Index(w http.ResponseWriter, r *http.Request) {
-	//func RenderPage(w http.ResponseWriter, page string, data interface{}) {
 	lg.Log.Printf("v1/index.....")
 	web.RenderPage(w, "v1/index", nil)
 }
