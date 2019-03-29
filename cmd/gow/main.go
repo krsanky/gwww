@@ -5,7 +5,7 @@ import (
 	"os"
 
 	"oldcode.org/gow/db"
-	"oldcode.org/gow/web"
+	"oldcode.org/gow/routes"
 )
 
 func main() {
@@ -18,7 +18,7 @@ func main() {
 	if len(os.Args) >= 2 {
 		switch arg1 := os.Args[1]; arg1 {
 		case "web":
-			web.Serve()
+			routes.Serve()
 		case "db":
 			db.TestBeets()
 			db.TestSql()
