@@ -5,3 +5,8 @@
 .column {
 /*	border: 1px dashed green;*/
 }
+
+header.navbar {
+	border-bottom: 1px dashed red;
+}
+

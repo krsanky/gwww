@@ -4,9 +4,12 @@ import (
 	"net"
 	"net/http"
 	"net/http/fcgi"
+	"os"
 
+	"oldcode.org/gow/lg"
 	v1 "oldcode.org/gow/v1"
-	web "oldcode.org/gow/web"
+	"oldcode.org/gow/views"
+	"oldcode.org/gow/web"
 )
 
 func Serve() {
@@ -28,5 +31,9 @@ func Serve() {
 
 	mux.HandleFunc("/v1/index", v1.Index)
 
+	mux.HandleFunc("/items", views.Items)
+
+	dir, _ := os.Getwd()
+	lg.Log.Printf("pre fcgi.Serve() dir:%s", dir)
 	fcgi.Serve(listener, mux)
 }

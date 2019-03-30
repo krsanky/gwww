@@ -1,0 +1,18 @@
+{{define "title"}}items{{end}}
+
+{{define "main" -}}
+<h1>items</h1>
+
+<a href="/items?asd=qwe&zxc=123">items-with-args</a>
+
+<p>item:{{.item.ID}}</p>
+
+{{- /* item.Title, item.ID, item.Artist, item.AlbumArtist) */ -}}
+
+<ul>
+{{- range .items -}}
+<li>id:{{.ID }} title:{{.Title}}</li>
+{{- end -}}
+</ul>
+
+{{end -}}
