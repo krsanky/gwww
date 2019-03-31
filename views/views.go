@@ -18,11 +18,11 @@ func Items(w http.ResponseWriter, r *http.Request) {
 	data := make(map[string]interface{})
 
 	item := model.Item{}
-	odb.First(&item, 10)
+	odb.Limit(15).First(&item, 10)
 	data["item"] = item
 
 	var items []model.Item
-	odb.Find(&items)
+	odb.Limit(15).Find(&items)
 	data["items"] = items
 
 	web.RenderPage(w, "items", data)
