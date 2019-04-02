@@ -35,7 +35,9 @@ func RenderPage(w http.ResponseWriter, page string, data interface{}) {
 			panic(e)
 		}
 		p := strings.Join([]string{page, "html"}, ".")
-		tmpls[page] = template.Must(template.ParseFiles("base.html", p))
+		targs := []string{"base.html", "testinclude.html", p}
+		lg.Log.Printf("targs:%s", strings.Join(targs, ","))
+		tmpls[page] = template.Must(template.ParseFiles(targs...))
 		if  e := os.Chdir(dir); e != nil {
 			panic(e)
 		}

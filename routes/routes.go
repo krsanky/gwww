@@ -6,6 +6,7 @@ import (
 	"net/http/fcgi"
 	"os"
 
+	"oldcode.org/gow/formstuff"
 	"oldcode.org/gow/lg"
 	v1 "oldcode.org/gow/v1"
 	"oldcode.org/gow/views"
@@ -32,6 +33,8 @@ func Serve() {
 	mux.HandleFunc("/v1/index", v1.Index)
 
 	mux.HandleFunc("/items", views.Items)
+
+	mux.HandleFunc("/formstuff/index", formstuff.Index)
 
 	dir, _ := os.Getwd()
 	lg.Log.Printf("pre fcgi.Serve() dir:%s", dir)

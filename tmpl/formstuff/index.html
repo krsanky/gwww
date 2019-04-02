@@ -1,0 +1,65 @@
+{{define "title"}}formstuff/index{{end}}
+
+{{define "main" -}}
+<h2>formstuff</h2>
+
+
+
+
+<!-- form select control -->
+<div class="form-group">
+	<select class="form-select">
+		<option>Choose an option</option>
+		<option>Slack</option>
+		<option>Skype</option>
+		<option>Hipchat</option>
+	</select>
+</div>
+<hr/>
+<!-- form radio control -->
+<div class="form-group">
+  <label class="form-label">Gender</label>
+  <label class="form-radio">
+    <input type="radio" name="gender" checked>
+    <i class="form-icon"></i> Male
+  </label>
+  <label class="form-radio">
+    <input type="radio" name="gender">
+    <i class="form-icon"></i> Female
+  </label>
+</div>
+<hr/>
+
+<div class="form-group">
+  <label class="form-radio form-inline">
+    <input type="radio" name="gender" checked=""><i class="form-icon"></i> Male
+  </label>
+  <label class="form-radio form-inline">
+    <input type="radio" name="gender"><i class="form-icon"></i> Female
+  </label>
+</div>
+<hr/>
+
+<div class="form-group">
+  <label class="form-checkbox form-inline">
+    <input type="checkbox"><i class="form-icon"></i> Checkbox 1
+  </label>
+  <label class="form-checkbox form-inline">
+    <input type="checkbox" checked=""><i class="form-icon"></i> Checkbox 2
+  </label>
+</div>
+<hr/>
+
+<form class="form-horizontal">
+  <div class="form-group">
+    <div class="col-3 col-sm-12">
+      <label class="form-label" for="input-example-1">Name</label>
+    </div>
+    <div class="col-9 col-sm-12">
+      <input class="form-input" type="text" id="input-example-1" placeholder="Name">
+    </div>
+  </div>
+  <!-- form structure -->
+</form>
+{{- end}}
+
