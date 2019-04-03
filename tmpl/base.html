@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-{{/* a comment */}}
 <head>
 <meta charset='utf-8' />
 <meta name='viewport' content='width=device-width, initial-scale=1' />
@@ -9,55 +8,17 @@
 
 <body>
 
-<header class="navbar">
-	<section class="navbar-section">
-		<a href="/" class="btn btn-link">Home</a>
-		<a href="/page3" class="btn btn-link">Alpha</a>
-	</section>
-	<section id="id123" class="navbar-center">
-		<a href="https://oldcode.org/">oldcode</a>
-	</section>
-	<section class="navbar-section">
-		<a href="/other" class="btn btn-link">Delta</a>
-		<a href="/page4" class="btn btn-link">Bravo</a>
-	</section>
-</header>
+{{- template "navbar" . -}}
 
-{{block "outermain" .}}
-{{/*
-<div class="hero hero-sm bg-dark">
-	<div class="hero-body">
-		<h1>H-{{.Title1}}#</h1>
-	</div>
-</div>
-*/}}
+{{- block "outermain" . -}}
 
 <div class="container">
 <div class="columns">
 
-<div class="column col-2">
-	{{block "leftnav" .}}
-	<ul class="nav">
-		<li class="menu-item">
-			<a href="/">Home</a>
-		</li>
-		<li class="menu-item">
-			<a href="/page3">Page 3</a>
-		</li>
-
-		<li class="menu-item">
-			<a href="/other">Other</a>
-		</li>
-		<li class="menu-item"><a href="/page4">Page 4</a></li>
-		<li class="menu-item"><a href="/v1/index">v1/index</a></li>
-		<li class="menu-item"><a href="/items">Items</a></li>
-		<li class="menu-item"><a href="/formstuff/index">formstuff/index</a></li>
-	</ul>
-	{{end}}
-</div>
+{{- template "leftnav" . -}}
 
 <div class="column">
-{{block "main" .}}
+{{- block "main" . -}}
 	<div class="empty">
 		<div class="empty-icon"><i class="icon icon-people"></i></div>
 		<p class="empty-title h5">You have no new messages</p>
@@ -66,20 +27,15 @@
 			<button class="btn btn-primary">Send a message</button>
 		</div>
 	</div>
+{{- end -}}
+</div>
+
+</div>
+</div>
+
 {{end}}
-</div>
 
-
-</div>
-</div>
-
-{{end}}
-
-
-<script src="/static/jquery-3.3.1.min.js"></script>
-<script src="/static/mousetrap.min.js"></script>
-<script src="/static/hn.js"></script>
-<script src="/static/script.js"></script>
+{{- template "js_includes" . -}}
 
 </body>
 </html>

@@ -35,7 +35,12 @@ func RenderPage(w http.ResponseWriter, page string, data interface{}) {
 			panic(e)
 		}
 		p := strings.Join([]string{page, "html"}, ".")
-		targs := []string{"base.html", "testinclude.html", p}
+		targs := []string{
+			"base.html", 
+			"navbar.tmpl", 
+			"leftnav.tmpl", 
+			"js_includes.tmpl", 
+			p}
 		lg.Log.Printf("targs:%s", strings.Join(targs, ","))
 		tmpls[page] = template.Must(template.ParseFiles(targs...))
 		if  e := os.Chdir(dir); e != nil {
@@ -46,15 +51,9 @@ func RenderPage(w http.ResponseWriter, page string, data interface{}) {
 }
 
 // these views don't need to be here, don't put more here
+
 func Index(w http.ResponseWriter, r *http.Request) {
-	headers := w.Header()
-	headers.Add("Content-Type", "text/html")
-	_, ok := tmpls["index"]
-	if !ok {
-		tmpls["index"] = template.Must(template.ParseFiles("tmpl/base.html", "tmpl/index.html"))
-	}
-	tmpls["index"].Execute(w, nil)
-	//fmt.Fprintf(w, "<script>console.log('script');</script>\n")
+	RenderPage(w, "index", nil)
 }
 
 func H1(w http.ResponseWriter, r *http.Request) {
@@ -64,15 +63,7 @@ func H1(w http.ResponseWriter, r *http.Request) {
 }
 
 func Other(w http.ResponseWriter, r *http.Request) {
-	_, ok := tmpls["other"]
-	if !ok {
-		tmpls["other"] = template.Must(
-			template.ParseFiles("tmpl/base.html", "tmpl/other.html"))
-	}
-	headers := w.Header()
-	headers.Add("Content-Type", "text/html")
-	//tmpl["other.html"].ExecuteTemplate(w, "name-of-define-block", nil)
-	tmpls["other"].Execute(w, nil)
+	RenderPage(w, "other", nil)
 }
 
 func Page3(w http.ResponseWriter, r *http.Request) {

@@ -10,6 +10,8 @@ import (
 
 func Index(w http.ResponseWriter, r *http.Request) {
 	lg.Log.Printf("formstuff/index.....")
-	web.RenderPage(w, "formstuff/index", nil)
+	data := make(map[string]interface{})
+	data["noleftnav"] = true
+	web.RenderPage(w, "formstuff/index", data)
 }
 
