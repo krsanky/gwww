@@ -10,3 +10,6 @@ header.navbar {
 	border-bottom: 1px dashed red;
 }
 
+.leftnav {
+	border-right: 1px dashed blue;
+}

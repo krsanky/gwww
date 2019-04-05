@@ -13,12 +13,7 @@ import (
 	"oldcode.org/gow/web"
 )
 
-func Serve() {
-	listener, err := net.Listen("tcp", "127.0.0.1:8088")
-	if err != nil {
-		panic(err)
-	}
-
+func setupRoutes() *http.ServeMux {
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("/", web.Index)
@@ -36,7 +31,19 @@ func Serve() {
 
 	mux.HandleFunc("/formstuff/index", formstuff.Index)
 
+	return mux
+}
+
+func Serve() {
+	listener, err := net.Listen("tcp", "127.0.0.1:8088")
+	if err != nil {
+		panic(err)
+	}
+
+	mux := setupRoutes()
+
 	dir, _ := os.Getwd()
 	lg.Log.Printf("pre fcgi.Serve() dir:%s", dir)
+
 	fcgi.Serve(listener, mux)
 }

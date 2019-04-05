@@ -1,3 +1,9 @@
+console.log("loading initial javascript from script.js");
+
+$(function() {
+	console.log("jquerys .ready() is ready");
+});
+/*
 $(function() {
 	console.log( "adding ctrl+shift+a key listener" );
 	Mousetrap.bind('ctrl+shift+a', function(e) {
@@ -12,4 +18,6 @@ $(function() {
 		return false;
 	});
 });
+*/
+console.log("last line in script.js");
 

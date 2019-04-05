@@ -9,11 +9,9 @@ import (
 )
 
 func main() {
-	fmt.Printf("gow\n")
-	for i, a := range os.Args[1:] {
-		fmt.Printf("%d:%s ", i, a)
-	}
-	fmt.Println()
+//	for i, a := range os.Args[1:] {
+//		fmt.Printf("%d:%s ", i, a)
+//	}
 
 	if len(os.Args) >= 2 {
 		switch arg1 := os.Args[1]; arg1 {
@@ -27,12 +25,13 @@ func main() {
 		}
 	} else {
 		usage()
+		routes.Serve()
 	}
 
 }
 
 func usage() {
 	fmt.Println()
-	fmt.Println(`gow [web|db]`)
+	fmt.Printf("gow [web|db]\n")
 	fmt.Println()
 }
