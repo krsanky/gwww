@@ -2,6 +2,10 @@
 @import url("https://unpkg.com/spectre.css/dist/spectre-exp.min.css");
 @import url("https://unpkg.com/spectre.css/dist/spectre-icons.min.css");
 
+html, body {
+	font-family: monospace; 
+}
+
 .column {
 /*	border: 1px dashed green;*/
 }

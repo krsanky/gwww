@@ -8,6 +8,7 @@ import (
 
 	"oldcode.org/gow/formstuff"
 	"oldcode.org/gow/lg"
+	"oldcode.org/gow/nostyle"
 	v1 "oldcode.org/gow/v1"
 	"oldcode.org/gow/views"
 	"oldcode.org/gow/web"
@@ -16,20 +17,18 @@ import (
 func setupRoutes() *http.ServeMux {
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("/", web.Index)
-
-	mux.HandleFunc("/h1", web.H1)
-	mux.HandleFunc("/other", web.Other)
-	mux.HandleFunc("/page3", web.Page3)
+	mux.HandleFunc("/", views.Index)
+	mux.HandleFunc("/page3", views.Page3)
 	mux.HandleFunc("/page4",
 		func(w http.ResponseWriter, r *http.Request) { web.RenderPage(w, "page4", nil) })
-	mux.HandleFunc("/circle", web.Circle)
+	mux.HandleFunc("/circle", views.Circle)
 
 	mux.HandleFunc("/v1/index", v1.Index)
 
 	mux.HandleFunc("/items", views.Items)
 
 	mux.HandleFunc("/formstuff/index", formstuff.Index)
+	mux.HandleFunc("/nostyle", nostyle.Index)
 
 	return mux
 }
