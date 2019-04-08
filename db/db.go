@@ -1,6 +1,7 @@
 package db
 
 import (
+	"database/sql"
 	"fmt"
 
 	"github.com/jinzhu/gorm"
@@ -8,6 +9,12 @@ import (
 )
 
 var beets_db_file = "/home/wise/go/src/oldcode.org/gow/beets.db"
+
+func Drivers() {
+	for _, d := range sql.Drivers() {
+		fmt.Printf("driver:%s\n", d)
+	}
+}
 
 func GetOpenDB() *gorm.DB {
 	db, err := gorm.Open("sqlite3", beets_db_file)
@@ -21,6 +28,28 @@ func GetOpenDB() *gorm.DB {
 }
 
 func TestSql() {
+	db, err := sql.Open("sqlite3", beets_db_file)
+	if err != nil {
+		panic(err)
+	}
+	stmt, err := db.Prepare("SELECT DISTINCT albumartist FROM albums")
+	if err != nil {
+		panic(err)
+	}
+	stmt.Exec()
+
+	rows, err := db.Query("SELECT DISTINCT albumartist FROM albums ORDER by albumartist")
+	if err != nil {
+		panic(err)
+	}
+	var s string
+	for rows.Next() {
+		rows.Scan(&s)
+		fmt.Printf("row albumartist:%s\n", s)
+	}
+}
+
+func TestGormSql() {
 	fmt.Printf("test (sql) beets: %s\n", beets_db_file)
 	db, err := gorm.Open("sqlite3", beets_db_file)
 	if err != nil {

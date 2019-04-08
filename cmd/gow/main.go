@@ -18,7 +18,8 @@ func main() {
 		case "web":
 			routes.Serve()
 		case "db":
-			db.TestBeets()
+			db.TestGormSql()
+			db.Drivers()
 			db.TestSql()
 		default:
 			usage()

@@ -15,12 +15,32 @@ type Item struct {
 	Media       string
 }
 
+type Artist struct {
+	Name string
+}
+
 func GetItems() ([]Item, error) {
 	//	odb.Limit(15).Find(&items)
 	//	data["items"] = items
 	var items []Item
 
 	return items, errors.New("GetItems() error...")
+}
+
+func GetArtists() ([]Artist, error) {
+	//	odb := db.GetOpenDB()
+	//	defer odb.Close()
+	//	//	odb.Limit(15).Find(&items)
+	//	//	data["items"] = items
+	//	var artists []Artist
+	//
+	//	odb.Limit(15).Find(&items)
+	//
+	//	return artists, errors.New("GetArtists() error...")
+	return nil, nil
+}
+
+func (a Artist) GetAlbums() {
 }
 
 //Limit

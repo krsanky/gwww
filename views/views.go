@@ -33,6 +33,14 @@ func Items(w http.ResponseWriter, r *http.Request) {
 	web.RenderPage(w, "items", data, "item_search.tmpl")
 }
 
+func Artists(w http.ResponseWriter, r *http.Request) {
+	data := make(map[string]interface{})
+	odb := db.GetOpenDB()
+	defer odb.Close()
+
+	web.RenderPage(w, "artists", data, "item_search.tmpl")
+}
+
 func Page3(w http.ResponseWriter, r *http.Request) {
 	data := struct {
 		Title1 string
