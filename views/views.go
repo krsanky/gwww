@@ -48,6 +48,11 @@ func Artists(w http.ResponseWriter, r *http.Request) {
 	web.RenderPage(w, "artists", data)
 }
 
+func Artist(w http.ResponseWriter, r *http.Request) {
+	data := make(map[string]interface{})
+	web.RenderPage(w, "artist", data)
+}
+
 func Page3(w http.ResponseWriter, r *http.Request) {
 	data := struct {
 		Title1 string

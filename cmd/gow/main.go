@@ -2,21 +2,23 @@ package main
 
 import (
 	"fmt"
+	"go/build"
 	"os"
+	"strings"
 
 	"oldcode.org/gow/db"
 	"oldcode.org/gow/routes"
 )
 
 func main() {
-//	for i, a := range os.Args[1:] {
-//		fmt.Printf("%d:%s ", i, a)
-//	}
+	//	for i, a := range os.Args[1:] {
+	//		fmt.Printf("%d:%s ", i, a)
+	//	}
 
 	if len(os.Args) >= 2 {
 		switch arg1 := os.Args[1]; arg1 {
 		case "web":
-			routes.Serve()
+			web()
 		case "db":
 			dbstuff()
 		default:
@@ -24,9 +26,27 @@ func main() {
 		}
 	} else {
 		usage()
-		routes.Serve()
+		web()
 	}
 
+}
+
+func web() {
+	cd()
+	routes.Serve()
+}
+
+func cd() {
+	gopath := os.Getenv("GOPATH")
+	if gopath == "" {
+		gopath = build.Default.GOPATH
+	}
+	ss := []string{gopath, "src", "oldcode.org", "gow"}
+	dir := strings.Join(ss, "/")
+	fmt.Printf("changing directory to:%s\n", dir)
+	if err := os.Chdir(dir); err != nil {
+		panic(err)
+	}
 }
 
 func dbstuff() {
@@ -44,6 +64,6 @@ func dbstuff() {
 
 func usage() {
 	fmt.Println()
-	fmt.Printf("gow [web|db]\n")
+	fmt.Printf("gow [web|db|cd]\n")
 	fmt.Println()
 }
