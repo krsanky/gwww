@@ -1,4 +1,4 @@
-{{define "title"}}artists{{end}}
+{{define "title"}}Artists{{end}}
 
 {{define "main"}}
 
@@ -11,9 +11,9 @@
 </div>
 
 <ul>
-{{range .artists}}
+{{- range .artists}}
 	<li>{{.Name}}</li>
-{{end}}
+{{- end}}
 </ul>
 
 {{end}}
