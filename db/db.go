@@ -33,7 +33,12 @@ func GetRawArtists() ([]string, error) {
 		return nil, err
 	}
 
-	rows, err := db.Query("SELECT DISTINCT albumartist FROM albums ORDER by albumartist")
+	rows, err := db.Query(`
+SELECT DISTINCT albumartist 
+FROM albums 
+WHERE albumartist <> ''
+ORDER by albumartist
+`)
 	if err != nil {
 		return nil, err
 	}

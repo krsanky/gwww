@@ -30,15 +30,18 @@ func Items(w http.ResponseWriter, r *http.Request) {
 	odb.Limit(15).Find(&items)
 	data["items"] = items
 
-	web.RenderPage(w, "items", data, "item_search.tmpl")
+	web.RenderPage(w, "items", data)
 }
 
 func Artists(w http.ResponseWriter, r *http.Request) {
 	data := make(map[string]interface{})
-	odb := db.GetOpenDB()
-	defer odb.Close()
+	artists, err := model.GetArtists() 
+	if err != nil {
+		panic(err)
+	}
+	data["artists"] = artists
 
-	web.RenderPage(w, "artists", data, "item_search.tmpl")
+	web.RenderPage(w, "artists", data)
 }
 
 func Page3(w http.ResponseWriter, r *http.Request) {
