@@ -27,25 +27,33 @@ func GetOpenDB() *gorm.DB {
 	return db
 }
 
-func TestSql() {
+func GetRawArtists() ([]string, error) {
 	db, err := sql.Open("sqlite3", beets_db_file)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
-	stmt, err := db.Prepare("SELECT DISTINCT albumartist FROM albums")
-	if err != nil {
-		panic(err)
-	}
-	stmt.Exec()
 
 	rows, err := db.Query("SELECT DISTINCT albumartist FROM albums ORDER by albumartist")
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
+
 	var s string
+	artists := make([]string, 0)
 	for rows.Next() {
 		rows.Scan(&s)
-		fmt.Printf("row albumartist:%s\n", s)
+		artists = append(artists, s)
+	}
+	return artists, nil
+}
+
+func TestSql() {
+	artists, err := GetRawArtists()
+	if err != nil {
+		panic(err)
+	}
+	for a := range artists {
+		fmt.Printf("row albumartist:%s\n", a)
 	}
 }
 

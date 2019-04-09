@@ -4,6 +4,12 @@
 
 html, body {
 	font-family: monospace; 
+/*
+	color: #333;
+	background-color: #ccc;
+*/
+	color: #dfd;
+	background-color: #222;
 }
 
 .column {

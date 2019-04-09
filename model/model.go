@@ -27,6 +27,7 @@ func GetItems() ([]Item, error) {
 	return items, errors.New("GetItems() error...")
 }
 
+
 func GetArtists() ([]Artist, error) {
 	//	odb := db.GetOpenDB()
 	//	defer odb.Close()

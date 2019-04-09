@@ -18,9 +18,7 @@ func main() {
 		case "web":
 			routes.Serve()
 		case "db":
-			db.TestGormSql()
-			db.Drivers()
-			db.TestSql()
+			dbstuff()
 		default:
 			usage()
 		}
@@ -29,6 +27,19 @@ func main() {
 		routes.Serve()
 	}
 
+}
+
+func dbstuff() {
+	db.TestGormSql()
+	db.Drivers()
+	//db.TestSql()
+	artists, err := db.GetRawArtists()
+	if err != nil {
+		panic(err)
+	}
+	for _, a := range artists {
+		fmt.Printf("a:%s\n", a)
+	}
 }
 
 func usage() {
