@@ -2,6 +2,7 @@ package web
 
 import (
 	"net/http"
+	"net/url"
 	"os"
 	"strings"
 	"text/template"
@@ -54,3 +55,20 @@ func RenderPage(w http.ResponseWriter, page string, data interface{}, sub_tmpls 
 	tmpls[page].Execute(w, data)
 }
 
+func LastInPath(u *url.URL) string {
+	lg.Log.Printf("LastInPath():%s", u.Path)
+	s := strings.SplitN(u.Path, "/", 3)
+	lg.Log.Printf("len s:%d %s", len(s), s)
+
+	if len(s) >= 3 {
+		val := strings.TrimSuffix(s[2], "/")
+		val, err := url.QueryUnescape(val)
+		if err != nil {
+			return ""
+		}
+		lg.Log.Printf("return:%s", val)
+		return val
+	}	
+	lg.Log.Printf("return:")
+	return ""
+}

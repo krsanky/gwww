@@ -2,17 +2,11 @@
 
 {{define "main"}}
 
-<div class="container">
-<div class="columns">
-<div class="column">
-<h2 class="text-center">Artists</h2>
-</div>
-</div>
-</div>
+<h2>Artists</h2>
 
 <ul>
 {{- range .artists}}
-	<li>{{.Name}}</li>
+	<li><a href="{{.Url}}">{{.Name}}</a></li>
 {{- end}}
 </ul>
 

@@ -1,7 +1,11 @@
 package model
 
 import (
+	"net/url"
+	"strings"
+
 	"oldcode.org/gow/db"
+	"oldcode.org/gow/lg"
 )
 
 type Artist struct {
@@ -20,4 +24,14 @@ func GetArtists() ([]Artist, error) {
 	}
 
 	return artists, nil
+}
+
+func (a *Artist) Url() string {
+	name_part := url.QueryEscape(a.Name)
+	url := strings.Join([]string{"/artist/", name_part, "/"}, "")
+	return url
+}
+
+func (a *Artist) Albums() {
+	lg.Log.Printf(".Albums() for %s", a.Name)
 }

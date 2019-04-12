@@ -64,6 +64,6 @@ func dbstuff() {
 
 func usage() {
 	fmt.Println()
-	fmt.Printf("gow [web|db|cd]\n")
+	fmt.Printf("gow [web|db]\n")
 	fmt.Println()
 }
