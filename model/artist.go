@@ -28,10 +28,35 @@ func GetArtists() ([]Artist, error) {
 
 func (a *Artist) Url() string {
 	name_part := url.QueryEscape(a.Name)
-	url := strings.Join([]string{"/artist/", name_part, "/"}, "")
+	url := strings.Join([]string{"/artist?a=", name_part, ""}, "")
 	return url
 }
 
-func (a *Artist) Albums() {
+func (a *Artist) Albums() ([]Album, error) {
 	lg.Log.Printf(".Albums() for %s", a.Name)
+	albums := make([]Album, 0)
+
+	db.Open()
+	rows, err := db.DB.Queryx(`
+SELECT ID, Album, AlbumArtist
+FROM albums
+WHERE albumartist = ?
+`, a.Name)
+	if err != nil {
+		return nil, err
+	}
+	for rows.Next() {
+		var a Album
+		err = rows.StructScan(&a)
+		if err != nil {
+			lg.Log.Printf("err:%s", err.Error())
+		}
+		lg.Log.Printf("Artist.Albums(): %d %s", a.ID, a.Album)
+		albums = append(albums, a)
+	}
+
+	return albums, nil
 }
+
+
+

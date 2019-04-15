@@ -1,8 +1,5 @@
 package model
 
-func (a Artist) GetAlbums() {
-}
-
 //Limit
 //Specify the max number of records to retrieve
 //

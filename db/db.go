@@ -6,9 +6,19 @@ import (
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
+	"github.com/jmoiron/sqlx"
 )
 
 var beets_db_file = "/home/wise/go/src/oldcode.org/gow/beets.db"
+var DB *sqlx.DB
+
+func Open() {
+	var err error
+	DB, err = sqlx.Open("sqlite3", beets_db_file)
+	if err != nil {
+		panic(err)
+	}
+}
 
 func Drivers() {
 	for _, d := range sql.Drivers() {
@@ -16,7 +26,7 @@ func Drivers() {
 	}
 }
 
-func GetOpenDB() *gorm.DB {
+func GormOpenDB() *gorm.DB {
 	db, err := gorm.Open("sqlite3", beets_db_file)
 	if err != nil {
 		panic(err)
@@ -28,12 +38,11 @@ func GetOpenDB() *gorm.DB {
 }
 
 func GetRawArtists() ([]string, error) {
-	db, err := sql.Open("sqlite3", beets_db_file)
-	if err != nil {
-		return nil, err
+	if DB == nil {
+		Open()
 	}
 
-	rows, err := db.Query(`
+	rows, err := DB.Query(`
 SELECT DISTINCT albumartist 
 FROM albums 
 WHERE albumartist <> ''

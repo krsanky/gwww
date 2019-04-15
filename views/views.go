@@ -20,7 +20,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 func Items(w http.ResponseWriter, r *http.Request) {
 	lg.Log.Printf("views.Items.....")
 
-	odb := db.GetOpenDB()
+	odb := db.GormOpenDB()
 	defer odb.Close()
 
 	data := make(map[string]interface{})
@@ -49,8 +49,23 @@ func Artists(w http.ResponseWriter, r *http.Request) {
 
 func Artist(w http.ResponseWriter, r *http.Request) {
 	data := make(map[string]interface{})
-	data["artist"] = model.Artist{web.LastInPath(r.URL)}
-	data["albums"] = []string{"asdasd", "qweqwe", "fgdhfg"}
-	lg.Log.Printf("Artist() data-artist:%s", data["artist"])
+
+	q := r.URL.Query()
+	artist := model.Artist{q.Get("a")}
+	lg.Log.Printf("Artist() artist:%s", artist.Name)
+	data["artist"] = artist
+
+	albums, err := artist.Albums()
+	if err != nil {
+		panic(err)
+	}
+	data["albums"] = albums 
+
+
+
 	web.RenderPage(w, "artist", data)
 }
+
+
+
+
