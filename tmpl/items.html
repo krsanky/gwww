@@ -2,51 +2,77 @@
 
 {{define "main"}}
 
+
+<form method="post">
 <div class="container">
+
+
+<div class="columns">
+
+<div class="column col-9">
+<div class="form-group">
+	<label class="form-label">Artist</label>
+	<select name="artist" class="form-select">
+		<option value="">Choose an Artist</option>
+		{{range .artists}}
+			<option {{- if eq $.artist .Name}} selected{{end}}>
+			{{- .Name -}}
+			</option>
+		{{- end}}
+	</select>
+</div>
+</div>
+
+<div class="column">
+<div class="form-group">
+	<label class="form-label">Starts with</label>
+	<select name="artist_startswith" class="form-select">
+		<option value="">Choose a letter</option>
+		{{template "a_z_select" .}}
+	</select>
+</div>
+</div>
+
+</div>
+
+
 <div class="columns">
 <div class="column">
-<h2 class="text-center">items</h2>
-</div>
-</div>
-</div>
-
-<div class="container">
-<div class="columns">
-<div class="column">
-
-
-<table class="table">
-<thead>
-	<tr>
-		<th>ID</th>
-		<th>Title</th>
-		<th>Artist</th>
-	</tr>
-</thead>
-
-<tbody>
-{{/*
-	<tr class="active">
-		<td>The Shawshank Redemption</td>
-		<td>Crime, Drama</td>
-		<td>14 October 1994</td>
-	</tr>
-*/}}
-
-{{/* ITEMS */}}
-{{range .items}}
-	<tr class="">
-		<td>{{.ID}}</td>
-		<td>{{.Title}}</td>
-		<td>{{.Artist}}</td>
-	</tr>
-{{end}}
-
-</tbody>
-</table>
-
-</div>
+<hr/>
+<button class="btn">Filter</button>
 </div>
 </div>
 
+</div>
+</form>
+
+<ul class="pagination">
+  <li class="page-item disabled">
+    <a href="#" tabindex="-1">Previous</a>
+  </li>
+  <li class="page-item active">
+    <a href="#">1</a>
+  </li>
+  <li class="page-item">
+    <a href="#">2</a>
+  </li>
+  <li class="page-item">
+    <a href="#">3</a>
+  </li>
+  <li class="page-item">
+    <span>...</span>
+  </li>
+  <li class="page-item">
+    <a href="#">12</a>
+  </li>
+  <li class="page-item">
+    <a href="#">Next</a>
+  </li>
+</ul>
+
+<div class="divider"></div>
+
+<ol start="11">
+<li>asd</li>
+</ol>
 {{end}}

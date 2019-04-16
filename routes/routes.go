@@ -21,10 +21,10 @@ func SetupRoutes() *http.ServeMux {
 
 	mux.HandleFunc("/v1/index", v1.Index)
 
-	mux.HandleFunc("/items", views.Items)
 	mux.HandleFunc("/artists", views.Artists)
 	mux.HandleFunc("/artist", views.Artist)
 	mux.HandleFunc("/album", views.Album)
+	mux.HandleFunc("/items", views.Items)
 	mux.HandleFunc("/track", views.Track)
 
 	mux.HandleFunc("/formstuff/index", formstuff.Index)

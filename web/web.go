@@ -38,7 +38,8 @@ func RenderPage(w http.ResponseWriter, page string, data interface{}, sub_tmpls 
 			"base.html",
 			"navbar.tmpl",
 			"leftnav.tmpl",
-			"js_includes.tmpl"}
+			"js_includes.tmpl",
+			"a_z_select.tmpl"}
 		if len(sub_tmpls) > 0 {
 			lg.Log.Printf("append sub_tmpls...")
 			targs = append(targs, sub_tmpls...)
@@ -52,7 +53,10 @@ func RenderPage(w http.ResponseWriter, page string, data interface{}, sub_tmpls 
 			panic(e)
 		}
 	}
-	tmpls[page].Execute(w, data)
+	err := tmpls[page].Execute(w, data)
+	if err != nil {
+		panic(err)
+	}
 }
 
 func LastInPath(u *url.URL) string {

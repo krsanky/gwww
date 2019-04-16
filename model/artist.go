@@ -12,7 +12,32 @@ type Artist struct {
 	Name string
 }
 
-func GetArtists() ([]Artist, error) {
+func GetArtists(startswith string) ([]Artist, error) {
+	if strings.Compare("", startswith) == 0 {
+		startswith = "%"
+	} else {
+		startswith = startswith + "%"
+	}
+	rows, err := db.DB.Query(`
+SELECT DISTINCT albumartist 
+FROM albums 
+WHERE albumartist like ?
+ORDER by albumartist
+`, startswith)
+	if err != nil {
+		return nil, err
+	}
+
+	var a string
+	artists := make([]Artist, 0)
+	for rows.Next() {
+		rows.Scan(&a)
+		artists = append(artists, Artist{a})
+	}
+	return artists, nil
+}
+
+func GetAllArtists() ([]Artist, error) {
 	artists := make([]Artist, 0)
 	artists_, err := db.GetRawArtists()
 	if err != nil {
@@ -56,6 +81,3 @@ WHERE albumartist = ?
 
 	return albums, nil
 }
-
-
-

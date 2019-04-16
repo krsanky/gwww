@@ -1,0 +1,5 @@
+{{define "a_z_select"}}
+{{range .A_Z}} 
+<option {{if eq $.artist_startswith .}} selected{{end}}>{{.}}</option>
+{{end}}
+{{end}}

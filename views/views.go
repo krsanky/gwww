@@ -4,9 +4,9 @@ import (
 	"net/http"
 	"strconv"
 
-	"oldcode.org/gow/db"
 	"oldcode.org/gow/lg"
 	"oldcode.org/gow/model"
+	"oldcode.org/gow/tmplutil"
 	"oldcode.org/gow/web"
 )
 
@@ -19,19 +19,23 @@ func Index(w http.ResponseWriter, r *http.Request) {
 }
 
 func Items(w http.ResponseWriter, r *http.Request) {
-	lg.Log.Printf("views.Items.....")
-
-	odb := db.GormOpenDB()
-	defer odb.Close()
-
 	data := make(map[string]interface{})
 
-	item := model.Item{}
-	odb.Limit(15).First(&item, 10)
-	data["item"] = item
+	data["A_Z"] = tmplutil.A_Z
+
+	artist := r.FormValue("artist")
+	artist_startswith := r.FormValue("artist_startswith")
+	lg.Log.Printf("artist[%s] artist_startswith[%s]", artist, artist_startswith)
+	data["artist"] = artist
+	data["artist_startswith"] = artist_startswith
+
+	artists, err := model.GetArtists(artist_startswith)
+	if err != nil {
+		panic(err)
+	}
+	data["artists"] = artists
 
 	var items []model.Item
-	odb.Limit(15).Find(&items)
 	data["items"] = items
 
 	web.RenderPage(w, "items", data)
@@ -39,7 +43,7 @@ func Items(w http.ResponseWriter, r *http.Request) {
 
 func Artists(w http.ResponseWriter, r *http.Request) {
 	data := make(map[string]interface{})
-	artists, err := model.GetArtists()
+	artists, err := model.GetAllArtists()
 	if err != nil {
 		panic(err)
 	}
