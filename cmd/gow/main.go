@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"oldcode.org/gow/db"
-	"oldcode.org/gow/routes"
+	"oldcode.org/gow/server"
 )
 
 func main() {
@@ -33,7 +33,7 @@ func main() {
 
 func web() {
 	cd()
-	routes.Serve()
+	server.Serve()
 }
 
 func cd() {
@@ -50,16 +50,8 @@ func cd() {
 }
 
 func dbstuff() {
-	db.TestGormSql()
 	db.Drivers()
 	//db.TestSql()
-	artists, err := db.GetRawArtists()
-	if err != nil {
-		panic(err)
-	}
-	for _, a := range artists {
-		fmt.Printf("a:%s\n", a)
-	}
 }
 
 func usage() {

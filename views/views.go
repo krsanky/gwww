@@ -2,6 +2,7 @@ package views
 
 import (
 	"net/http"
+	"strconv"
 
 	"oldcode.org/gow/db"
 	"oldcode.org/gow/lg"
@@ -59,13 +60,33 @@ func Artist(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-	data["albums"] = albums 
-
-
+	data["albums"] = albums
 
 	web.RenderPage(w, "artist", data)
 }
 
+func Album(w http.ResponseWriter, r *http.Request) {
+	q := r.URL.Query()
+	data := make(map[string]interface{})
+	id, err := strconv.Atoi(q.Get("ai"))
+	if err != nil {
+		lg.Log.Printf("err:%s", err.Error())
+	}
+	album, err := model.AlbumByID(id)
+	if err != nil {
+		lg.Log.Printf("AlbumByID() err:%s", err.Error())
+	}
+	data["album"] = album
 
+	items, err := album.Items()
+	if err != nil {
+		lg.Log.Printf("AlbumByID() err:%s", err.Error())
+	}
+	data["items"] = items
 
+	web.RenderPage(w, "album", data)
+}
 
+func Track(w http.ResponseWriter, r *http.Request) {
+	web.RenderPage(w, "track", nil)
+}

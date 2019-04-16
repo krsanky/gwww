@@ -1,20 +1,16 @@
 package routes
 
 import (
-	"net"
 	"net/http"
-	"net/http/fcgi"
-	"os"
 
 	"oldcode.org/gow/formstuff"
-	"oldcode.org/gow/lg"
 	"oldcode.org/gow/nostyle"
 	v1 "oldcode.org/gow/v1"
 	"oldcode.org/gow/views"
 	"oldcode.org/gow/web"
 )
 
-func setupRoutes() *http.ServeMux {
+func SetupRoutes() *http.ServeMux {
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("/", views.Index)
@@ -28,6 +24,8 @@ func setupRoutes() *http.ServeMux {
 	mux.HandleFunc("/items", views.Items)
 	mux.HandleFunc("/artists", views.Artists)
 	mux.HandleFunc("/artist", views.Artist)
+	mux.HandleFunc("/album", views.Album)
+	mux.HandleFunc("/track", views.Track)
 
 	mux.HandleFunc("/formstuff/index", formstuff.Index)
 
@@ -35,18 +33,4 @@ func setupRoutes() *http.ServeMux {
 	mux.HandleFunc("/nostyle/2", nostyle.V2)
 
 	return mux
-}
-
-func Serve() {
-	listener, err := net.Listen("tcp", "127.0.0.1:8088")
-	if err != nil {
-		panic(err)
-	}
-
-	mux := setupRoutes()
-
-	dir, _ := os.Getwd()
-	lg.Log.Printf("pre fcgi.Serve() dir:%s", dir)
-
-	fcgi.Serve(listener, mux)
 }

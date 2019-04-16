@@ -36,9 +36,8 @@ func (a *Artist) Albums() ([]Album, error) {
 	lg.Log.Printf(".Albums() for %s", a.Name)
 	albums := make([]Album, 0)
 
-	db.Open()
 	rows, err := db.DB.Queryx(`
-SELECT ID, Album, AlbumArtist
+SELECT id, album, albumartist
 FROM albums
 WHERE albumartist = ?
 `, a.Name)
@@ -46,12 +45,12 @@ WHERE albumartist = ?
 		return nil, err
 	}
 	for rows.Next() {
-		var a Album
+		a := Album{}
 		err = rows.StructScan(&a)
 		if err != nil {
 			lg.Log.Printf("err:%s", err.Error())
 		}
-		lg.Log.Printf("Artist.Albums(): %d %s", a.ID, a.Album)
+		lg.Log.Printf("Artist.Albums(): %d %s", a.ID, a.Title)
 		albums = append(albums, a)
 	}
 
