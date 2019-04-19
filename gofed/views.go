@@ -7,5 +7,5 @@ import (
 )
 
 func Index(w http.ResponseWriter, r *http.Request) {
-	web.Render(w, nil, "gofed/index.html")
+	web.Render(w, nil, "gofed/base.html", "gofed/index.html")
 }
