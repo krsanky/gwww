@@ -35,6 +35,14 @@ func Items(w http.ResponseWriter, r *http.Request) {
 	}
 	data["artists"] = artists
 
+
+//	albums, err := artist.GetAlbums()
+//	if err != nil {
+//		panic(err)
+//	}
+//	data["albums"] = albums
+
+
 	var items []model.Item
 	data["items"] = items
 

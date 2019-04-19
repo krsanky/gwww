@@ -7,13 +7,13 @@
 <div class="container">
 
 
+<!-- ARTIST -->
 <div class="columns">
-
 <div class="column col-9">
 <div class="form-group">
 	<label class="form-label">Artist</label>
 	<select name="artist" class="form-select">
-		<option value="">Choose an Artist</option>
+		<option value="">Choose Artist</option>
 		{{range .artists}}
 			<option {{- if eq $.artist .Name}} selected{{end}}>
 			{{- .Name -}}
@@ -27,14 +27,30 @@
 <div class="form-group">
 	<label class="form-label">Starts with</label>
 	<select name="artist_startswith" class="form-select">
-		<option value="">Choose a letter</option>
+		<option value="">Choose letter</option>
 		{{template "a_z_select" .}}
 	</select>
 </div>
 </div>
-
 </div>
 
+<!-- ALBUM -->
+{{/* if albums exists...... */}}
+<div class="columns">
+<div class="column">
+<div class="form-group">
+	<label class="form-label">Album</label>
+	<select name="artist" class="form-select">
+		<option value="">Choose Album</option>
+		{{range .albums}}
+			<option {{- if eq $.album .Name}} selected{{end}}>
+			{{- .Name -}}
+			</option>
+		{{- end}}
+	</select>
+</div>
+</div>
+</div>
 
 <div class="columns">
 <div class="column">
@@ -46,29 +62,7 @@
 </div>
 </form>
 
-<ul class="pagination">
-  <li class="page-item disabled">
-    <a href="#" tabindex="-1">Previous</a>
-  </li>
-  <li class="page-item active">
-    <a href="#">1</a>
-  </li>
-  <li class="page-item">
-    <a href="#">2</a>
-  </li>
-  <li class="page-item">
-    <a href="#">3</a>
-  </li>
-  <li class="page-item">
-    <span>...</span>
-  </li>
-  <li class="page-item">
-    <a href="#">12</a>
-  </li>
-  <li class="page-item">
-    <a href="#">Next</a>
-  </li>
-</ul>
+{{template "items_pagination"}}
 
 <div class="divider"></div>
 

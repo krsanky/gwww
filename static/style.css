@@ -4,12 +4,12 @@
 
 html, body {
 	font-family: monospace; 
+/*
 	color: #333;
 	background-color: #dededa;
-/*
-	color: #efe;
-	background-color: #222;
 */
+	color: 111;
+	background-color: #eee;
 
 }
 
@@ -22,9 +22,9 @@ ul {
 }
 
 header.navbar {
-	border-bottom: 1px dashed red;
+/*	border-bottom: 1px dashed red;*/
 }
 
 .leftnav {
-	border-right: 1px dashed blue;
+/*	border-right: 1px dashed blue;*/
 }
