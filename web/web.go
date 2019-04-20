@@ -108,3 +108,9 @@ func LastInPath(u *url.URL) string {
 	lg.Log.Printf("return:")
 	return ""
 }
+
+func CookieTest() {
+
+}
+
+
