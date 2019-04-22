@@ -18,7 +18,7 @@ func GetArtists(startswith string) ([]Artist, error) {
 	} else {
 		startswith = startswith + "%"
 	}
-	rows, err := db.DB.Query(`
+	rows, err := db.BeetsDB.Query(`
 SELECT DISTINCT albumartist 
 FROM albums 
 WHERE albumartist like ?
@@ -61,7 +61,7 @@ func (a *Artist) Albums() ([]Album, error) {
 	lg.Log.Printf(".Albums() for %s", a.Name)
 	albums := make([]Album, 0)
 
-	rows, err := db.DB.Queryx(`
+	rows, err := db.BeetsDB.Queryx(`
 SELECT id, album, albumartist
 FROM albums
 WHERE albumartist = ?

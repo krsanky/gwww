@@ -10,11 +10,6 @@ import (
 	"oldcode.org/gow/routes"
 )
 
-//	// ORDER MATTERS ... acccount depends on session
-//	h := nosurf.NewPure(routes.Router())
-//	h = account.AddUser(h)
-//	session.Init()
-//	h = session.Manager.Use(h)
 func Serve() {
 	listener, err := net.Listen("tcp", "127.0.0.1:8088")
 	if err != nil {
@@ -30,3 +25,10 @@ func Serve() {
 
 	fcgi.Serve(listener, mux)
 }
+
+//	// ORDER MATTERS ... acccount depends on session
+//	h := nosurf.NewPure(routes.Router())
+//	h = account.AddUser(h)
+//	session.Init()
+//	h = session.Manager.Use(h)
+	

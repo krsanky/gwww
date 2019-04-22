@@ -25,7 +25,7 @@ func (a *Album) Url() string {
 func AlbumByID(id int) (*Album, error) {
 	lg.Log.Printf(".AlbumByID() for %d", id)
 	var album Album
-	err := db.DB.QueryRowx(`
+	err := db.BeetsDB.QueryRowx(`
 SELECT id, album, albumartist
 FROM albums
 WHERE id = ?
@@ -41,7 +41,7 @@ func (a *Album) Items() ([]Item, error) {
 	items := make([]Item, 0)
 
 
-	rows, err := db.DB.Queryx(`
+	rows, err := db.BeetsDB.Queryx(`
 SELECT
 id, album_id, path, title,
 artist, albumartist, track, media       

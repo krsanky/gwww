@@ -62,12 +62,15 @@ func RenderPage(w http.ResponseWriter, page string, data interface{}, sub_tmpls 
 	}
 }
 
+// the last tmpls is used to name it, so it must be unique
 func Render(w http.ResponseWriter, data interface{}, tmpls ...string) {
 	if len(tmpls) < 1 {
 		lg.Log.Printf("error Render()... tmpls<1")
 		panic("at the disco")
 	}
-	page := tmpls[0]
+
+	page := tmpls[len(tmpls)-1]
+
 	lg.Log.Printf("Render(%s)...", page)
 	headers := w.Header()
 	headers.Add("Content-Type", "text/html")

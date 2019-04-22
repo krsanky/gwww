@@ -5,7 +5,8 @@ import (
 
 	"github.com/alexedwards/scs"
 	"github.com/alexedwards/scs/stores/pgstore"
-	"github.com/krsanky/lg"
+	"oldcode.org/gow/db"
+	"oldcode.org/gow/lg"
 )
 
 var Manager *scs.Manager
