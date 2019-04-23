@@ -2,12 +2,14 @@ package server
 
 import (
 	"net"
+	"net/http"
 	"net/http/fcgi"
 	"os"
 
 	"oldcode.org/gow/db"
 	"oldcode.org/gow/lg"
 	"oldcode.org/gow/routes"
+	"oldcode.org/gow/session"
 )
 
 func Serve() {
@@ -16,14 +18,19 @@ func Serve() {
 		panic(err)
 	}
 
-	db.Open()
-
-	mux := routes.SetupRoutes()
-
 	dir, _ := os.Getwd()
 	lg.Log.Printf("pre fcgi.Serve() dir:%s", dir)
 
-	fcgi.Serve(listener, mux)
+	db.Open()
+	db.InitDB() 
+
+	//mux is a handler, because ServeMux implements ServeHTTP()
+	mux := http.NewServeMux()
+	routes.AddRoutes(mux)
+
+	session.Init()
+	h := session.Manager.Use(mux)
+	fcgi.Serve(listener, h)
 }
 
 //	// ORDER MATTERS ... acccount depends on session
@@ -31,4 +38,3 @@ func Serve() {
 //	h = account.AddUser(h)
 //	session.Init()
 //	h = session.Manager.Use(h)
-	

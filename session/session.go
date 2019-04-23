@@ -13,8 +13,6 @@ var Manager *scs.Manager
 
 func Init() {
 	store := pgstore.New(db.DB, 0)
-	//engine := boltstore.New(sess_db.DB, 0)
-
 	Manager = scs.NewManager(store)
 	Manager.Name("les_super_sesh")
 	Manager.Persist(true)

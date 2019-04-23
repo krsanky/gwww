@@ -11,8 +11,8 @@ import (
 	"oldcode.org/gow/web"
 )
 
-func SetupRoutes() *http.ServeMux {
-	mux := http.NewServeMux()
+func AddRoutes(mux *http.ServeMux) {
+	//mux := http.NewServeMux()
 
 	mux.HandleFunc("/", gofed.Index)
 	mux.HandleFunc("/circle", views.Circle)
@@ -35,5 +35,5 @@ func SetupRoutes() *http.ServeMux {
 	mux.HandleFunc("/page4",
 		func(w http.ResponseWriter, r *http.Request) { web.RenderPage(w, "page4", nil) })
 
-	return mux
+	//return mux
 }

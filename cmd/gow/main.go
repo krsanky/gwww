@@ -51,7 +51,8 @@ func cd() {
 
 func dbstuff() {
 	db.Drivers()
-	//db.TestSql()
+	db.InitDB()
+	db.TestDB()
 }
 
 func usage() {
