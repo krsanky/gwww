@@ -9,14 +9,14 @@ import (
 	"oldcode.org/gow/web"
 )
 
-func LoginPage(w http.ResponseWriter, r *http.Request) {
+func Login(w http.ResponseWriter, r *http.Request) {
 	lg.Log.Printf("LoginPage() method:%s", r.Method)
 	data := make(map[string]interface{})
 
 	if "POST" == r.Method {
 		//view.ShowFormData(r)
-		username := r.FormValue("username")
-		password := r.FormValue("password")
+		username := r.FormValue("inputEmail")
+		password := r.FormValue("inputPassword")
 		lg.Log.Printf("username:%s password:%s", username, password)
 
 		ok := account.AuthUser(w, r, username, password)
@@ -38,7 +38,7 @@ func LoginPage(w http.ResponseWriter, r *http.Request) {
 	web.Render(w, data, tmpls...)
 }
 
-func LogoutPage(w http.ResponseWriter, r *http.Request) {
+func Logout(w http.ResponseWriter, r *http.Request) {
 	session.Manager.Load(r).Clear(w)
 	http.Redirect(w, r, "/", 303)
 }

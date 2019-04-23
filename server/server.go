@@ -10,6 +10,7 @@ import (
 	"oldcode.org/gow/lg"
 	"oldcode.org/gow/routes"
 	"oldcode.org/gow/session"
+	account_view "oldcode.org/gow/account/view"
 )
 
 func Serve() {
@@ -27,6 +28,7 @@ func Serve() {
 	//mux is a handler, because ServeMux implements ServeHTTP()
 	mux := http.NewServeMux()
 	routes.AddRoutes(mux)
+	account_view.AddRoutes(mux)
 
 	session.Init()
 	h := session.Manager.Use(mux)

@@ -40,9 +40,3 @@ func AddRoutes(mux *http.ServeMux) {
 
 
 
-
-//func Routes(r *router.Router) {
-//	r.Get("/account/login", http.HandlerFunc(LoginPage))
-//	r.Post("/account/login", http.HandlerFunc(LoginPage))
-//	r.Get("/account/logout", http.HandlerFunc(LogoutPage))
-//}
