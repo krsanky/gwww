@@ -37,7 +37,7 @@ func RenderPage(w http.ResponseWriter, page string, data interface{}, sub_tmpls 
 		}
 
 		targs := []string{
-			"base.html",
+			"old_base.html",
 			"navbar.tmpl",
 			"leftnav.tmpl",
 			"js_includes.tmpl",

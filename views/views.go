@@ -6,9 +6,12 @@ import (
 
 	"oldcode.org/gow/lg"
 	"oldcode.org/gow/model"
-	"oldcode.org/gow/tmplutil"
 	"oldcode.org/gow/web"
 )
+
+var A_Z = []string{"A", "B", "C", "D", "E", "F", "G", "H", "I",
+	"J", "K", "L", "M", "N", "O", "P", "Q", "R",
+	"S", "T", "U", "V", "W", "X", "Y", "Z"}
 
 func Index(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
@@ -21,7 +24,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 func Items(w http.ResponseWriter, r *http.Request) {
 	data := make(map[string]interface{})
 
-	data["A_Z"] = tmplutil.A_Z
+	data["A_Z"] = A_Z
 
 	artist := r.FormValue("artist")
 	artist_startswith := r.FormValue("artist_startswith")
@@ -35,13 +38,11 @@ func Items(w http.ResponseWriter, r *http.Request) {
 	}
 	data["artists"] = artists
 
-
-//	albums, err := artist.GetAlbums()
-//	if err != nil {
-//		panic(err)
-//	}
-//	data["albums"] = albums
-
+	//	albums, err := artist.GetAlbums()
+	//	if err != nil {
+	//		panic(err)
+	//	}
+	//	data["albums"] = albums
 
 	var items []model.Item
 	data["items"] = items

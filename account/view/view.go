@@ -34,8 +34,8 @@ func Login(w http.ResponseWriter, r *http.Request) {
 
 	//view.Render(w, r, "account/login.html", ctx)
 	tmpls := []string{
-		"gofed/base.html",
-		"gofed/nav.tmpl",
+		"base.html",
+		"nav.tmpl",
 		"account/login.html"}
 	web.Render(w, data, tmpls...)
 }

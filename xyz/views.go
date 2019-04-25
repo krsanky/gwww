@@ -19,8 +19,8 @@ func Users(w http.ResponseWriter, r *http.Request) {
 		lg.Log.Printf("u1:%s", users[0])
 	}
 	tmpls := []string{
-		"gofed/base.html",
-		"gofed/nav.tmpl",
+		"base.html",
+		"nav.tmpl",
 		"xyz/users.html"}
 	web.Render(w, data, tmpls...)
 }
@@ -29,8 +29,8 @@ func User(w http.ResponseWriter, r *http.Request) {
 	lg.Log.Printf("xyz.User() method:%s", r.Method)
 	data := make(map[string]interface{})
 	tmpls := []string{
-		"gofed/base.html",
-		"gofed/nav.tmpl",
+		"base.html",
+		"nav.tmpl",
 		"xyz/user.html"}
 	web.Render(w, data, tmpls...)
 }

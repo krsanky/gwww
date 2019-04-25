@@ -10,8 +10,8 @@ import (
 
 func Index(w http.ResponseWriter, r *http.Request) {
 	tmpls := []string{
-		"gofed/base.html",
-		"gofed/nav.tmpl",
+		"base.html",
+		"nav.tmpl",
 		"gofed/index.html"}
 	web.Render(w, nil, tmpls...)
 }
@@ -29,8 +29,8 @@ func Music(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 	tmpls := []string{
-		"gofed/base.html",
-		"gofed/nav.tmpl",
+		"base.html",
+		"nav.tmpl",
 		"gofed/music.html"}
 	web.Render(w, nil, tmpls...)
 }
