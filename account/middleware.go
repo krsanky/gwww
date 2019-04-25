@@ -19,7 +19,6 @@ func AddUser(h http.Handler) http.Handler {
 		}
 
 		if user != nil {
-			//ctx := context.WithValue(r.Context(), "user", user)
 			ctx := ContextWithUser(r.Context(), user)
 			lg.Log.Printf("AddUser() added user_id:%d to r.Context()", user.Id)
 			h.ServeHTTP(w, r.WithContext(ctx))

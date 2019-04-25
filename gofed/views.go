@@ -8,6 +8,12 @@ import (
 	"oldcode.org/gow/web"
 )
 
+type Pill int
+const (
+	Placebo Pill = iota
+	Aspirin
+)
+
 func Index(w http.ResponseWriter, r *http.Request) {
 	tmpls := []string{
 		"base.html",

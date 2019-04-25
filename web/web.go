@@ -7,6 +7,7 @@ import (
 	"strings"
 	"text/template"
 
+	"oldcode.org/gow/account"
 	lg "oldcode.org/gow/lg"
 )
 
@@ -20,6 +21,14 @@ func GetTmpls() map[string]*template.Template {
 func init() {
 	tmpls = make(map[string]*template.Template)
 	_tmpls = make(map[string]*template.Template)
+}
+
+func TmplData(r *http.Request) (map[string]interface{}, error) {
+	data := make(map[string]interface{})
+	user, _ := account.UserFromContext(r.Context())
+
+	data["user"] = user
+	return data, nil
 }
 
 func RenderPage(w http.ResponseWriter, page string, data interface{}, sub_tmpls ...string) {
@@ -107,7 +116,7 @@ func LastInPath(u *url.URL) string {
 		}
 		lg.Log.Printf("return:%s", val)
 		return val
-	}	
+	}
 	lg.Log.Printf("return:")
 	return ""
 }
@@ -115,5 +124,3 @@ func LastInPath(u *url.URL) string {
 func CookieTest() {
 
 }
-
-

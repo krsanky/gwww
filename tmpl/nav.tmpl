@@ -1,4 +1,8 @@
 {{define "nav"}}
+
+<!-- ***logged in user:{{.user}}*** -->
+<!-- {{if .user}}YES-USER{{else}}NO_USER{{end}} -->
+
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
 	<a class="navbar-brand" href="/">oldcode</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -7,9 +11,15 @@
 
 	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 		<ul class="navbar-nav mr-auto">
+
 			<li class="nav-item active">
-				<a class="nav-link" href="/account/login">Register|Login <span class="sr-only">(current)</span></a>
+{{if .user}}
+				<a class="nav-link" href="/account/logout">Logout</a>
+{{else}}
+				<a class="nav-link" href="/account/login">Register|Login</a>
+{{end}}
 			</li>
+
 			<li class="nav-item">
 				<a class="nav-link" href="/circle">Circle</a>
 			</li>

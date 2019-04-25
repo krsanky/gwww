@@ -42,5 +42,5 @@ func Login(w http.ResponseWriter, r *http.Request) {
 
 func Logout(w http.ResponseWriter, r *http.Request) {
 	session.Manager.Load(r).Clear(w)
-	http.Redirect(w, r, "/", 303)
+	http.Redirect(w, r, "/?msg=loggedout", 303)
 }

@@ -1,11 +1,28 @@
 {{define "main"}}
-<h1>xyz</h1>
+<h1>xyz:users</h1>
 
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Email</th>
+      <th scope="col">impersonate</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+    </tr>
+  </thead>
+  <tbody>
 {{range .users}}
-<li>{{.Url}}</li>
+    <tr>
+      <th scope="row">{{.Id}}</th>
+      <td>{{.Url}}</td>
+      <td><a href="/xyz/become?u={{.Id}}">become</a></td>
+      <td>{{.First_name}}</td>
+      <td>{{.Last_name}}</td>
+    </tr>
 {{end}}
-<ul>
-</ul>
+  </tbody>
+</table>
 
 <form method="post">
 </form>

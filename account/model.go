@@ -27,7 +27,7 @@ func (u *User) String() string {
 }
 
 func (u *User) Url() string {
-	return fmt.Sprintf("<a href='/xyz/user/%d'>%s</a>", u.Id, u.Email)
+	return fmt.Sprintf("<a href='/xyz/user?u=%d'>%s</a>", u.Id, u.Email)
 }
 
 func GetUsers() ([]User, error) {
@@ -100,6 +100,14 @@ func PasswordMatch(u *User, formpassword string) bool {
 	return u.Password == formpassword
 }
 
+func LoginUser(w http.ResponseWriter, r *http.Request, u *User) {
+	sess := session.Manager.Load(r)
+	err := sess.PutInt(w, "user_id", u.Id)
+	if err != nil {
+		panic(err)
+	}
+}
+
 func AuthUser(w http.ResponseWriter, r *http.Request, username string, password string) bool {
 	u, err := GetUserByName(username)
 	sess := session.Manager.Load(r)
@@ -107,6 +115,7 @@ func AuthUser(w http.ResponseWriter, r *http.Request, username string, password 
 		lg.Log.Printf("user email:%s", u.Email)
 		if PasswordMatch(u, password) {
 			lg.Log.Printf("AuthUser MATCH")
+			//LoginUser(w, r, u)
 			err := sess.PutInt(w, "user_id", u.Id)
 			if err != nil {
 				panic(err)
