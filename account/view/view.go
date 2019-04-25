@@ -3,6 +3,7 @@ package view
 import (
 	"net/http"
 
+	"github.com/justinas/nosurf"
 	"oldcode.org/gow/account"
 	"oldcode.org/gow/lg"
 	"oldcode.org/gow/session"
@@ -28,7 +29,8 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	//data["token"] = nosurf.Token(r)
+	data["token"] = nosurf.Token(r)
+	lg.Log.Printf("LoginPage() token[%s]", data["token"])
 
 	//view.Render(w, r, "account/login.html", ctx)
 	tmpls := []string{

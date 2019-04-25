@@ -6,11 +6,14 @@ import (
 	"net/http/fcgi"
 	"os"
 
+	"github.com/justinas/nosurf"
+	"oldcode.org/gow/account"
+	account_view "oldcode.org/gow/account/view"
 	"oldcode.org/gow/db"
 	"oldcode.org/gow/lg"
 	"oldcode.org/gow/routes"
 	"oldcode.org/gow/session"
-	account_view "oldcode.org/gow/account/view"
+	"oldcode.org/gow/xyz"
 )
 
 func Serve() {
@@ -23,20 +26,26 @@ func Serve() {
 	lg.Log.Printf("pre fcgi.Serve() dir:%s", dir)
 
 	db.Open()
-	db.InitDB() 
+	db.InitDB()
 
 	//mux is a handler, because ServeMux implements ServeHTTP()
 	mux := http.NewServeMux()
 	routes.AddRoutes(mux)
 	account_view.AddRoutes(mux)
+	xyz.AddRoutes(mux)
 
+	// ORDER MATTERS ... acccount depends on session
+	h := nosurf.NewPure(mux)
+	//h = M1(h, "->h1")
+	h = account.AddUser(h)
 	session.Init()
-	h := session.Manager.Use(mux)
+	h = session.Manager.Use(h)
 	fcgi.Serve(listener, h)
 }
 
-//	// ORDER MATTERS ... acccount depends on session
-//	h := nosurf.NewPure(routes.Router())
-//	h = account.AddUser(h)
-//	session.Init()
-//	h = session.Manager.Use(h)
+func M1(h http.HandlerFunc, extra_arg string) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		lg.Log.Printf("M1--%s--- %s", extra_arg, r.RequestURI)
+		h.ServeHTTP(w, r)
+	}
+}

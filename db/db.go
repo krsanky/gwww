@@ -4,7 +4,6 @@ import (
 	"database/sql"
 	"fmt"
 
-	_ "github.com/jinzhu/gorm/dialects/sqlite"
 	"github.com/jmoiron/sqlx"
 	"oldcode.org/gow/lg"
 )
@@ -12,6 +11,7 @@ import (
 var beets_db_file = "/home/wise/go/src/oldcode.org/gow/beets.db"
 var BeetsDB *sqlx.DB
 var DB *sql.DB
+var DBX *sqlx.DB
 
 var password = "bluedogtree"
 var user = "webserver"
@@ -22,14 +22,23 @@ func InitDB() {
 	var err error
 	connect_string := fmt.Sprintf("user=%s password=%s dbname=%s sslmode=disable",
 		user, password, db_name)
+
 	DB, err = sql.Open("postgres", connect_string)
 	if err != nil {
 		panic(err)
 	}
-
 	if err = DB.Ping(); err != nil {
 		panic(err)
 	}
+
+	DBX, err = sqlx.Open("postgres", connect_string)
+	if err != nil {
+		panic(err)
+	}
+	if err = DBX.Ping(); err != nil {
+		panic(err)
+	}
+
 	//TestDB()
 }
 

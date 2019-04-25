@@ -19,10 +19,30 @@ type User struct {
 	Email        string
 	Is_staff     bool
 	Is_active    bool
+	//Timezone carchar(128)
 }
 
 func (u *User) String() string {
-	return fmt.Sprintf("<id:%d username:%s email:%s pw:%s>", u.Id, u.Username, u.Email, u.Password)
+	return fmt.Sprintf("[id:%d username:%s email:%s pw:%s]", u.Id, u.Username, u.Email, u.Password)
+}
+
+func (u *User) Url() string {
+	return fmt.Sprintf("<a href='/xyz/user/%d'>%s</a>", u.Id, u.Email)
+}
+
+func GetUsers() ([]User, error) {
+	var us []User
+	db := db.DBX.Unsafe()
+	rows, err := db.Queryx("SELECT * FROM account")
+	for rows.Next() {
+		var u User
+		err = rows.StructScan(&u)
+		if err != nil {
+			return nil, err
+		}
+		us = append(us, u)
+	}
+	return us, nil
 }
 
 func GetUserById(id int) (*User, error) {
