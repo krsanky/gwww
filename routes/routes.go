@@ -1,10 +1,14 @@
 package routes
 
+//This is the main routes.
+//A package can supply its own AddRoutes() function.
+//Look at server package for adding the routes.
+//Must keep the urt paths distinct.
+
 import (
 	"net/http"
 
 	"oldcode.org/gow/formstuff"
-	"oldcode.org/gow/gofed"
 	"oldcode.org/gow/nostyle"
 	v1 "oldcode.org/gow/v1"
 	"oldcode.org/gow/views"
@@ -12,21 +16,17 @@ import (
 )
 
 func AddRoutes(mux *http.ServeMux) {
-	//mux := http.NewServeMux()
-
-	mux.HandleFunc("/", gofed.Index)
+	mux.HandleFunc("/", views.Index)
+	mux.HandleFunc("/msg", views.Msg)
 	mux.HandleFunc("/circle", views.Circle)
 
 	mux.HandleFunc("/v1/index", v1.Index)
 
-	mux.HandleFunc("/music", gofed.Music)
 	mux.HandleFunc("/artists", views.Artists)
 	mux.HandleFunc("/artist", views.Artist)
 	mux.HandleFunc("/album", views.Album)
 	mux.HandleFunc("/items", views.Items)
 	mux.HandleFunc("/track", views.Track)
-
-	mux.HandleFunc("/gofed/", gofed.Index)
 
 	mux.HandleFunc("/formstuff/index", formstuff.Index)
 	mux.HandleFunc("/nostyle", nostyle.Index)
@@ -34,9 +34,4 @@ func AddRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("/page3", views.Page3)
 	mux.HandleFunc("/page4",
 		func(w http.ResponseWriter, r *http.Request) { web.RenderPage(w, "page4", nil) })
-
-	//return mux
 }
-
-
-

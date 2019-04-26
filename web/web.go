@@ -27,7 +27,7 @@ func TmplData(r *http.Request) (map[string]interface{}, error) {
 	data := make(map[string]interface{})
 	user, _ := account.UserFromContext(r.Context())
 
-	data["user"] = user
+	data["page_user"] = user
 	return data, nil
 }
 
