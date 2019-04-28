@@ -4,7 +4,6 @@ import (
 	"net/http"
 
 	"oldcode.org/gow/lg"
-	"oldcode.org/gow/web"
 )
 
 var tab = `
@@ -40,7 +39,7 @@ To play the E(D bass) slide open D to 4th fret.
 
 func Index(w http.ResponseWriter, r *http.Request) {
 	lg.Log.Printf("v1/index.....")
-	web.RenderPage(w, "v1/index", nil)
+	//web.RenderPage(w, "v1/index", nil)
 }
 
 var tab2 = `

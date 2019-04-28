@@ -11,16 +11,22 @@ import (
 	lg "oldcode.org/gow/lg"
 )
 
-var tmpls map[string]*template.Template
+var GlobalFuncMap template.FuncMap
 var _tmpls map[string]*template.Template
 
-func GetTmpls() map[string]*template.Template {
-	return tmpls
+func InputChecked(checked bool) string {
+	if checked {
+		return " checked "
+	} else {
+		return ""
+	}
 }
 
 func init() {
-	tmpls = make(map[string]*template.Template)
 	_tmpls = make(map[string]*template.Template)
+	GlobalFuncMap = template.FuncMap{
+		"input_checked": InputChecked,
+	}
 }
 
 func TmplData(r *http.Request) (map[string]interface{}, error) {
@@ -29,46 +35,6 @@ func TmplData(r *http.Request) (map[string]interface{}, error) {
 
 	data["page_user"] = user
 	return data, nil
-}
-
-func RenderPage(w http.ResponseWriter, page string, data interface{}, sub_tmpls ...string) {
-	lg.Log.Printf("RenderPage(%s)...", page)
-	headers := w.Header()
-	headers.Add("Content-Type", "text/html")
-	_, tmpl_exists := tmpls[page]
-	if !tmpl_exists {
-		dir, err := os.Getwd()
-		if err != nil {
-			panic(err)
-		}
-		if e := os.Chdir("tmpl/"); e != nil {
-			panic(e)
-		}
-
-		targs := []string{
-			"old_base.html",
-			"navbar.tmpl",
-			"leftnav.tmpl",
-			"js_includes.tmpl",
-			"items_pagination.tmpl",
-			"a_z_select.tmpl"}
-		if len(sub_tmpls) > 0 {
-			lg.Log.Printf("append sub_tmpls...")
-			targs = append(targs, sub_tmpls...)
-		}
-		p := strings.Join([]string{page, "html"}, ".")
-		targs = append(targs, p)
-		lg.Log.Printf("targs:%s", strings.Join(targs, ","))
-
-		tmpls[page] = template.Must(template.ParseFiles(targs...))
-		if e := os.Chdir(dir); e != nil {
-			panic(e)
-		}
-	}
-	err := tmpls[page].Execute(w, data)
-	if err != nil {
-		panic(err)
-	}
 }
 
 // the last tmpls is used to name it, so it must be unique
@@ -92,7 +58,22 @@ func Render(w http.ResponseWriter, data interface{}, tmpls ...string) {
 		if e := os.Chdir("tmpl/"); e != nil {
 			panic(e)
 		}
-		_tmpls[page] = template.Must(template.ParseFiles(tmpls...))
+
+		//_tmpls[page] = template.Must(template.ParseFiles(tmpls...))
+		
+		t, _ := template.ParseFiles(tmpls...)
+		_tmpls[page] = t
+
+
+
+		//_tmpls[page] = template.Must(template.New(page).Funcs(GlobalFuncMap).ParseFiles(tmpls...))
+
+		//		_tmpls[page] = template.New(page).Funcs(GlobalFuncMap)
+		//		_, err = _tmpls[page].ParseFiles(tmpls...)
+		//		if err != nil {
+		//			panic(err)
+		//		}
+
 		if e := os.Chdir(dir); e != nil {
 			panic(e)
 		}

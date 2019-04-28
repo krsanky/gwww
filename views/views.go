@@ -70,7 +70,7 @@ func Items(w http.ResponseWriter, r *http.Request) {
 	var items []model.Item
 	data["items"] = items
 
-	web.RenderPage(w, "items", data)
+	//web.RenderPage(w, "items", data)
 }
 
 func Artists(w http.ResponseWriter, r *http.Request) {
@@ -81,7 +81,7 @@ func Artists(w http.ResponseWriter, r *http.Request) {
 	}
 	data["artists"] = artists
 
-	web.RenderPage(w, "artists", data)
+	//web.RenderPage(w, "artists", data)
 }
 
 func Artist(w http.ResponseWriter, r *http.Request) {
@@ -98,7 +98,7 @@ func Artist(w http.ResponseWriter, r *http.Request) {
 	}
 	data["albums"] = albums
 
-	web.RenderPage(w, "artist", data)
+	//web.RenderPage(w, "artist", data)
 }
 
 func Album(w http.ResponseWriter, r *http.Request) {
@@ -121,9 +121,5 @@ func Album(w http.ResponseWriter, r *http.Request) {
 	}
 	data["items"] = items
 
-	web.RenderPage(w, "album", data)
-}
-
-func Track(w http.ResponseWriter, r *http.Request) {
-	web.RenderPage(w, "track", nil)
+	//web.RenderPage(w, "album", data)
 }

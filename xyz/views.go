@@ -3,6 +3,7 @@ package xyz
 import (
 	"net/http"
 	"strconv"
+	"strings"
 
 	"github.com/gorilla/schema"
 	"github.com/justinas/nosurf"
@@ -99,6 +100,9 @@ func AddUser(w http.ResponseWriter, r *http.Request) {
 		decoder := schema.NewDecoder()
 		decoder.IgnoreUnknownKeys(true)
 		err := r.ParseForm()
+		for k, v := range r.Form {
+			lg.Log.Printf("k: %s v: %s", k, strings.Join(v, ""))
+		}
 		if err != nil {
 			lg.Log.Printf("err:%s", err.Error())
 			goto Render
@@ -108,7 +112,7 @@ func AddUser(w http.ResponseWriter, r *http.Request) {
 			lg.Log.Printf("err:%s", err.Error())
 			goto Render
 		}
-		//lg.Log.
+		lg.Log.Printf("user:%v", user)
 		//http.Redirect(w, r, newUrl, http.StatusSeeOther)
 	}
 

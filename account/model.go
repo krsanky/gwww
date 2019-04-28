@@ -35,8 +35,8 @@ $6, $7, $8)`
 }
 
 func (u *User) String() string {
-	return fmt.Sprintf("[id:%d username:%s email:%s pw:%s]",
-		u.Id, u.Username, u.Email, u.Password)
+	return fmt.Sprintf("[id:%d username:%s email:%s pw:%s act:%v]",
+		u.Id, u.Username, u.Email, u.Password, u.Is_active)
 }
 
 func (u *User) Url() string {

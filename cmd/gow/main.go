@@ -21,6 +21,8 @@ func main() {
 			web()
 		case "db":
 			dbstuff()
+		case "tmpl":
+			TmplTest()	
 		default:
 			usage()
 		}
@@ -57,6 +59,6 @@ func dbstuff() {
 
 func usage() {
 	fmt.Println()
-	fmt.Printf("gow [web|db]\n")
+	fmt.Printf("gow [web|db|tmpl]\n")
 	fmt.Println()
 }
