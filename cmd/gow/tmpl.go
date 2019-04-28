@@ -29,7 +29,9 @@ func TmplTest() {
 	tfiles := []string{
 		"tmpl/test/t1.html",
 		"tmpl/test/t2.html"}
-	t, err := template.New("t1.html").ParseFiles(tfiles...)
+	t := template.New("t1.html")
+	t.Funcs(Fmap)
+	_, err := t.ParseFiles(tfiles...)
 	if err != nil {
 		panic(err)
 	}
