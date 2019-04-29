@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"path/filepath"
 	"strings"
 	"text/template"
 
@@ -22,10 +23,15 @@ func InputChecked(checked bool) string {
 	}
 }
 
+func Test1() string {
+	return "Test1..."
+}
+
 func init() {
 	_tmpls = make(map[string]*template.Template)
 	GlobalFuncMap = template.FuncMap{
 		"input_checked": InputChecked,
+		"test1": Test1,
 	}
 }
 
@@ -44,7 +50,11 @@ func Render(w http.ResponseWriter, data interface{}, tmpls ...string) {
 		panic("at the disco")
 	}
 
+	// this name is for my code to cache the template and
+	// refer back to it.  In my setup/scheme, it's the last
+	// teamplet that is the unique or defining one.
 	page := tmpls[len(tmpls)-1]
+	//page := filepath.Base(tmpls[0])
 
 	lg.Log.Printf("Render(%s)...", page)
 	headers := w.Header()
@@ -60,19 +70,18 @@ func Render(w http.ResponseWriter, data interface{}, tmpls ...string) {
 		}
 
 		//_tmpls[page] = template.Must(template.ParseFiles(tmpls...))
-		
-		t, _ := template.ParseFiles(tmpls...)
+		//tfiles := []string{ "tmpl/test/t1.html", "tmpl/test/t2.html"}
+
+		// this name is like saying {{define "name"}}...
+		// which is a feature I don't use in this setup
+		name := filepath.Base(tmpls[0])
+		t := template.New(name)
+		t.Funcs(GlobalFuncMap)
+		_, err = t.ParseFiles(tmpls...)
+		if err != nil {
+			panic(err)
+		}
 		_tmpls[page] = t
-
-
-
-		//_tmpls[page] = template.Must(template.New(page).Funcs(GlobalFuncMap).ParseFiles(tmpls...))
-
-		//		_tmpls[page] = template.New(page).Funcs(GlobalFuncMap)
-		//		_, err = _tmpls[page].ParseFiles(tmpls...)
-		//		if err != nil {
-		//			panic(err)
-		//		}
 
 		if e := os.Chdir(dir); e != nil {
 			panic(e)

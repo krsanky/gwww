@@ -11,12 +11,12 @@ import (
 
 type User struct {
 	Id         int
+	Email      string
 	Password   string
-	Is_super   bool
 	Username   string
 	First_name string
 	Last_name  string
-	Email      string
+	Is_super   bool
 	Is_staff   bool
 	Is_active  bool
 }

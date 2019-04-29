@@ -1,17 +1,14 @@
+{{define "title"}}user:{{.user.Id}}{{end}}
+
 {{define "main"}}
-<h1>xyz:user {{.user1.Id}}</h1>
+{{template "breadcrumbs" .}}
+
+<h1>xyz:user {{.user.Id}}</h1>
 <a href="/xyz/users">back to users</a>
-<p>{{.user1}}</p>
 
+<p>{{.user}}</p>
 
-
-
-
-
-
-
-
-
+{{template "user_form" .}}
 
 
 {{end}}

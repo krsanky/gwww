@@ -31,6 +31,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	tmpls := []string{
 		"base.html",
 		"nav.tmpl",
+		"breadcrumbs.tmpl",
 		"index.html"}
 	web.Render(w, data, tmpls...)
 }

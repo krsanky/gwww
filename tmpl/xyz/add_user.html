@@ -1,53 +1,9 @@
+{{define "title"}}add-user-xyz{{end}}
+
 {{define "main"}}
+{{template "breadcrumbs" .}}
 
-<form method="post">
-<input type="hidden" id="csrf_token" name="csrf_token" value="{{.token}}"> 
+{{template "user_form" .}}
 
-<div class="form-group">
-	<label for="email">Email</label>
-	<input type="email" value="{{.user.Email}}" class="form-control" id="email" name="Email">
-</div>
-
-<div class="form-group">
-	<label for="password">Password</label>
-	<input type="password" class="form-control" id="password" 
-		name="Password" value="{{.user.Password}}">
-</div>
-
-<div class="form-group">
-	<label for="username">Username</label>
-	<input type="text" class="form-control" id="username" 
-		name="Username" value="{{.user.Username}}">
-</div>
-
-<div class="form-group">
-	<label for="first_name">First Name</label>
-	<input type="text" class="form-control" id="first_name" 
-		name="First_name" value="{{.user.First_name}}">
-</div>
-
-<div class="form-group">
-	<label for="last_name">Last Name</label>
-	<input type="text" class="form-control" id="last_name" 
-		name="Last_name" value="{{.user.Last_name}}">
-</div>
-
-<div class="form-group form-check">
-	<input type="checkbox" class="form-check-input" name="Is_super" id="is_super">
-	<label class="form-check-label" for="is_super">Is Super</label>
-</div>
-
-<div class="form-group form-check">
-	<input type="checkbox" class="form-check-input" name="Is_staff" id="is_staff">
-	<label class="form-check-label" for="is_staff">Is Staff</label>
-</div>
-
-<div class="form-group form-check">
-	<input type="checkbox" class="form-check-input" name="Is_active" id="is_active">
-	<label class="form-check-label" for="is_active">Is Active</label>
-</div>
-
-<button type="submit" class="btn btn-primary">Submit</button>
-</form>
 {{end}}
 

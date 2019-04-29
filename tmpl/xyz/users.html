@@ -1,12 +1,17 @@
+{{define "title"}}xyz:users{{end}}
+
 {{define "main"}}
+{{template "breadcrumbs" .}}
+
 <h1>xyz:users</h1>
 
 <table class="table">
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Email</th>
-      <th scope="col">impersonate</th>
+      <th scope="col">Email (edit)</th>
+      <th scope="col">Password (become)</th>
+      <th scope="col">Username</th>
       <th scope="col">First</th>
       <th scope="col">Last</th>
     </tr>
@@ -16,7 +21,8 @@
     <tr>
       <th scope="row">{{.Id}}</th>
       <td>{{.Url}}</td>
-      <td><a href="/xyz/become?u={{.Id}}">become</a></td>
+      <td><a href="/xyz/become?u={{.Id}}">{{.Password}}</a></td>
+      <td>{{.Username}}</td>
       <td>{{.First_name}}</td>
       <td>{{.Last_name}}</td>
     </tr>
@@ -24,7 +30,7 @@
   </tbody>
 </table>
 
-<a href="/xyz/add-user">add user</a>
+<a role="button" class="btn btn-primary" href="/xyz/add-user">add user</a>
 
 {{end}}
 

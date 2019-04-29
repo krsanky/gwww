@@ -12,6 +12,19 @@ import (
 	"oldcode.org/gow/web"
 )
 
+func Index(w http.ResponseWriter, r *http.Request) {
+	data, err := web.TmplData(r)
+	if err != nil {
+		lg.Log.Printf("err:%s", err)
+	}
+	tmpls := []string{
+		"base.html",
+		"nav.tmpl",
+		"breadcrumbs.tmpl",
+		"xyz/index.html"}
+	web.Render(w, data, tmpls...)
+}
+
 func Users(w http.ResponseWriter, r *http.Request) {
 	lg.Log.Printf("xyz.Users() method:%s", r.Method)
 
@@ -31,6 +44,7 @@ func Users(w http.ResponseWriter, r *http.Request) {
 	tmpls := []string{
 		"base.html",
 		"nav.tmpl",
+		"breadcrumbs.tmpl",
 		"xyz/users.html"}
 	web.Render(w, data, tmpls...)
 }
@@ -48,12 +62,14 @@ func User(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		lg.Log.Printf("xzy.User() err2:%s", err.Error())
 	}
-	data["user1"] = user
+	data["user"] = user
 
 	tmpls := []string{
 		"base.html",
 		"nav.tmpl",
-		"xyz/user.html"}
+		"breadcrumbs.tmpl",
+		"xyz/user.html",
+		"xyz/user_form.tmpl"}
 	web.Render(w, data, tmpls...)
 }
 
@@ -79,17 +95,6 @@ func SendEmail(w http.ResponseWriter, r *http.Request) {
 	web.Render(w, nil, tmpls...)
 }
 
-//type User struct {
-//	Id         int
-//	Password   string
-//	Is_super   bool
-//	Username   string
-//	First_name string
-//	Last_name  string
-//	Email      string
-//	Is_staff   bool
-//	Is_active  bool
-//r.PostForm (after r.ParseForm()
 func AddUser(w http.ResponseWriter, r *http.Request) {
 	user := &account.User{}
 	data, _ := web.TmplData(r)
@@ -120,11 +125,14 @@ Render:
 	tmpls := []string{
 		"base.html",
 		"nav.tmpl",
-		"xyz/add_user.html"}
+		"breadcrumbs.tmpl",
+		"xyz/add_user.html",
+		"xyz/user_form.tmpl"}
 	web.Render(w, data, tmpls...)
 }
 
 func AddRoutes(mux *http.ServeMux) {
+	mux.HandleFunc("/xyz", Index)
 	mux.HandleFunc("/xyz/users", Users)
 	mux.HandleFunc("/xyz/user", User)
 	mux.HandleFunc("/xyz/become", Become)
