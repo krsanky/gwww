@@ -1,0 +1,62 @@
+package breadcrumbs
+
+import (
+	"fmt"
+	"html/template"
+
+	"oldcode.org/gow/lg"
+)
+
+type BCList struct {
+	Bcs []BCItem
+}
+
+type BCItem struct {
+	Name   string
+	Path   string
+	Active bool
+}
+
+func New() *BCList {
+	return &BCList{}
+}
+
+var funcMap template.FuncMap
+
+func init() {
+	funcMap = template.FuncMap{
+		"active": bc_active,
+	}
+}
+
+func AddFuncs(t *template.Template) {
+	t.Funcs(funcMap)
+}
+
+func bc_active(a bool) template.HTML {
+	lg.Log.Printf("bc_active:%v", a)
+	if a {
+		return template.HTML(" active")
+	} else {
+		return template.HTML("")
+	}
+}
+
+func (bc *BCItem) LI() template.HTML {
+	if bc.Active {
+		return template.HTML(fmt.Sprintf("<li class='breadcrumb-item active'>%s</li>",
+			bc.Name))
+	} else {
+		return template.HTML(fmt.Sprintf("<li class='breadcrumb-item'><a href='%s'>%s</a></li>",
+			bc.Path, bc.Name))
+	}
+}
+
+func (bcs *BCList) Append(name, path string) {
+	bcs.Bcs = append(bcs.Bcs, BCItem{Path: path, Name: name} 
+}
+
+func (bcs *BCList) SetLastActive() {
+	bcs.Bcs[len(bcs.Bcs)-1].Active = true
+}
+

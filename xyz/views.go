@@ -8,6 +8,7 @@ import (
 	"github.com/gorilla/schema"
 	"github.com/justinas/nosurf"
 	"oldcode.org/gow/account"
+	"oldcode.org/gow/breadcrumbs"
 	"oldcode.org/gow/lg"
 	"oldcode.org/gow/web"
 )
@@ -40,6 +41,13 @@ func Users(w http.ResponseWriter, r *http.Request) {
 		data["users"] = users
 		lg.Log.Printf("u1:%s", users[0])
 	}
+
+	bcs := breadcrumbs.New()
+	bcs.Append("Home", "/")
+	bcs.Append("XYZ", "/xyz")
+	bcs.Append("Users", "/xyz/users")
+	bcs.SetLastActive()
+	data["breadcrumbs"] = bcs
 
 	tmpls := []string{
 		"base.html",

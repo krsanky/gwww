@@ -2,6 +2,7 @@ package account
 
 import (
 	"fmt"
+	"html/template"
 	"net/http"
 
 	"oldcode.org/gow/db"
@@ -39,8 +40,8 @@ func (u *User) String() string {
 		u.Id, u.Username, u.Email, u.Password, u.Is_active)
 }
 
-func (u *User) Url() string {
-	return fmt.Sprintf("<a href='/xyz/user?u=%d'>%s</a>", u.Id, u.Email)
+func (u *User) Url() template.HTML {
+	return template.HTML(fmt.Sprintf("<a href='/xyz/user?u=%d'>%s</a>", u.Id, u.Email))
 }
 
 func GetUsers() ([]User, error) {

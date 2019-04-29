@@ -6,9 +6,10 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-	"text/template"
+	"html/template"
 
 	"oldcode.org/gow/account"
+	"oldcode.org/gow/breadcrumbs"
 	lg "oldcode.org/gow/lg"
 )
 
@@ -31,7 +32,7 @@ func init() {
 	_tmpls = make(map[string]*template.Template)
 	GlobalFuncMap = template.FuncMap{
 		"input_checked": InputChecked,
-		"test1": Test1,
+		"test1":         Test1,
 	}
 }
 
@@ -76,7 +77,10 @@ func Render(w http.ResponseWriter, data interface{}, tmpls ...string) {
 		// which is a feature I don't use in this setup
 		name := filepath.Base(tmpls[0])
 		t := template.New(name)
+
 		t.Funcs(GlobalFuncMap)
+		breadcrumbs.AddFuncs(t)
+
 		_, err = t.ParseFiles(tmpls...)
 		if err != nil {
 			panic(err)
