@@ -19,10 +19,6 @@ func AddRoutes(mux *http.ServeMux) {
 
 	mux.HandleFunc("/v1/index", v1.Index)
 
-	mux.HandleFunc("/artists", views.Artists)
-	mux.HandleFunc("/artist", views.Artist)
-	mux.HandleFunc("/album", views.Album)
-	mux.HandleFunc("/items", views.Items)
 
 	//mux.HandleFunc("/page4",
 	//		func(w http.ResponseWriter, r *http.Request) { web.RenderPage(w, "page4", nil) })

@@ -11,6 +11,7 @@ import (
 	account_view "oldcode.org/gow/account/view"
 	"oldcode.org/gow/db"
 	"oldcode.org/gow/lg"
+	"oldcode.org/gow/music"
 	"oldcode.org/gow/routes"
 	"oldcode.org/gow/session"
 	"oldcode.org/gow/xyz"
@@ -33,6 +34,7 @@ func Serve() {
 	routes.AddRoutes(mux)
 	account_view.AddRoutes(mux)
 	xyz.AddRoutes(mux)
+	music.AddRoutes(mux)
 
 	// ORDER MATTERS ... acccount depends on session
 	h := nosurf.NewPure(mux)
