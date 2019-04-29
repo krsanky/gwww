@@ -53,7 +53,7 @@ func (bc *BCItem) LI() template.HTML {
 }
 
 func (bcs *BCList) Append(name, path string) {
-	bcs.Bcs = append(bcs.Bcs, BCItem{Path: path, Name: name} 
+	bcs.Bcs = append(bcs.Bcs, BCItem{Name: name, Path: path, Active: false})
 }
 
 func (bcs *BCList) SetLastActive() {

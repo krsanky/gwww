@@ -18,6 +18,11 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		lg.Log.Printf("err:%s", err)
 	}
+	bcs := breadcrumbs.New()
+	bcs.Append("Home", "/")
+	bcs.Append("XYZ", "/xyz")
+	bcs.SetLastActive()
+	data["breadcrumbs"] = bcs
 	tmpls := []string{
 		"base.html",
 		"nav.tmpl",
@@ -72,12 +77,18 @@ func User(w http.ResponseWriter, r *http.Request) {
 	}
 	data["user"] = user
 
+	bcs := breadcrumbs.New()
+	bcs.Append("Home", "/")
+	bcs.Append("XYZ", "/xyz")
+	bcs.Append("User", "/xyz/user")
+	bcs.SetLastActive()
+	data["breadcrumbs"] = bcs
 	tmpls := []string{
 		"base.html",
 		"nav.tmpl",
 		"breadcrumbs.tmpl",
-		"xyz/user.html",
-		"xyz/user_form.tmpl"}
+		"xyz/user_form.tmpl",
+		"xyz/user.html"}
 	web.Render(w, data, tmpls...)
 }
 
@@ -130,12 +141,18 @@ func AddUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 Render:
+	bcs := breadcrumbs.New()
+	bcs.Append("Home", "/")
+	bcs.Append("XYZ", "/xyz")
+	bcs.Append("Add User", "/xyz/add-user")
+	bcs.SetLastActive()
+	data["breadcrumbs"] = bcs
 	tmpls := []string{
 		"base.html",
 		"nav.tmpl",
 		"breadcrumbs.tmpl",
-		"xyz/add_user.html",
-		"xyz/user_form.tmpl"}
+		"xyz/user_form.tmpl",
+		"xyz/add_user.html"}
 	web.Render(w, data, tmpls...)
 }
 
