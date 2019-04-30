@@ -33,6 +33,7 @@ func Radio(w http.ResponseWriter, r *http.Request) {
 		"base.html",
 		"nav.tmpl",
 		"breadcrumbs.tmpl",
+		"urt/numpad.tmpl",
 		"urt/radio.html"}
 	web.Render(w, data, tmpls...)
 }
