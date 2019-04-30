@@ -59,7 +59,17 @@ func Artists(w http.ResponseWriter, r *http.Request) {
 	}
 	data["artists"] = artists
 
-	//web.RenderPage(w, "artists", data)
+	bcs := breadcrumbs.New().Append("Home", "/")
+	bcs.Append("Music", "/music")
+	bcs.AppendActive("Artists", "/music/artists")
+	data["breadcrumbs"] = bcs
+	tmpls := []string{
+		"base.html",
+		"nav.tmpl",
+		"breadcrumbs.tmpl",
+		"music/artists_pagination.tmpl",
+		"music/artists.html"}
+	web.Render(w, data, tmpls...)
 }
 
 func Artist(w http.ResponseWriter, r *http.Request) {
@@ -76,7 +86,13 @@ func Artist(w http.ResponseWriter, r *http.Request) {
 	}
 	data["albums"] = albums
 
-	//web.RenderPage(w, "artist", data)
+	data["breadcrumbs"] = breadcrumbs.New().Append("Home", "/").AppendActive("Music", "/music")
+	tmpls := []string{
+		"base.html",
+		"nav.tmpl",
+		"breadcrumbs.tmpl",
+		"music/artist.html"}
+	web.Render(w, data, tmpls...)
 }
 
 func Album(w http.ResponseWriter, r *http.Request) {

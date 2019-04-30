@@ -28,3 +28,12 @@ header.navbar {
 .leftnav {
 /*	border-right: 1px dashed blue;*/
 }
+
+.btn-c1 {
+	background-color: #000;
+	color: #7F3;
+}
+.btn-c1:hover {
+	color: #7F3;
+}
+

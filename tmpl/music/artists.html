@@ -1,14 +1,15 @@
 {{define "title"}}Artists{{end}}
 
 {{define "main"}}
-
-<h2>Artists</h2>
+{{template "breadcrumbs" .}}
+{{template "artists_pagination" .}}
 
 <ul>
 {{- range .artists}}
 	<li><a href="{{.Url}}">{{.Name}}</a></li>
 {{- end}}
 </ul>
+{{template "artists_pagination" .}}
 
 
 {{end}}
