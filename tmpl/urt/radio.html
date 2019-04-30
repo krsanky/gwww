@@ -3,6 +3,9 @@
 {{define "main"}}
 {{template "breadcrumbs" .}}
 
+<button id="urt_play_sound_button" type="button" 
+	class="btn btn-primary btn-lg btn-block">play sound</button>
+
 
 <div class="container py-4">
     <div class="row">
@@ -38,5 +41,29 @@
     <!--/row-->
 </div>
 
+{{end}}
+
+{{define "extra_head"}}
+<!-- urt extra_head -->
+
+<audio id="audio_123">
+<source src="/static/URT_RADIO_RAW/radio/female/female11.wav">
+</audio>
+
+
+<script>
+console.log("urt radio ...");
+var aud1 = new Audio("/static/URT_RADIO_RAW/radio/female/female11.wav");
+
+var play_butt_func = function() {
+	console.log("play butt ...");
+	//$('audio#audio_123').play();
+	aud1.play();
+}
+
+$(function() {
+	$("#urt_play_sound_button").click(play_butt_func);
+});
+</script>
 {{end}}
 
