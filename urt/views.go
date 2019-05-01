@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"oldcode.org/gow/breadcrumbs"
+	"oldcode.org/gow/views"
 	"oldcode.org/gow/web"
 )
 
@@ -29,6 +30,11 @@ func Radio(w http.ResponseWriter, r *http.Request) {
 	bcs.Append("URT", "/urt")
 	bcs.AppendActive("Radio", "/urt/radio")
 	data["breadcrumbs"] = bcs
+
+	if "POST" == r.Method {
+		views.ShowFormData(r)
+	}
+
 	tmpls := []string{
 		"base.html",
 		"nav.tmpl",

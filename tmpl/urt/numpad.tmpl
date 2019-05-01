@@ -1,35 +1,75 @@
 {{define "numpad"}}
-<div class="container py-4">
-    <div class="row">
-        <div class="col-auto mx-auto bg-white rounded shadow">
-
-            <!-- keypad -->
-            <div class="btn-group-vertical mx-4 my-5" role="group">
-                <div class="btn-group btn-group-lg">
-                    <button type="button" class="btn btn-outline-secondary border-bottom-0 rounded-0">1</button>
-                    <button type="button" class="btn btn-outline-secondary border-bottom-0">2</button>
-                    <button type="button" class="btn btn-outline-secondary border-bottom-0 rounded-0">3</button>
-                </div>
-                <div class="btn-group btn-group-lg">
-                    <button type="button" class="btn btn-outline-secondary border-bottom-0 rounded-0">4</button>
-                    <button type="button" class="btn btn-outline-secondary border-bottom-0">5</button>
-                    <button type="button" class="btn btn-outline-secondary border-bottom-0 rounded-0">6</button>
-                </div>
-                <div class="btn-group btn-group-lg">
-                    <button type="button" class="btn btn-outline-secondary rounded-0">7</button>
-                    <button type="button" class="btn btn-outline-secondary">8</button>
-                    <button type="button" class="btn btn-outline-secondary rounded-0">9</button>
-                </div>
-                <div class="btn-group btn-group-lg">
-                    <button type="button" class="btn btn-outline-secondary rounded-0">*</button>
-                    <button type="button" class="btn btn-outline-secondary">0</button>
-                    <button type="button" class="btn btn-outline-secondary rounded-0"><span class="small">#</span></button>
-                </div>
-            </div>
 
 
-        </div>
-    </div>
-    <!--/row-->
+
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<button id="button_1" type="button" 
+				class="btn btn-primary btn-lg btn-block">1</button>
+		</div>
+		<div class="col">
+			<button id="button_2" type="button" 
+				class="btn btn-primary btn-lg btn-block">2</button>
+		</div>
+		<div class="col">
+			<button id="button_3" type="button" 
+				class="btn btn-primary btn-lg btn-block">3</button>
+		</div>
+	</div>
 </div>
+<br/>
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<button id="button_4" type="button" value="4"
+				class="btn btn-primary btn-lg btn-block">4</button>
+		</div>
+		<div class="col">
+			<button id="button_5" type="button" value="5"
+				class="btn btn-primary btn-lg btn-block">5</button>
+		</div>
+		<div class="col">
+			<button id="button_6" type="button" value="6"
+				class="btn btn-primary btn-lg btn-block">6</button>
+		</div>
+	</div>
+</div>
+<br/>
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<button id="button_7" type="button" value="7"
+				class="btn btn-primary btn-lg btn-block">7</button>
+		</div>
+		<div class="col">
+			<button id="button_8" type="button" value="8"
+				class="btn btn-primary btn-lg btn-block">8</button>
+		</div>
+		<div class="col">
+			<button id="button_9" type="button" value="9"
+				class="btn btn-primary btn-lg btn-block">9</button>
+		</div>
+	</div>
+</div>
+<br/>
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<button id="button_a" type="button" value="*"
+				class="btn btn-primary btn-lg btn-block">*</button>
+		</div>
+		<div class="col">
+			<button id="button_0" type="button" value="0"
+				class="btn btn-primary btn-lg btn-block">0</button>
+		</div>
+		<div class="col">
+			<button id="button_h" type="button" value="#"
+				class="btn btn-primary btn-lg btn-block">#</button>
+		</div>
+	</div>
+</div>
+<br/>
+
+
 {{end}}

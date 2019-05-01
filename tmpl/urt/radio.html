@@ -3,48 +3,90 @@
 {{define "main"}}
 {{template "breadcrumbs" .}}
 
-<button id="urt_play_sound_button" type="button" 
-	class="btn btn-primary btn-lg btn-block">play sound</button>
+<div class="container">
+<div class="row">
+<div class="col-8">
+</div>
+<div class="col-4">
+<div class="form-group">
+	<input type="text" class="form-control" id="radio_state" 
+		name="radio_state" value="">
+</div>
+</div>
+</div>
+</div>
 
 {{template "numpad" .}}
 
+<div class="container">
+<div class="row">
+<div class="col-6">
+<div class="btn-group btn-group-toggle" data-toggle="buttons">
+  <label class="btn btn-secondary active">
+    <input type="radio" name="sex_input" id="option1" value="female" checked> Female
+  </label>
+  <label class="btn btn-secondary">
+    <input type="radio" name="sex_input" id="option2" value="male"> Male
+  </label>
+</div>
+</div>
 
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-  <label class="form-check-label" for="inlineRadio1">1</label>
+
+<div class="col-4">
+<button type="button" class="btn btn-block btn-dark">Submit</button>
 </div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-  <label class="form-check-label" for="inlineRadio2">2</label>
+
+
+<div class="col-2">
+
+<div class="form-group">
+	<input type="text" class="form-control" id="radio_state2" 
+		name="radio_state" value="">
 </div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" disabled>
-  <label class="form-check-label" for="inlineRadio3">3 (disabled)</label>
 </div>
+</div>
+</div>
+
+<label class="radio-inline"><input type="radio" name="optradio" value="r1" checked>Option 1</label>
+<label class="radio-inline"><input type="radio" name="optradio" value="r2">Option 2</label>
+<label class="radio-inline"><input type="radio" name="optradio" value="r3">Option 3</label> 
 
 {{end}}
 
 {{define "extra_head"}}
 <!-- urt extra_head -->
 
-<audio id="audio_123">
-<source src="/static/URT_RADIO_RAW/radio/female/female11.wav">
-</audio>
-
-
 <script>
 console.log("urt radio ...");
-var aud1 = new Audio("/static/URT_RADIO_RAW/radio/female/female11.wav");
+
+var file_base = "/static/URT_RADIO_RAW/radio/";
+
+var female11 = new Audio("/static/URT_RADIO_RAW/radio/female/female11.wav");
+var female12 = new Audio("/static/URT_RADIO_RAW/radio/female/female12.wav");
+var female13 = new Audio("/static/URT_RADIO_RAW/radio/female/female13.wav");
+var female14 = new Audio("/static/URT_RADIO_RAW/radio/female/female14.wav");
+var female15 = new Audio("/static/URT_RADIO_RAW/radio/female/female15.wav");
+var female16 = new Audio("/static/URT_RADIO_RAW/radio/female/female16.wav");
+var female17 = new Audio("/static/URT_RADIO_RAW/radio/female/female17.wav");
+var female18 = new Audio("/static/URT_RADIO_RAW/radio/female/female18.wav");
+var male18 = new Audio("/static/URT_RADIO_RAW/radio/male/male18.wav");
 
 var play_butt_func = function() {
-	console.log("play butt ...");
-	//$('audio#audio_123').play();
-	aud1.play();
+	female18.play();
+}
+var play_m18 = function() {
+	male18.play();
+}
+var all_click = function() {
+	console.log("all click:"+$(this).val());
+	console.log($("input[type='radio'][name='optradio']:checked").val());
 }
 
 $(function() {
-	$("#urt_play_sound_button").click(play_butt_func);
+	/*$("#button_1").click(play_butt_func);*/
+	$("button").click(all_click);
 });
+
 </script>
 {{end}}
 
