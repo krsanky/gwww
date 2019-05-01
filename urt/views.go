@@ -11,6 +11,7 @@ import (
 func AddRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("/urt", Index)
 	mux.HandleFunc("/urt/radio", Radio)
+	mux.HandleFunc("/urt/radio/key", RadioKey)
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
@@ -43,3 +44,18 @@ func Radio(w http.ResponseWriter, r *http.Request) {
 		"urt/radio.html"}
 	web.Render(w, data, tmpls...)
 }
+
+func RadioKey(w http.ResponseWriter, r *http.Request) {
+	data, _ := web.TmplData(r)
+	bcs := breadcrumbs.New().Append("Home", "/")
+	bcs.Append("URT", "/urt")
+	bcs.AppendActive("Radio Key", "/urt/radio/key")
+	data["breadcrumbs"] = bcs
+	tmpls := []string{
+		"base.html",
+		"nav.tmpl",
+		"breadcrumbs.tmpl",
+		"urt/radio_key.html"}
+	web.Render(w, data, tmpls...)
+}
+

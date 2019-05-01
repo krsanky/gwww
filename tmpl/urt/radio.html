@@ -22,11 +22,13 @@
 <div class="row">
 <div class="col-6">
 <div class="btn-group btn-group-toggle" data-toggle="buttons">
-  <label class="btn btn-secondary active">
-    <input type="radio" name="sex_input" id="option1" value="female" checked> Female
+  <label class="btn btn-secondary">
+    <input type="radio" 
+		name="sex_input" id="sex_input_0" value="female"> Female
   </label>
   <label class="btn btn-secondary">
-    <input type="radio" name="sex_input" id="option2" value="male"> Male
+    <input type="radio" 
+		name="sex_input" value="male"> Male
   </label>
 </div>
 </div>
@@ -47,9 +49,12 @@
 </div>
 </div>
 
-<label class="radio-inline"><input type="radio" name="optradio" value="r1" checked>Option 1</label>
-<label class="radio-inline"><input type="radio" name="optradio" value="r2">Option 2</label>
-<label class="radio-inline"><input type="radio" name="optradio" value="r3">Option 3</label> 
+{{/* this worked fine
+<label class="radio-inline"><input type="radio" 
+	name="optradio" value="male" checked> male</label>
+<label class="radio-inline"><input type="radio" 
+	name="optradio" value="female"> female</label>
+*/}}
 
 {{end}}
 
@@ -77,13 +82,15 @@ var play_butt_func = function() {
 var play_m18 = function() {
 	male18.play();
 }
+
 var all_click = function() {
 	console.log("all click:"+$(this).val());
-	console.log($("input[type='radio'][name='optradio']:checked").val());
+	console.log($("input[type='radio'][name='sex_input']:checked").val());
 }
 
 $(function() {
-	/*$("#button_1").click(play_butt_func);*/
+	/* $("input:radio:first").click(); */
+	$("#sex_input_0").click();
 	$("button").click(all_click);
 });
 
