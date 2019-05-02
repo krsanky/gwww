@@ -1,6 +1,9 @@
+#WWWHOME=	/var/www/htdocs
+WWWHOME=/var/www/vhost/oldcode.org/htdocs/
+
 deploy:
-	cp -r static /var/www/htdocs/
-	cp -r URT_RADIO_RAW /var/www/htdocs/static/
+	cp -r static ${WWWHOME}
+	cp -r URT_RADIO_RAW ${WWWHOME}/static/
 
 .PHONY= deploy
 
