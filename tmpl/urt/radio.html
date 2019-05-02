@@ -3,18 +3,6 @@
 {{define "main"}}
 {{template "breadcrumbs" .}}
 
-<div class="container">
-<div class="row">
-<div class="col-8">
-</div>
-<div class="col-4">
-<div class="form-group">
-	<input type="text" class="form-control" id="radio_state" 
-		name="radio_state" value="">
-</div>
-</div>
-</div>
-</div>
 
 {{template "numpad" .}}
 
@@ -35,14 +23,14 @@
 
 
 <div class="col-4">
-<button type="button" class="btn btn-block btn-dark">Submit</button>
+<button type="button" id='reset_button' class="btn btn-block btn-dark">Reset</button>
 </div>
 
 
 <div class="col-2">
 
 <div class="form-group">
-	<input type="text" class="form-control" id="radio_state2" 
+	<input type="text" class="form-control" id="radio_state" 
 		name="radio_state" value="">
 </div>
 </div>
@@ -59,41 +47,64 @@
 {{end}}
 
 {{define "extra_head"}}
-<!-- urt extra_head -->
-
 <script>
-console.log("urt radio ...");
-
 var file_base = "/static/URT_RADIO_RAW/radio/";
+var audio_cache = {};
 
-var female11 = new Audio("/static/URT_RADIO_RAW/radio/female/female11.wav");
-var female12 = new Audio("/static/URT_RADIO_RAW/radio/female/female12.wav");
-var female13 = new Audio("/static/URT_RADIO_RAW/radio/female/female13.wav");
-var female14 = new Audio("/static/URT_RADIO_RAW/radio/female/female14.wav");
-var female15 = new Audio("/static/URT_RADIO_RAW/radio/female/female15.wav");
-var female16 = new Audio("/static/URT_RADIO_RAW/radio/female/female16.wav");
-var female17 = new Audio("/static/URT_RADIO_RAW/radio/female/female17.wav");
-var female18 = new Audio("/static/URT_RADIO_RAW/radio/female/female18.wav");
-var male18 = new Audio("/static/URT_RADIO_RAW/radio/male/male18.wav");
-
-var play_butt_func = function() {
-	female18.play();
+var process_radio_state = function() {
+	s = $('#radio_state').val();
+	console.log("process radio state:"+s);
+	
+	if (s.length < 2) {
+		return;
+	} else if (s.length == 2) {
+		play_radio(s, get_sex());
+		$('#radio_state').val("");
+	} else {
+		console.log("state err: reset it");
+		$('#radio_state').val("");
+	}
 }
-var play_m18 = function() {
-	male18.play();
+
+var get_sex = function() {
+	return $("input[type='radio'][name='sex_input']:checked").val();
+}
+
+var update_radio_state = function(new_val) {
+	cur = $('#radio_state').val();
+	console.log("current radio state:"+cur+" new val:"+new_val);
+	$('#radio_state').val(cur+new_val);
+}
+
+var play_radio = function(state, sex) {
+	console.log("PLAYRADIO:"+state+" sex:"+sex);
+	path = file_base;
+	path = path + sex + "/" + sex + state + ".wav";
+	console.log("--path:"+path);
+
+	if (!(path in audio_cache)) {
+		console.log("no audio yet, cache it...");
+		audio_cache[path] = new Audio(path);
+	}
+	audio_cache[path].play();
 }
 
 var all_click = function() {
 	console.log("all click:"+$(this).val());
 	console.log($("input[type='radio'][name='sex_input']:checked").val());
+	update_radio_state($(this).val());
+	process_radio_state(); 
 }
 
+/* $("input:radio:first").click(); */
+
 $(function() {
-	/* $("input:radio:first").click(); */
 	$("#sex_input_0").click();
 	$("button").click(all_click);
+	$('#reset_button').click(function(){
+		$('#radio_state').val('');
+	});
 });
-
 </script>
 {{end}}
 

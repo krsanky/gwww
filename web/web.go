@@ -70,9 +70,6 @@ func Render(w http.ResponseWriter, data interface{}, tmpls ...string) {
 			panic(e)
 		}
 
-		//_tmpls[page] = template.Must(template.ParseFiles(tmpls...))
-		//tfiles := []string{ "tmpl/test/t1.html", "tmpl/test/t2.html"}
-
 		// this name is like saying {{define "name"}}...
 		// which is a feature I don't use in this setup
 		name := filepath.Base(tmpls[0])
