@@ -16,6 +16,7 @@ import (
 	"oldcode.org/gow/session"
 	"oldcode.org/gow/urt"
 	"oldcode.org/gow/xyz"
+	"oldcode.org/gow/geo"
 )
 
 func Serve() {
@@ -37,6 +38,7 @@ func Serve() {
 	xyz.AddRoutes(mux)
 	music.AddRoutes(mux)
 	urt.AddRoutes(mux)
+	geo.AddRoutes(mux)
 
 	// ORDER MATTERS ... acccount depends on session
 	h := nosurf.NewPure(mux)

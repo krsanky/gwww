@@ -1,0 +1,27 @@
+{{define "title"}}URT{{end}}
+
+{{define "main"}}
+{{template "breadcrumbs" .}}
+
+<button type="button">get location</button>
+
+{{end}}
+
+{{define "extra_body"}}
+<script>
+var logPos = function(pos) {
+	console.log("lat:" + pos.coords.latitude +
+		"lon:" + pos.coords.longitude);
+}
+
+if (navigator.geolocation) {
+	console.log("YES HAS GEO");
+	navigator.geolocation.getCurrentPosition(logPos);
+} else {
+	console.log("NO NO GEO");
+}
+
+</script>
+{{end}}
+
+
