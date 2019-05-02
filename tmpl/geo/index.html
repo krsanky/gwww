@@ -1,16 +1,30 @@
-{{define "title"}}URT{{end}}
+{{define "title"}}GEO{{end}}
 
 {{define "main"}}
 {{template "breadcrumbs" .}}
 
-<button type="button">get location</button>
+<div class="container">
+<div class="row">
+<div class="col">
+<button type="button" id="get_loc_b" class="btn btn-info">get location</button>
+</div>
+</div>
+</div>
+
+<div class="container">
+<div class="row">
+<div class="col">
+<p id="geo_output">...</p>
+</div>
+</div>
+</div>
 
 {{end}}
 
 {{define "extra_body"}}
 <script>
 var logPos = function(pos) {
-	console.log("lat:" + pos.coords.latitude +
+	alert("lat:" + pos.coords.latitude +
 		"lon:" + pos.coords.longitude);
 }
 
@@ -20,7 +34,14 @@ if (navigator.geolocation) {
 } else {
 	console.log("NO NO GEO");
 }
+	
+var show_msg = function() {
+	$('#geo_output').html("hey see me?!");
+}
 
+$(function() {
+	$('#get_loc_b').click(show_msg);
+});
 </script>
 {{end}}
 
