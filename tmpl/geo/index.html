@@ -14,7 +14,7 @@
 <div class="container">
 <div class="row">
 <div class="col">
-<p id="geo_output">...</p>
+<p id="geo_output">XXX...</p>
 </div>
 </div>
 </div>
@@ -24,15 +24,23 @@
 {{define "extra_body"}}
 <script>
 var logPos = function(pos) {
-	alert("lat:" + pos.coords.latitude +
-		"lon:" + pos.coords.longitude);
+	$('#geo_output').html("lat:" + pos.coords.latitude + "lon:" + pos.coords.longitude);
+}
+
+function error(err) {
+/*
+	console.warn(`ERROR(${err.code}): ${err.message}`);
+	alert(`ERROR(${err.code}): ${err.message}`);
+*/
+	$('#geo_output').html("err");
 }
 
 if (navigator.geolocation) {
-	console.log("YES HAS GEO");
-	navigator.geolocation.getCurrentPosition(logPos);
+	$('#geo_output').html("has geo...");
+	navigator.geolocation.getCurrentPosition(logPos, error);
+	$('#geo_output').html("has geo...after");
 } else {
-	console.log("NO NO GEO");
+	$('#geo_output').html("has NO geo");
 }
 	
 var show_msg = function() {
@@ -42,6 +50,86 @@ var show_msg = function() {
 $(function() {
 	$('#get_loc_b').click(show_msg);
 });
+
+
+
+{{/*
+function prompt(window, pref, message, callback) {
+    let branch = Components.classes["@mozilla.org/preferences-service;1"]
+                           .getService(Components.interfaces.nsIPrefBranch);
+
+    if (branch.getPrefType(pref) === branch.PREF_STRING) {
+        switch (branch.getCharPref(pref)) {
+        case "always":
+            return callback(true);
+        case "never":
+            return callback(false);
+        }
+    }
+
+    let done = false;
+
+    function remember(value, result) {
+        return function() {
+            done = true;
+            branch.setCharPref(pref, value);
+            callback(result);
+        }
+    }
+
+    let self = window.PopupNotifications.show(
+        window.gBrowser.selectedBrowser,
+        "geolocation",
+        message,
+        "geo-notification-icon",
+        {
+            label: "Share Location",
+            accessKey: "S",
+            callback: function(notification) {
+                done = true;
+                callback(true);
+            }
+        }, [
+            {
+                label: "Always Share",
+                accessKey: "A",
+                callback: remember("always", true)
+            },
+            {
+                label: "Never Share",
+                accessKey: "N",
+                callback: remember("never", false)
+            }
+        ], {
+            eventCallback: function(event) {
+                if (event === "dismissed") {
+                    if (!done) callback(false);
+                    done = true;
+                    window.PopupNotifications.remove(self);
+                }
+            },
+            persistWhileVisible: true
+        });
+}
+
+prompt(window,
+       "extensions.foo-addon.allowGeolocation",
+       "Foo Add-on wants to know your location.",
+       function callback(allowed) { alert(allowed); });
+*/}}
+
+{{/*
+var positionOption = { timeout: 500, enableHighAccuracy: true };
+var gpsSunccuss = function(currentPosition) {
+    //use gps position
+};
+var gpsFailed = function() {
+    //use some 3rd party position solution(get position by your device ip)
+    getPositionBy3rdParty();
+};
+navigator.geolocation.getCurrentPosition(gpsSunccuss, gpsFailed, positionOption)
+*/}}
+
 </script>
 {{end}}
 
