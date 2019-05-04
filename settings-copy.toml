@@ -1,0 +1,12 @@
+[email]
+host = '*****************'
+port = 999
+user = 'qwerty@asd.com'
+password = '*****************'
+use_ssl = true
+
+[db]
+user = 'useruser' 
+password = 'passwordpassword'
+name = 'useruser1'
+

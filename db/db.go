@@ -7,19 +7,20 @@ import (
 	"github.com/jmoiron/sqlx"
 	_ "github.com/mattn/go-sqlite3"
 	"oldcode.org/gow/lg"
+	"oldcode.org/gow/settings"
 )
 
-var beets_db_file = "/home/wise/go/src/oldcode.org/gow/beets.db"
 var BeetsDB *sqlx.DB
 var DB *sql.DB
 var DBX *sqlx.DB
 
-var password = "bluedogtree"
-var user = "webserver"
-var db_name = "webserver"
-
 func InitDB() {
 	lg.Log.Printf("init pg db start ...")
+
+	password := settings.GetString("db.password")
+	user := settings.GetString("db.user")
+	db_name := settings.GetString("db.name")
+
 	var err error
 	connect_string := fmt.Sprintf("user=%s password=%s dbname=%s sslmode=disable",
 		user, password, db_name)
@@ -44,6 +45,8 @@ func InitDB() {
 }
 
 func Open() {
+	beets_db_file := settings.GetString("db.beets_file")
+
 	var err error
 	BeetsDB, err = sqlx.Open("sqlite3", beets_db_file)
 	if err != nil {

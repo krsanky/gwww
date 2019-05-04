@@ -3,25 +3,16 @@ package email
 import (
 	"fmt"
 	"net/smtp"
-)
 
-var (
-	host     string
-	port     int
-	user     string
-	password string
-	use_ssl  bool
+	"oldcode.org/gow/settings"
 )
-
-func init() {
-	host = "smtp.fastmail.com"
-	port = 587
-	user = "wisehart@fastmail.fm"
-	password = "n5jkbctpygfqy3pv"
-	use_ssl = true
-}
 
 func Send_test() {
+	port := settings.GetInt("email.port")
+	host := settings.GetString("email.host")
+	user := settings.GetString("email.user")
+	password := settings.GetString("email.password")
+
 	auth := smtp.PlainAuth("", user, password, host)
 	hostp := fmt.Sprintf("%s:%d", host, port)
 	//fmt.Printf("hostp:%s\n", hostp)
@@ -30,6 +21,7 @@ func Send_test() {
 		"Subject: 123 Gophers\r\n" +
 		"\r\n" +
 		"123 This is the email body.\r\n")
+	//asd123 is the real from and sender
 	err := smtp.SendMail(hostp, auth, "asd123@oldcode.org", to, msg)
 	if err != nil {
 		fmt.Println("error sending email\n")

@@ -10,13 +10,13 @@ import (
 	"oldcode.org/gow/account"
 	account_view "oldcode.org/gow/account/view"
 	"oldcode.org/gow/db"
+	"oldcode.org/gow/geo"
 	"oldcode.org/gow/lg"
 	"oldcode.org/gow/music"
 	"oldcode.org/gow/routes"
 	"oldcode.org/gow/session"
 	"oldcode.org/gow/urt"
 	"oldcode.org/gow/xyz"
-	"oldcode.org/gow/geo"
 )
 
 func Serve() {
