@@ -37,10 +37,21 @@ func Index(w http.ResponseWriter, r *http.Request) {
 }
 
 func Msg(w http.ResponseWriter, r *http.Request) {
+	// look for something in session like "flash_msg" ?
+	// read the msg param
+
 	data, _ := web.TmplData(r)
+	data["breadcrumbs"] = breadcrumbs.New().Append("Home", "/").AppendActive("Message", "/msg")
+	q := r.URL.Query()
+	msg := q.Get("m")
+	if msg != "" {
+		data["msg"] = msg
+	}
+
 	tmpls := []string{
 		"base.html",
 		"nav.tmpl",
+		"breadcrumbs.tmpl",
 		"msg.html"}
 	web.Render(w, data, tmpls...)
 }

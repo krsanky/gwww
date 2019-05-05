@@ -26,9 +26,13 @@ func register(email string) {
 	}
 }
 func HandleRegister(w http.ResponseWriter, r *http.Request) {
-	//http.Redirect(w, r, "/msg?m=checkemail", 303)
 	lg.Log.Printf("emailForReg:%s", r.FormValue("emailForReg"))
-	email.Send_test()
+
+	// put this in a channel thing (fire and forget)
+	go email.Send_test()
+
+	
+	http.Redirect(w, r, "/msg?m=checkemail", 303)
 }
 
 func Login(w http.ResponseWriter, r *http.Request) {
