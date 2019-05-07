@@ -1,4 +1,6 @@
 CREATE TABLE registration (                                                                     
 	account INT references account(id),
-	activaton_key text
+	activation_key text,
+	ts TIMESTAMP, 
+	tstz TIMESTAMPTZ
 );

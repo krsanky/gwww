@@ -53,7 +53,7 @@ func Render(w http.ResponseWriter, data interface{}, tmpls ...string) {
 
 	// this name is for my code to cache the template and
 	// refer back to it.  In my setup/scheme, it's the last
-	// teamplet that is the unique or defining one.
+	// template that is the unique or defining one.
 	page := tmpls[len(tmpls)-1]
 	//page := filepath.Base(tmpls[0])
 

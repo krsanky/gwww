@@ -16,7 +16,8 @@ func AddUser(h http.Handler) http.Handler {
 			lg.Log.Printf("AddUser() err:%s", err.Error())
 		}
 		user, err := GetUserById(user_id)
-		if err != nil {
+		if false && (err != nil) {
+			// might just be no results
 			lg.Log.Printf("AddUser() err2:%s", err.Error())
 		}
 

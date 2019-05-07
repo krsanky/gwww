@@ -1,6 +1,7 @@
 package account
 
 import (
+	"database/sql"
 	"fmt"
 	"html/template"
 	"net/http"
@@ -14,7 +15,7 @@ type User struct {
 	Id         int
 	Email      string
 	Password   string
-	Username   string
+	Username   sql.NullString
 	First_name string
 	Last_name  string
 	Is_super   bool
@@ -24,6 +25,8 @@ type User struct {
 
 // write whatever we have to new record
 func (u *User) SaveNew() error {
+	lg.Log.Printf("account.SaveNew() email:%s", u.Email)
+
 	sql := `INSERT INTO account
 (password, is_superuser, username, first_name, last_name, 
 email, is_staff, is_active)
@@ -77,6 +80,7 @@ FROM account WHERE id=$1`, id)
 		&u.Is_staff,
 		&u.Is_active)
 
+	// add check for ErrNoRows ....
 	if err != nil {
 		return nil, err
 	}
@@ -101,6 +105,7 @@ FROM account WHERE username=$1`, username)
 		&u.Is_staff,
 		&u.Is_active)
 
+	// add check for ErrNoRows ....
 	if err != nil {
 		return nil, err
 	} else {
@@ -111,9 +116,15 @@ FROM account WHERE username=$1`, username)
 func GetUserByEmail(email string) (*User, error) {
 	db := db.DBX.Unsafe()
 	row := db.QueryRowx(`SELECT * FROM account WHERE email=$1`, email)
+	lg.Log.Printf("row:%v", row)
 	u := &User{}
-	err := row.StructScan(&u)
+	err := row.StructScan(u)
+
+	//var ErrNoRows = errors.New("sql: no rows in result set")
 	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, nil
+		}
 		return nil, err
 	} else {
 		return u, nil
