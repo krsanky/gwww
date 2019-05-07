@@ -14,6 +14,16 @@ import (
 func AddRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("/account/login", Login)
 	mux.HandleFunc("/account/logout", Logout)
+	mux.HandleFunc("/account/password/reset", Reset)
+}
+
+func Reset(w http.ResponseWriter, r *http.Request) {
+	data, _ := web.TmplData(r)
+	tmpls := []string{
+		"base.html",
+		"nav.tmpl",
+		"account/reset.html"}
+	web.Render(w, data, tmpls...)
 }
 
 func Login(w http.ResponseWriter, r *http.Request) {
@@ -61,7 +71,7 @@ func HandleRegister(w http.ResponseWriter, r *http.Request) {
 	lg.Log.Printf("account.view.HandleRegister(): emailForReg:%s", r.FormValue("emailForReg"))
 	_email := r.FormValue("emailForReg")
 
-	//check that the email is unsued
+	//check that the email is unused
 	//create a locked out account with that email
 
 	var u *account.User

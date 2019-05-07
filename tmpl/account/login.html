@@ -2,21 +2,8 @@
 <form method="post">
 <input type="hidden" name="csrf_token" value="{{.token}}"> 
 
-<h3 class="h3 mb-3 font-weight-normal">Please register</h3>
 
-<div class="form-group">
-	<label for="emailForReg">Email address</label>
-	<input type="email" class="form-control" 
-		id="emailForReg" 
-		name="emailForReg" 
-		placeholder="Enter email">
-</div>
-<button type="submit" name="register_button" value="register" 
-	class="btn btn-info">Register</button>
-
-<hr/>
-
-<h3 class="h3 mb-3 font-weight-normal">Or login</h3>
+<h3 class="h3 mb-3 font-weight-normal">Please login</h3>
 
 <div class="form-group">
 	<label for="emailForLogin">Email address</label>
@@ -34,6 +21,27 @@
 </div>
 <button type="submit" name="login_button" value="login" 
 	class="btn btn-primary">Login</button>
+
+<hr/>
+
+
+
+<h3 class="h3 mb-3 font-weight-normal">Or register</h3>
+
+<div class="form-group">
+	<label for="emailForReg">Email address</label>
+	<input type="email" class="form-control" 
+		id="emailForReg" 
+		name="emailForReg" 
+		placeholder="Enter email">
+</div>
+<button type="submit" name="register_button" value="register" 
+	class="btn btn-info">Register</button>
+
+
+<hr/>
+
+<a role="button" class="btn btn-warning" href="/account/password/reset">forgot|reset password</a>
 
 </form>
 {{end}}

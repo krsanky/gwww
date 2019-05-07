@@ -3,7 +3,9 @@ package urt
 import (
 	"net/http"
 
+	"github.com/krsanky/go-urt-server-query/urt"
 	"oldcode.org/gow/breadcrumbs"
+	"oldcode.org/gow/lg"
 	"oldcode.org/gow/views"
 	"oldcode.org/gow/web"
 )
@@ -62,6 +64,9 @@ func RadioKey(w http.ResponseWriter, r *http.Request) {
 
 func Servers(w http.ResponseWriter, r *http.Request) {
 	data, _ := web.TmplData(r)
+
+	urtCtf(data)
+
 	bcs := breadcrumbs.New().Append("Home", "/")
 	bcs.Append("URT", "/urt")
 	bcs.AppendActive("URT Servers", "/urt/servers")
@@ -74,3 +79,30 @@ func Servers(w http.ResponseWriter, r *http.Request) {
 	web.Render(w, data, tmpls...)
 }
 
+func urtCtf(page_data map[string]interface{}) {
+	data, err := urt.GetRawStatus("216.52.148.134:27961") // urtctf
+	if err != nil {
+		lg.Log.Printf("ERR:%s", err)
+		return
+	}
+	//fmt.Println(string(data))
+
+	_, err = urt.ServerVars(data)
+	if err != nil {
+		lg.Log.Printf("ERR:%s", err)
+		return
+	}
+	//fmt.Printf("len vars:%d\n", len(vars))
+
+	players, err := urt.Players(data)
+	if err != nil {
+		lg.Log.Printf("ERR:%s", err)
+		return
+	}
+	//fmt.Printf("len players:%d\n", len(players))
+	//for _, p := range players {
+	//	fmt.Println(p)
+	//}
+
+	page_data["players"] = players
+}
