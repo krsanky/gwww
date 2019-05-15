@@ -142,16 +142,15 @@ func (u *User) Login(w http.ResponseWriter, r *http.Request) {
 }
 
 func LoginUser(w http.ResponseWriter, r *http.Request, u *User) {
-	sess := session.Manager.Load(r)
-	err := sess.PutInt(w, UserIdString, u.Id)
-	if err != nil {
-		panic(err)
-	}
+	session.Session.Put(r.Context(), UserIdString, u.Id)
 }
 
 // user is implied as current logged in user
 func Logout(w http.ResponseWriter, r *http.Request) {
-	session.Manager.Load(r).Clear(w)
+	err := session.Session.Destroy(r.Context())
+	if err != nil {
+		lg.Log.Printf("sess.Destroy() error")
+	}
 }
 
 func (u *User) Auth(w http.ResponseWriter, r *http.Request, password string) bool {
@@ -164,16 +163,11 @@ func (u *User) Auth(w http.ResponseWriter, r *http.Request, password string) boo
 
 func AuthUser(w http.ResponseWriter, r *http.Request, username string, password string) bool {
 	u, err := GetUserByName(username)
-	sess := session.Manager.Load(r)
 	if err == nil {
 		lg.Log.Printf("user email:%s", u.Email)
 		if PasswordMatch(u, password) {
 			lg.Log.Printf("AuthUser MATCH")
-			//LoginUser(w, r, u)
-			err := sess.PutInt(w, UserIdString, u.Id)
-			if err != nil {
-				panic(err)
-			}
+			session.Session.Put(r.Context(), UserIdString, u.Id)
 			return true
 		} else {
 			lg.Log.Printf("AuthUser NO MATCH")
@@ -181,8 +175,8 @@ func AuthUser(w http.ResponseWriter, r *http.Request, username string, password 
 	}
 
 	lg.Log.Printf("AuthUser err:%s", err)
-	sess.PopInt(w, UserIdString)
-	sess.PopString(w, "user_username")
+	session.Session.PopInt(r.Context(), UserIdString)
+	session.Session.PopString(r.Context(), "user_username")
 	return false
 }
 

@@ -45,7 +45,7 @@ func Serve() {
 	//h = M1(h, "->h1")
 	h = account.AddUser(h)
 	session.Init()
-	h = session.Manager.Use(h)
+	h = session.Session.LoadAndSave(h)
 	fcgi.Serve(listener, h)
 }
 

@@ -8,6 +8,7 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 	"oldcode.org/gow/lg"
 	"oldcode.org/gow/settings"
+	_ "github.com/lib/pq"
 )
 
 var BeetsDB *sqlx.DB
