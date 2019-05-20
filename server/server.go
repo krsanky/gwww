@@ -28,7 +28,10 @@ func Serve() {
 	}
 
 	dir, _ := os.Getwd()
-	lg.Log.Printf("pre fcgi.Serve() dir:%s", dir)
+	lg.Log.Printf("server.Serve() dir:%s", dir)
+	os.Chdir("/home/wise/go/src/oldcode.org/gow")
+	dir, _ = os.Getwd()
+	lg.Log.Printf("--now dir:%s", dir)
 
 	db.Open()
 	db.InitDB()

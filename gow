@@ -1,0 +1,22 @@
+#!/bin/ksh
+
+name="gow"
+daemon="/home/wise/go/bin/gow"
+gow_user="wise"
+
+rc_stop() {
+	echo "stop"
+	pkill $name
+}
+
+rc_start() {
+	echo "start"
+	$name &
+}
+
+if [ $# -eq 1 ] ; then
+	rc_stop
+else 
+	rc_start
+fi
+
