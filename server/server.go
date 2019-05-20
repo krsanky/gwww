@@ -19,6 +19,8 @@ import (
 	"oldcode.org/gow/xyz"
 )
 
+//try:
+//https://github.com/alexedwards/stack
 func Serve() {
 	listener, err := net.Listen("tcp", "127.0.0.1:8088")
 	if err != nil {

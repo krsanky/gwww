@@ -55,3 +55,9 @@ func Msg(w http.ResponseWriter, r *http.Request) {
 		"msg.html"}
 	web.Render(w, data, tmpls...)
 }
+
+func DirectMsg(w http.ResponseWriter, r *http.Request) {
+
+
+}
+
