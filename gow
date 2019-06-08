@@ -5,8 +5,9 @@ daemon="/home/wise/go/bin/gow"
 gow_user="wise"
 
 rc_stop() {
-	echo "stop"
+	echo "stopping..."
 	pkill $name
+	echo "returned:$?"
 }
 
 rc_start() {
@@ -15,8 +16,18 @@ rc_start() {
 }
 
 if [ $# -eq 1 ] ; then
-	rc_stop
+	echo "arg is: $1"
+	if [ $1 == "stop" ] ; then
+		rc_stop
+	elif [ $1 == "restart" ] ; then
+		rc_stop
+		sleep 1
+		rc_start
+	elif [ $1 == "start" ] ; then
+		rc_start
+	fi
 else 
+	echo "default is start"
 	rc_start
 fi
 

@@ -3,6 +3,8 @@
 {{define "main"}}
 {{template "breadcrumbs" .}}
 
+<a href="/geo/map" role="button" class="btn btn-primary btn-lg btn-block">Map</a>
+
 <div class="container">
 <div class="row">
 <div class="col">
@@ -38,7 +40,13 @@ function error(err) {
 
 if (navigator.geolocation) {
 	$('#geo_output').html("has geo...");
-	navigator.geolocation.getCurrentPosition(logPos, error);
+	po = {enableHighAccuracy: true};
+/*
+	alert("js comments test...");
+	po.maximumAge = 75000; // milliseconds 
+	po.timeout = 1000 * 10; // 10 seconds
+*/
+	navigator.geolocation.getCurrentPosition(logPos, error, po);
 	$('#geo_output').html("has geo...after");
 } else {
 	$('#geo_output').html("has NO geo");

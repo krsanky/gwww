@@ -1,3 +1,4 @@
+*.zip
 *.db
 tmpl2/
 log.txt

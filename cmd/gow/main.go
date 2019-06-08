@@ -46,6 +46,7 @@ func cd() {
 	ss := []string{gopath, "src", "oldcode.org", "gow"}
 	dir := strings.Join(ss, "/")
 	fmt.Printf("changing directory to:%s\n", dir)
+	fmt.Println()
 	if err := os.Chdir(dir); err != nil {
 		panic(err)
 	}
