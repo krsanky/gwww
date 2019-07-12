@@ -117,3 +117,16 @@ func Album(w http.ResponseWriter, r *http.Request) {
 
 	//web.RenderPage(w, "album", data)
 }
+
+func Filter(w http.ResponseWriter, r *http.Request) {
+	data, _ := web.TmplData(r)
+	data["breadcrumbs"] = breadcrumbs.New().Append("Home", "/").AppendActive("Music", "/music")
+	tmpls := []string{
+		"base.html",
+		"nav.tmpl",
+		"breadcrumbs.tmpl",
+		"music/filter.html"}
+	web.Render(w, data, tmpls...)
+}
+
+

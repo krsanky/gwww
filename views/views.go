@@ -26,14 +26,11 @@ func Index(w http.ResponseWriter, r *http.Request) {
 		http.NotFound(w, r)
 		return
 	}
-	data, _ := web.TmplData(r)
-	data["breadcrumbs"] = breadcrumbs.New().AppendActive("Home", "/")
 	tmpls := []string{
 		"base.html",
 		"nav.tmpl",
-		"breadcrumbs.tmpl",
 		"index.html"}
-	web.Render(w, data, tmpls...)
+	web.Render(w, nil, tmpls...)
 }
 
 func Msg(w http.ResponseWriter, r *http.Request) {
