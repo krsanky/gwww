@@ -1,0 +1,22 @@
+{{define "title"}}Play Song{{end}}
+
+
+{{define "main"}}
+{{template "breadcrumbs" .}}
+
+<div class="container">
+<div class="columns">
+<div class="column">
+<h2 class="text-center">Play One Fixed Song</h2>
+<a href="/audio_cache/02-Timeless.mp3">timeless</a>
+
+<audio controls preload="auto">
+	<source src="/audio_cache/02-Timeless.mp3" type="audio/mpeg">
+	no support
+</audio>
+
+</div>
+</div>
+</div>
+
+{{end}}

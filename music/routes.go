@@ -9,4 +9,5 @@ func AddRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("/music/album", Album)
 	mux.HandleFunc("/music/items", Items)
 	mux.HandleFunc("/music/filter", Filter)
+	//mux.HandleFunc("/music/playsong", Playsong)
 }

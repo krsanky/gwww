@@ -57,8 +57,8 @@ func (bcs *BCList) Append(name, path string) *BCList {
 	return bcs
 }
 
-func (bcs *BCList) AppendActive(name, path string) *BCList {
-	bcs.Bcs = append(bcs.Bcs, BCItem{Name: name, Path: path, Active: true})
+func (bcs *BCList) AppendActive(name string) *BCList {
+	bcs.Bcs = append(bcs.Bcs, BCItem{Name: name, Active: true})
 	return bcs
 }
 

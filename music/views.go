@@ -13,7 +13,7 @@ import (
 
 func Index(w http.ResponseWriter, r *http.Request) {
 	data, _ := web.TmplData(r)
-	data["breadcrumbs"] = breadcrumbs.New().Append("Home", "/").AppendActive("Music", "/music")
+	data["breadcrumbs"] = breadcrumbs.New().Append("Home", "/").AppendActive("Music")
 	tmpls := []string{
 		"base.html",
 		"nav.tmpl",
@@ -61,7 +61,7 @@ func Artists(w http.ResponseWriter, r *http.Request) {
 
 	bcs := breadcrumbs.New().Append("Home", "/")
 	bcs.Append("Music", "/music")
-	bcs.AppendActive("Artists", "/music/artists")
+	bcs.AppendActive("Artists")
 	data["breadcrumbs"] = bcs
 	tmpls := []string{
 		"base.html",
@@ -86,7 +86,7 @@ func Artist(w http.ResponseWriter, r *http.Request) {
 	}
 	data["albums"] = albums
 
-	data["breadcrumbs"] = breadcrumbs.New().Append("Home", "/").AppendActive("Music", "/music")
+	data["breadcrumbs"] = breadcrumbs.New().Append("Home", "/").AppendActive("Music")
 	tmpls := []string{
 		"base.html",
 		"nav.tmpl",
@@ -120,7 +120,7 @@ func Album(w http.ResponseWriter, r *http.Request) {
 
 func Filter(w http.ResponseWriter, r *http.Request) {
 	data, _ := web.TmplData(r)
-	data["breadcrumbs"] = breadcrumbs.New().Append("Home", "/").AppendActive("Music", "/music")
+	data["breadcrumbs"] = breadcrumbs.New().Append("Home", "/").AppendActive("Music")
 	tmpls := []string{
 		"base.html",
 		"nav.tmpl",

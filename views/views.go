@@ -38,7 +38,7 @@ func Msg(w http.ResponseWriter, r *http.Request) {
 	// read the msg param
 
 	data, _ := web.TmplData(r)
-	data["breadcrumbs"] = breadcrumbs.New().Append("Home", "/").AppendActive("Message", "/msg")
+	data["breadcrumbs"] = breadcrumbs.New().Append("Home", "/").AppendActive("Message")
 	q := r.URL.Query()
 	msg := q.Get("m")
 	if msg != "" {

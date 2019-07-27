@@ -13,6 +13,16 @@ import (
 	"oldcode.org/gow/web"
 )
 
+func AddRoutes(mux *http.ServeMux) {
+	mux.HandleFunc("/xyz", Index)
+	mux.HandleFunc("/xyz/users", Users)
+	mux.HandleFunc("/xyz/user", User)
+	mux.HandleFunc("/xyz/become", Become)
+	mux.HandleFunc("/xyz/add-user", AddUser)
+	mux.HandleFunc("/xyz/send-email", SendEmail)
+	mux.HandleFunc("/xyz/colors", Colors)
+}
+
 func Index(w http.ResponseWriter, r *http.Request) {
 	data, err := web.TmplData(r)
 	if err != nil {
@@ -156,11 +166,19 @@ Render:
 	web.Render(w, data, tmpls...)
 }
 
-func AddRoutes(mux *http.ServeMux) {
-	mux.HandleFunc("/xyz", Index)
-	mux.HandleFunc("/xyz/users", Users)
-	mux.HandleFunc("/xyz/user", User)
-	mux.HandleFunc("/xyz/become", Become)
-	mux.HandleFunc("/xyz/add-user", AddUser)
-	mux.HandleFunc("/xyz/send-email", SendEmail)
+func Colors(w http.ResponseWriter, r *http.Request) {
+	data, _ := web.TmplData(r)
+	bcs := breadcrumbs.New()
+	bcs.Append("Home", "/")
+	bcs.Append("XYZ", "/xyz")
+	bcs.AppendActive("Colors")
+	data["breadcrumbs"] = bcs
+	tmpls := []string{
+		"base.html",
+		"nav.tmpl",
+		"breadcrumbs.tmpl",
+		"xyz/colors.html"}
+	web.Render(w, data, tmpls...)
 }
+
+

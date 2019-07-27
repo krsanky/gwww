@@ -19,7 +19,7 @@ func AddRoutes(mux *http.ServeMux) {
 
 func Index(w http.ResponseWriter, r *http.Request) {
 	data, _ := web.TmplData(r)
-	data["breadcrumbs"] = breadcrumbs.New().Append("Home", "/").AppendActive("URT", "/urt")
+	data["breadcrumbs"] = breadcrumbs.New().Append("Home", "/").AppendActive("URT")
 	tmpls := []string{
 		"base.html",
 		"nav.tmpl",
@@ -32,7 +32,7 @@ func Radio(w http.ResponseWriter, r *http.Request) {
 	data, _ := web.TmplData(r)
 	bcs := breadcrumbs.New().Append("Home", "/")
 	bcs.Append("URT", "/urt")
-	bcs.AppendActive("Radio", "/urt/radio")
+	bcs.AppendActive("Radio")
 	data["breadcrumbs"] = bcs
 
 	if "POST" == r.Method {
@@ -52,7 +52,7 @@ func RadioKey(w http.ResponseWriter, r *http.Request) {
 	data, _ := web.TmplData(r)
 	bcs := breadcrumbs.New().Append("Home", "/")
 	bcs.Append("URT", "/urt")
-	bcs.AppendActive("Radio Key", "/urt/radio/key")
+	bcs.AppendActive("Radio Key")
 	data["breadcrumbs"] = bcs
 	tmpls := []string{
 		"base.html",
@@ -69,7 +69,7 @@ func Servers(w http.ResponseWriter, r *http.Request) {
 
 	bcs := breadcrumbs.New().Append("Home", "/")
 	bcs.Append("URT", "/urt")
-	bcs.AppendActive("URT Servers", "/urt/servers")
+	bcs.AppendActive("URT Servers")
 	data["breadcrumbs"] = bcs
 	tmpls := []string{
 		"base.html",

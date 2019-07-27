@@ -14,7 +14,7 @@ func AddRoutes(mux *http.ServeMux) {
 
 func Index(w http.ResponseWriter, r *http.Request) {
 	data, _ := web.TmplData(r)
-	data["breadcrumbs"] = breadcrumbs.New().Append("Home", "/").AppendActive("GEO", "/geo")
+	data["breadcrumbs"] = breadcrumbs.New().Append("Home", "/").AppendActive("GEO")
 	tmpls := []string{
 		"base.html",
 		"nav.tmpl",
@@ -26,7 +26,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 func Map(w http.ResponseWriter, r *http.Request) {
 	data, _ := web.TmplData(r)
 	bcs := breadcrumbs.New().Append("Home", "/").Append("GEO", "/geo")
-	bcs.AppendActive("Map", "/map")
+	bcs.AppendActive("Map")
 	data["breadcrumbs"] = bcs
 	tmpls := []string{
 		"base.html",

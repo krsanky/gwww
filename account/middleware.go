@@ -12,16 +12,11 @@ var UserIdString = "_account__user_id_"
 func AddUser(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
-
-
-
 		user_id := session.Session.GetInt(r.Context(), UserIdString)
-//		user_id, err := session.Manager.Load(r).GetInt(UserIdString)
-//		if err != nil {
-//			lg.Log.Printf("AddUser() err:%s", err.Error())
-//		}
-
-
+		//		user_id, err := session.Manager.Load(r).GetInt(UserIdString)
+		//		if err != nil {
+		//			lg.Log.Printf("AddUser() err:%s", err.Error())
+		//		}
 
 		user, err := GetUserById(user_id)
 		if false && (err != nil) {
