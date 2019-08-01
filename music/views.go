@@ -120,13 +120,16 @@ func Album(w http.ResponseWriter, r *http.Request) {
 
 func Filter(w http.ResponseWriter, r *http.Request) {
 	data, _ := web.TmplData(r)
-	data["breadcrumbs"] = breadcrumbs.New().Append("Home", "/").AppendActive("Music")
+	bcs := breadcrumbs.New().Append("Home", "/").Append("Music", "/music")
+	bcs.AppendActive("Filter")
+	data["breadcrumbs"] = bcs
+	data["view"] = "filter";
 	tmpls := []string{
 		"base.html",
 		"nav.tmpl",
 		"breadcrumbs.tmpl",
+		"music/filter_results.html",
 		"music/filter.html"}
 	web.Render(w, data, tmpls...)
 }
-
 
