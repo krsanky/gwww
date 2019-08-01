@@ -129,6 +129,7 @@ func Filter(w http.ResponseWriter, r *http.Request) {
 		"nav.tmpl",
 		"breadcrumbs.tmpl",
 		"music/filter_results.html",
+		"music/filter_filter.html",
 		"music/filter.html"}
 	web.Render(w, data, tmpls...)
 }
