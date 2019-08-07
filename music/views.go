@@ -22,6 +22,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	web.Render(w, data, tmpls...)
 }
 
+// old view render style doesnt work ...
 func Items(w http.ResponseWriter, r *http.Request) {
 	data, _ := web.TmplData(r)
 
@@ -39,16 +40,8 @@ func Items(w http.ResponseWriter, r *http.Request) {
 	}
 	data["artists"] = artists
 
-	//	albums, err := artist.GetAlbums()
-	//	if err != nil {
-	//		panic(err)
-	//	}
-	//	data["albums"] = albums
-
 	var items []model.Item
 	data["items"] = items
-
-	//web.RenderPage(w, "items", data)
 }
 
 func Artists(w http.ResponseWriter, r *http.Request) {
@@ -123,13 +116,14 @@ func Filter(w http.ResponseWriter, r *http.Request) {
 	bcs := breadcrumbs.New().Append("Home", "/").Append("Music", "/music")
 	bcs.AppendActive("Filter")
 	data["breadcrumbs"] = bcs
-	data["view"] = "filter";
+	data["A_Z"] = views.A_Z
 	tmpls := []string{
 		"base.html",
 		"nav.tmpl",
 		"breadcrumbs.tmpl",
 		"music/filter_results.html",
 		"music/filter_filter.html",
+		"a_z_select.tmpl",
 		"music/filter.html"}
 	web.Render(w, data, tmpls...)
 }
