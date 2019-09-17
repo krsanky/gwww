@@ -2,12 +2,10 @@ package main
 
 import (
 	"fmt"
-	"go/build"
 	"os"
-	"strings"
 
-	"oldcode.org/gow/db"
-	"oldcode.org/gow/server"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/db"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/server"
 )
 
 func main() {
@@ -22,7 +20,7 @@ func main() {
 		case "db":
 			dbstuff()
 		case "tmpl":
-			TmplTest()	
+			TmplTest()
 		default:
 			usage()
 		}
@@ -39,17 +37,8 @@ func web() {
 }
 
 func cd() {
-	gopath := os.Getenv("GOPATH")
-	if gopath == "" {
-		gopath = build.Default.GOPATH
-	}
-	ss := []string{gopath, "src", "oldcode.org", "gow"}
-	dir := strings.Join(ss, "/")
-	fmt.Printf("changing directory to:%s\n", dir)
-	fmt.Println()
-	if err := os.Chdir(dir); err != nil {
-		panic(err)
-	}
+	d, _ := os.Getwd()
+	fmt.Printf("cur dir:%s\n", d)
 }
 
 func dbstuff() {

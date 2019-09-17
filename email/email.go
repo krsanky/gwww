@@ -7,8 +7,8 @@ import (
 	"os"
 	"text/template"
 
-	"oldcode.org/gow/lg"
-	"oldcode.org/gow/settings"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/lg"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/settings"
 )
 
 var (

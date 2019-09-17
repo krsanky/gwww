@@ -4,11 +4,11 @@ import (
 	"net/http"
 
 	"github.com/justinas/nosurf"
-	"oldcode.org/gow/account"
-	"oldcode.org/gow/email"
-	"oldcode.org/gow/lg"
-	"oldcode.org/gow/views"
-	"oldcode.org/gow/web"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/account"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/email"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/lg"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/views"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/web"
 )
 
 func AddRoutes(mux *http.ServeMux) {
@@ -79,7 +79,7 @@ func HandleRegister(w http.ResponseWriter, r *http.Request) {
 	u, err = account.GetUserByEmail(_email)
 	if err != nil {
 		panic(err)
-	} 
+	}
 	if u == nil {
 		u = &account.User{}
 		u.Email = _email

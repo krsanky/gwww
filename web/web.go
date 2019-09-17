@@ -1,16 +1,16 @@
 package web
 
 import (
+	"html/template"
 	"net/http"
 	"net/url"
 	"os"
 	"path/filepath"
 	"strings"
-	"html/template"
 
-	"oldcode.org/gow/account"
-	"oldcode.org/gow/breadcrumbs"
-	lg "oldcode.org/gow/lg"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/account"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/breadcrumbs"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/lg"
 )
 
 var GlobalFuncMap template.FuncMap

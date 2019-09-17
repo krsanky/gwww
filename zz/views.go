@@ -3,7 +3,7 @@ package zz
 import (
 	"net/http"
 
-	"oldcode.org/gow/web"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/web"
 )
 
 func AddRoutes(mux *http.ServeMux) {

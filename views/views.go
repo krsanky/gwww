@@ -4,9 +4,9 @@ import (
 	"net/http"
 	"strings"
 
-	"oldcode.org/gow/breadcrumbs"
-	"oldcode.org/gow/lg"
-	"oldcode.org/gow/web"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/breadcrumbs"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/lg"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/web"
 )
 
 var A_Z = []string{"A", "B", "C", "D", "E", "F", "G", "H", "I",
@@ -55,6 +55,4 @@ func Msg(w http.ResponseWriter, r *http.Request) {
 
 func DirectMsg(w http.ResponseWriter, r *http.Request) {
 
-
 }
-

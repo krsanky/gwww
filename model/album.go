@@ -3,8 +3,8 @@ package model
 import (
 	"fmt"
 
-	"oldcode.org/gow/db"
-	"oldcode.org/gow/lg"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/db"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/lg"
 )
 
 type Album struct {
@@ -39,7 +39,6 @@ WHERE id = ?
 
 func (a *Album) Items() ([]Item, error) {
 	items := make([]Item, 0)
-
 
 	rows, err := db.BeetsDB.Queryx(`
 SELECT

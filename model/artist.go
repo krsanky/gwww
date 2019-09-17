@@ -4,8 +4,8 @@ import (
 	"net/url"
 	"strings"
 
-	"oldcode.org/gow/db"
-	"oldcode.org/gow/lg"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/db"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/lg"
 )
 
 type Artist struct {

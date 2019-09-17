@@ -7,17 +7,17 @@ import (
 	"os"
 
 	"github.com/justinas/nosurf"
-	"oldcode.org/gow/account"
-	account_view "oldcode.org/gow/account/view"
-	"oldcode.org/gow/db"
-	"oldcode.org/gow/geo"
-	"oldcode.org/gow/lg"
-	"oldcode.org/gow/music"
-	"oldcode.org/gow/routes"
-	"oldcode.org/gow/session"
-	"oldcode.org/gow/urt"
-	"oldcode.org/gow/xyz"
-	"oldcode.org/gow/zz"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/account"
+	account_view "oldcode.org/home/wise/repo/go/oldcode.org/gow/account/view"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/db"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/geo"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/lg"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/music"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/routes"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/session"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/urt"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/xyz"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/zz"
 )
 
 //try:

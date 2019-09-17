@@ -1,11 +1,18 @@
 package settings
 
-import "github.com/pelletier/go-toml"
+import (
+	"fmt"
+	"os"
+
+	"github.com/pelletier/go-toml"
+)
 
 var settings *toml.Tree
 
 func Init() {
 	var err error
+	d, _ := os.Getwd()
+	fmt.Printf("settings dir:%s\n", d)
 	settings, err = toml.LoadFile("settings.toml")
 	if err != nil {
 		panic(err)

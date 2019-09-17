@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"html/template"
 
-	"oldcode.org/gow/lg"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/lg"
 )
 
 type BCList struct {
@@ -65,4 +65,3 @@ func (bcs *BCList) AppendActive(name string) *BCList {
 func (bcs *BCList) SetLastActive() {
 	bcs.Bcs[len(bcs.Bcs)-1].Active = true
 }
-

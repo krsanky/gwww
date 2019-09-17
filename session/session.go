@@ -3,10 +3,10 @@ package session
 import (
 	"net/http"
 
-	"github.com/alexedwards/scs"
 	"github.com/alexedwards/scs/postgresstore"
-	"oldcode.org/gow/db"
-	"oldcode.org/gow/lg"
+	"github.com/alexedwards/scs/v2"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/db"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/lg"
 )
 
 var Session *scs.Session
@@ -14,7 +14,6 @@ var Session *scs.Session
 func Init() {
 	Session = scs.NewSession()
 	Session.Store = postgresstore.New(db.DB)
-
 
 	Session.Cookie.Name = "les_super_sesh"
 	Session.Cookie.Persist = true
@@ -25,9 +24,9 @@ func GetWithDefault(r *http.Request, key string, def string) (value string, err 
 
 	value = Session.GetString(r.Context(), key)
 	//value, err = Manager.Load(r).GetString(key)
-//	if err != nil {
-//		lg.Log.Printf("err: %s", err.Error())
-//	}
+	//	if err != nil {
+	//		lg.Log.Printf("err: %s", err.Error())
+	//	}
 	lg.Log.Printf("value: %s", value)
 	if value == "" {
 		value = def

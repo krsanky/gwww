@@ -4,11 +4,11 @@ import (
 	"net/http"
 	"strconv"
 
-	"oldcode.org/gow/breadcrumbs"
-	"oldcode.org/gow/lg"
-	"oldcode.org/gow/model"
-	"oldcode.org/gow/views"
-	"oldcode.org/gow/web"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/breadcrumbs"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/lg"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/model"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/views"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/web"
 )
 
 func Index(w http.ResponseWriter, r *http.Request) {
@@ -127,4 +127,3 @@ func Filter(w http.ResponseWriter, r *http.Request) {
 		"music/filter.html"}
 	web.Render(w, data, tmpls...)
 }
-

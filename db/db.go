@@ -5,10 +5,10 @@ import (
 	"fmt"
 
 	"github.com/jmoiron/sqlx"
-	_ "github.com/mattn/go-sqlite3"
-	"oldcode.org/gow/lg"
-	"oldcode.org/gow/settings"
 	_ "github.com/lib/pq"
+	_ "github.com/mattn/go-sqlite3"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/lg"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/settings"
 )
 
 var BeetsDB *sqlx.DB
