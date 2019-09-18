@@ -1,5 +1,5 @@
-#WWWHOME=/var/www/htdocs
-WWWHOME=/var/www/vhost/oldcode.org/htdocs/
+WWWHOME=/var/www/htdocs
+#WWWHOME=/var/www/vhost/oldcode.org/htdocs/
 
 deploy:
 	cp -r static ${WWWHOME}
