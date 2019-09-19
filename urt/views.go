@@ -65,7 +65,7 @@ func RadioKey(w http.ResponseWriter, r *http.Request) {
 func Servers(w http.ResponseWriter, r *http.Request) {
 	data, _ := web.TmplData(r)
 
-	urtCtf(data)
+	UrtCtf(data)
 
 	bcs := breadcrumbs.New().Append("Home", "/")
 	bcs.Append("URT", "/urt")
@@ -79,7 +79,7 @@ func Servers(w http.ResponseWriter, r *http.Request) {
 	web.Render(w, data, tmpls...)
 }
 
-func urtCtf(page_data map[string]interface{}) {
+func UrtCtf(page_data map[string]interface{}) {
 	data, err := urt.GetRawStatus("216.52.148.134:27961") // urtctf
 	if err != nil {
 		lg.Log.Printf("ERR:%s", err)

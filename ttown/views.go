@@ -4,12 +4,14 @@ import (
 	"net/http"
 
 	"oldcode.org/home/wise/repo/go/oldcode.org/gow/lg"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/urt"
 	"oldcode.org/home/wise/repo/go/oldcode.org/gow/web"
 )
 
 func AddRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("/ttown", Index)
 	mux.HandleFunc("/ttown/msg", Msg)
+	mux.HandleFunc("/ttown/urtctf", Urtctf)
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
@@ -31,5 +33,14 @@ func Msg(w http.ResponseWriter, r *http.Request) {
 	tmpls := []string{
 		"ttown/base.html",
 		"ttown/msg.html"}
+	web.Render(w, data, tmpls...)
+}
+
+func Urtctf(w http.ResponseWriter, r *http.Request) {
+	data, _ := web.TmplData(r)
+	urt.UrtCtf(data)
+	tmpls := []string{
+		"ttown/base.html",
+		"ttown/urtctf.html"}
 	web.Render(w, data, tmpls...)
 }
