@@ -9,6 +9,10 @@
 <!-- base extra_head -->
 <meta name="my-meta" content="base my meta">
 {{end}}
+<style>
+header {
+	border-bottom: 1px dashed green;
+</style>
 </head>
 
 <body>
@@ -17,7 +21,13 @@
 <header>
 <h1>heartsick for homeboy hoedown</h1>
 <a href="/ttown">home</a>
+
+{{if .page_user}}
+<a class="nav-link" href="/account/logout">logout</a>
+{{else}}
 <a href="/account/login2">login</a>
+{{end}}
+
 <a href="/">mobile-site</a>
 </header>
 

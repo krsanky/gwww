@@ -9,6 +9,7 @@ import (
 
 func AddRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("/ttown", Index)
+	mux.HandleFunc("/ttown/msg", Msg)
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
@@ -17,5 +18,18 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	tmpls := []string{
 		"ttown/base.html",
 		"ttown/index.html"}
+	web.Render(w, data, tmpls...)
+}
+
+func Msg(w http.ResponseWriter, r *http.Request) {
+	data, _ := web.TmplData(r)
+	q := r.URL.Query()
+	msg := q.Get("m")
+	if msg != "" {
+		data["msg"] = msg
+	}
+	tmpls := []string{
+		"ttown/base.html",
+		"ttown/msg.html"}
 	web.Render(w, data, tmpls...)
 }
