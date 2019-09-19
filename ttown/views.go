@@ -3,6 +3,7 @@ package ttown
 import (
 	"net/http"
 
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/lg"
 	"oldcode.org/home/wise/repo/go/oldcode.org/gow/web"
 )
 
@@ -11,10 +12,10 @@ func AddRoutes(mux *http.ServeMux) {
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
+	lg.Log.Printf("ttown.Index() method:%s", r.Method)
 	data, _ := web.TmplData(r)
 	tmpls := []string{
-		"ttown/ttbase.html",
+		"ttown/base.html",
 		"ttown/index.html"}
 	web.Render(w, data, tmpls...)
 }
-

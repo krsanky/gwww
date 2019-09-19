@@ -17,6 +17,7 @@ func Init() {
 
 	Session.Cookie.Name = "les_super_sesh"
 	Session.Cookie.Persist = true
+	lg.Log.Printf("session.Init()...")
 }
 
 func GetWithDefault(r *http.Request, key string, def string) (value string, err error) {
