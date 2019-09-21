@@ -1,13 +1,18 @@
 package model
 
 import (
+	"fmt"
 	"testing"
 )
 
-//func GetArtists(startswith string) ([]Artist, error) {
 func TestGetArtists(t *testing.T) {
 
 	//t.Errorf("asdasdasd")
-	//_, err := model.GetArtists("A")
-	t.Errorf("err:")
+	artists, err := GetArtists("A")
+	if err != nil {
+		t.Errorf("err:")
+	}
+	for _, a := range artists {
+		fmt.Printf("a:%v\n", a)
+	}
 }

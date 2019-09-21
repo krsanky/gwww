@@ -13,6 +13,12 @@ import (
 var DB *sql.DB
 var DBX *sqlx.DB
 
+func handle_err(e error) {
+	if e != nil {
+		panic(e)
+	}
+}
+
 func InitDB() {
 	lg.Log.Printf("init pg db start ...")
 
@@ -25,20 +31,12 @@ func InitDB() {
 		user, password, db_name)
 
 	DB, err = sql.Open("postgres", connect_string)
-	if err != nil {
-		panic(err)
-	}
-	if err = DB.Ping(); err != nil {
-		panic(err)
-	}
+	handle_err(err)
+	handle_err(DB.Ping())
 
 	DBX, err = sqlx.Open("postgres", connect_string)
-	if err != nil {
-		panic(err)
-	}
-	if err = DBX.Ping(); err != nil {
-		panic(err)
-	}
+	handle_err(err)
+	handle_err(DBX.Ping())
 }
 
 func Drivers() {
@@ -48,6 +46,7 @@ func Drivers() {
 }
 
 func TestDB() {
+	fmt.Printf("db.TestDB()\n")
 	var err error
 	if err = DB.Ping(); err != nil {
 		panic(err)
@@ -63,7 +62,7 @@ func TestDB() {
 		if err := rows.Scan(&name); err != nil {
 			panic(err)
 		}
-		lg.Log.Printf("name:%s", name)
+		lg.Log.Printf("name:%s\n", name)
 	}
 	if err := rows.Err(); err != nil {
 		panic(err)
