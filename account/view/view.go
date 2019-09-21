@@ -32,7 +32,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	data, _ := web.TmplData(r)
 
 	if "POST" == r.Method {
-		views.ShowFormData(r)
+		views.LogFormData(r)
 
 		rbutton := r.FormValue("register_button")
 		if rbutton == "register" {
@@ -69,7 +69,7 @@ func Login2(w http.ResponseWriter, r *http.Request) {
 
 	if "POST" == r.Method {
 		lg.Log.Printf("POST")
-		views.ShowFormData(r)
+		views.LogFormData(r)
 
 		username := r.FormValue("username")
 		password := r.FormValue("password")

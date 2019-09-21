@@ -87,5 +87,5 @@ func Send(to []string, data interface{}, tmpls ...string) {
 	if err = pages[page].Execute(&buf, data); err != nil {
 		panic(err)
 	}
-	lg.Log.Printf("BUF:%s", buf)
+	//lg.Log.Printf("BUF:%s", buf) wrong formt specifier
 }

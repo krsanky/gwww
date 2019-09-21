@@ -6,12 +6,10 @@ import (
 
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
-	_ "github.com/mattn/go-sqlite3"
 	"oldcode.org/home/wise/repo/go/oldcode.org/gow/lg"
 	"oldcode.org/home/wise/repo/go/oldcode.org/gow/settings"
 )
 
-var BeetsDB *sqlx.DB
 var DB *sql.DB
 var DBX *sqlx.DB
 
@@ -41,57 +39,11 @@ func InitDB() {
 	if err = DBX.Ping(); err != nil {
 		panic(err)
 	}
-
-	//TestDB()
-}
-
-func Open() {
-	beets_db_file := settings.GetString("db.beets_file")
-
-	var err error
-	BeetsDB, err = sqlx.Open("sqlite3", beets_db_file)
-	if err != nil {
-		panic(err)
-	}
 }
 
 func Drivers() {
 	for _, d := range sql.Drivers() {
 		fmt.Printf("driver:%s\n", d)
-	}
-}
-
-func GetRawArtists() ([]string, error) {
-	if BeetsDB == nil {
-		Open()
-	}
-
-	rows, err := BeetsDB.Query(`
-SELECT DISTINCT albumartist 
-FROM albums 
-WHERE albumartist <> ''
-ORDER by albumartist
-`)
-	if err != nil {
-		return nil, err
-	}
-
-	var s string
-	artists := make([]string, 0)
-	for rows.Next() {
-		rows.Scan(&s)
-		artists = append(artists, s)
-	}
-	return artists, nil
-}
-
-func TestSql() {
-	artists, err := GetRawArtists()
-	if err != nil {
-		panic(err)
-	}
-	for a := range artists {
-		fmt.Printf("row albumartist:%s\n", a)
 	}
 }
 

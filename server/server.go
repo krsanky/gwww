@@ -35,7 +35,6 @@ func Serve() {
 	dir, _ = os.Getwd()
 	lg.Log.Printf("--now dir:%s", dir)
 
-	db.Open()
 	db.InitDB()
 
 	//mux is a handler, because ServeMux implements ServeHTTP()

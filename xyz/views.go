@@ -54,7 +54,7 @@ func Users(w http.ResponseWriter, r *http.Request) {
 		lg.Log.Printf("err:%s", err)
 	} else {
 		data["users"] = users
-		lg.Log.Printf("u1:%s", users[0])
+		//lg.Log.Printf("u1:%s", users[0])
 	}
 
 	bcs := breadcrumbs.New()

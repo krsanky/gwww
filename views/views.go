@@ -13,7 +13,7 @@ var A_Z = []string{"A", "B", "C", "D", "E", "F", "G", "H", "I",
 	"J", "K", "L", "M", "N", "O", "P", "Q", "R",
 	"S", "T", "U", "V", "W", "X", "Y", "Z"}
 
-func ShowFormData(r *http.Request) {
+func LogFormData(r *http.Request) {
 	r.ParseForm()
 	for k, v := range r.Form {
 		lg.Log.Printf("k: %s v: %s", k, strings.Join(v, ""))
@@ -21,11 +21,11 @@ func ShowFormData(r *http.Request) {
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/" {
-		lg.Log.Printf("views.Index(): NOT FOUND %s", r.URL.Path)
-		http.NotFound(w, r)
-		return
-	}
+//	if r.URL.Path != "/" {
+//		lg.Log.Printf("views.Index(): NOT FOUND %s", r.URL.Path)
+//		http.NotFound(w, r)
+//		return
+//	}
 	tmpls := []string{
 		"base.html",
 		"nav.tmpl",

@@ -39,7 +39,7 @@ $6, $7, $8)`
 }
 
 func (u *User) String() string {
-	return fmt.Sprintf("[id:%d username:%s email:%s pw:%s act:%v]",
+	return fmt.Sprintf("[id:%d username:%v email:%s pw:%s act:%t]",
 		u.Id, u.Username, u.Email, u.Password, u.Is_active)
 }
 

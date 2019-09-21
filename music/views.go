@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/justinas/nosurf"
 	"oldcode.org/home/wise/repo/go/oldcode.org/gow/breadcrumbs"
 	"oldcode.org/home/wise/repo/go/oldcode.org/gow/lg"
 	"oldcode.org/home/wise/repo/go/oldcode.org/gow/model"
@@ -125,5 +126,27 @@ func Filter(w http.ResponseWriter, r *http.Request) {
 		"music/filter_filter.html",
 		"a_z_select.tmpl",
 		"music/filter.html"}
+	web.Render(w, data, tmpls...)
+}
+
+func Music(w http.ResponseWriter, r *http.Request) {
+	data, _ := web.TmplData(r)
+	data["A_Z"] = views.A_Z
+	data["token"] = nosurf.Token(r)
+	tmpls := []string{
+		"ttown/base.html",
+		"a_z_select.tmpl",
+		"ttown/music.html"}
+
+	if "POST" == r.Method {
+		//views.LogFormData(r)
+		artist_startswith := r.PostFormValue("artist_startswith")
+		artists, err := model.GetArtists(artist_startswith)
+		lg.Log.Printf("len artists:%v", len(artists))
+		if err != nil {
+			lg.Log.Printf("err:%v", err)
+		}
+	}
+
 	web.Render(w, data, tmpls...)
 }

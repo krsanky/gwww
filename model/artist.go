@@ -18,11 +18,11 @@ func GetArtists(startswith string) ([]Artist, error) {
 	} else {
 		startswith = startswith + "%"
 	}
-	rows, err := db.BeetsDB.Query(`
+	rows, err := db.DB.Query(`
 SELECT DISTINCT albumartist 
 FROM albums 
-WHERE albumartist like ?
-ORDER by albumartist
+--WHERE albumartist like ?
+--ORDER by albumartist
 `, startswith)
 	if err != nil {
 		return nil, err
@@ -37,9 +37,29 @@ ORDER by albumartist
 	return artists, nil
 }
 
+func GetRawArtists() ([]string, error) {
+       rows, err := db.DB.Query(`
+SELECT DISTINCT albumartist 
+FROM albums 
+WHERE albumartist <> ''
+ORDER by albumartist
+`)
+       if err != nil {
+               return nil, err
+       }
+
+       var s string
+       artists := make([]string, 0)
+       for rows.Next() {
+               rows.Scan(&s)
+               artists = append(artists, s)
+       }
+       return artists, nil
+}
+
 func GetAllArtists() ([]Artist, error) {
 	artists := make([]Artist, 0)
-	artists_, err := db.GetRawArtists()
+	artists_, err := GetRawArtists()
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +81,7 @@ func (a *Artist) Albums() ([]Album, error) {
 	lg.Log.Printf(".Albums() for %s", a.Name)
 	albums := make([]Album, 0)
 
-	rows, err := db.BeetsDB.Queryx(`
+	rows, err := db.DBX.Queryx(`
 SELECT id, album, albumartist
 FROM albums
 WHERE albumartist = ?

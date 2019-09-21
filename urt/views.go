@@ -36,7 +36,7 @@ func Radio(w http.ResponseWriter, r *http.Request) {
 	data["breadcrumbs"] = bcs
 
 	if "POST" == r.Method {
-		views.ShowFormData(r)
+		views.LogFormData(r)
 	}
 
 	tmpls := []string{
