@@ -13,11 +13,6 @@ type Artist struct {
 	Name string
 }
 
-func T1() {
-	fmt.Printf("db.TestDB() from model\n")
-	db.TestDB()
-}
-
 func GetArtists(startswith string) ([]Artist, error) {
 	if strings.Compare("", startswith) == 0 {
 		startswith = "%"
@@ -44,25 +39,23 @@ ORDER by albumartist
 }
 
 func GetRawArtists() ([]string, error) {
-//	rows, err := db.DB.Query(`
-//SELECT DISTINCT albumartist 
-//FROM albums 
-//WHERE albumartist <> ''
-//ORDER by albumartist
-//`)
-//	if err != nil {
-//		return nil, err
-//	}
-//
-//	var s string
-//	artists := make([]string, 0)
-//	for rows.Next() {
-//		rows.Scan(&s)
-//		artists = append(artists, s)
-//	}
-//	return artists, nil
-//	db.TestDB()
-	return nil, nil
+	rows, err := db.DB.Query(`
+SELECT DISTINCT albumartist 
+FROM albums 
+WHERE albumartist <> ''
+ORDER by albumartist
+`)
+	if err != nil {
+		return nil, err
+	}
+
+	var s string
+	artists := make([]string, 0)
+	for rows.Next() {
+		rows.Scan(&s)
+		artists = append(artists, s)
+	}
+	return artists, nil
 }
 
 func GetAllArtists() ([]Artist, error) {

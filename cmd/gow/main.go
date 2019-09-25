@@ -40,7 +40,6 @@ func dbstuff() {
 	db.Drivers()
 	db.InitDB()
 	db.TestDB()
-	model.T1()
 	as, err := model.GetRawArtists()
 	if err != nil {
 		panic(err)

@@ -1,6 +1,8 @@
 package settings
 
 import (
+	"fmt"
+
 	"github.com/pelletier/go-toml"
 )
 
@@ -14,14 +16,23 @@ func Init(sfile string) {
 	}
 }
 
+func check() {
+	if settings == nil {
+		panic(fmt.Errorf("settings: need settings.Init(<settings-file>)\n"))
+	}
+}
+
 func GetInt(key string) int64 {
+	check()
 	return settings.Get(key).(int64)
 }
 
 func GetString(key string) string {
+	check()
 	return settings.Get(key).(string)
 }
 
 func ReadEmailHost() string {
+	check()
 	return GetString("email.host")
 }
