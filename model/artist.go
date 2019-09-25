@@ -22,7 +22,7 @@ func GetArtists(startswith string) ([]Artist, error) {
 	rows, err := db.DB.Query(`
 SELECT DISTINCT albumartist 
 FROM albums 
-WHERE albumartist like ?
+WHERE albumartist like $1
 ORDER by albumartist
 `, startswith)
 	if err != nil {

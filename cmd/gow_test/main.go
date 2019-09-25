@@ -19,8 +19,8 @@ func main() {
 	fmt.Printf("--\n")
 	db.TestDB()
 
-	as, err := model.GetAllArtists()
-	//_, err := model.GetArtists("A")
+	//as, err := model.GetAllArtists()
+	as, err := model.GetArtists("A")
 	if err != nil {
 		panic(err)
 	}
