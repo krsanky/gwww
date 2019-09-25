@@ -3,6 +3,7 @@
 name="gow"
 daemon="/home/wise/go/bin/gow"
 gow_user="wise"
+gow_settings="settings.toml"
 
 rc_stop() {
 	echo "stopping..."
@@ -12,7 +13,7 @@ rc_stop() {
 
 rc_start() {
 	echo "start"
-	$name &
+	$name web $gow_settings &
 }
 
 if [ $# -eq 1 ] ; then

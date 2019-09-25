@@ -15,6 +15,7 @@ import (
 	"oldcode.org/home/wise/repo/go/oldcode.org/gow/music"
 	"oldcode.org/home/wise/repo/go/oldcode.org/gow/routes"
 	"oldcode.org/home/wise/repo/go/oldcode.org/gow/session"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/settings"
 	"oldcode.org/home/wise/repo/go/oldcode.org/gow/ttown"
 	"oldcode.org/home/wise/repo/go/oldcode.org/gow/urt"
 	"oldcode.org/home/wise/repo/go/oldcode.org/gow/xyz"
@@ -23,12 +24,14 @@ import (
 
 //try:
 //https://github.com/alexedwards/stack
-func Serve() {
+func Serve(sfile string) {
+	settings.Init(sfile)
 	listener, err := net.Listen("tcp", "127.0.0.1:8088")
 	if err != nil {
 		panic(err)
 	}
 
+	// get rid of this dir stuff...
 	dir, _ := os.Getwd()
 	lg.Log.Printf("server.Serve() dir:%s", dir)
 	os.Chdir("/home/wise/go/src/oldcode.org/gow")
