@@ -82,15 +82,15 @@ func (a *Artist) Url() string {
 	return url
 }
 
-func (a *Artist) Albums() ([]Album, error) {
-	lg.Log.Printf(".Albums() for %s", a.Name)
+func Albums(artist string) ([]Album, error) {
+	lg.Log.Printf(".Albums() for %s", artist)
 	albums := make([]Album, 0)
 
 	rows, err := db.DBX.Queryx(`
 SELECT id, album, albumartist
 FROM albums
-WHERE albumartist = ?
-`, a.Name)
+WHERE albumartist = $1
+`, artist)
 	if err != nil {
 		return nil, err
 	}

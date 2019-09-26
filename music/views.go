@@ -76,15 +76,15 @@ func Artist(w http.ResponseWriter, r *http.Request) {
 	data, _ := web.TmplData(r)
 
 	q := r.URL.Query()
-	artist := model.Artist{q.Get("a")}
-	lg.Log.Printf("Artist() artist:%s", artist.Name)
+	artist := q.Get("a")
+	lg.Log.Printf("Artist() artist:%s", artist)
 	data["artist"] = artist
 
-//	albums, err := artist.Albums()
-//	if err != nil {
-//		panic(err)
-//	}
-//	data["albums"] = albums
+	albums, err := model.Albums(artist)
+	if err != nil {
+		panic(err)
+	}
+	data["albums"] = albums
 
 	tmpls := []string{
 		"ttown/base.html",
