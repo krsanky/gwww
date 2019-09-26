@@ -12,18 +12,23 @@ import (
 	"oldcode.org/home/wise/repo/go/oldcode.org/gow/web"
 )
 
-func Index(w http.ResponseWriter, r *http.Request) {
-	data, _ := web.TmplData(r)
-	data["breadcrumbs"] = breadcrumbs.New().Append("Home", "/").AppendActive("Music")
-	tmpls := []string{
-		"base.html",
-		"nav.tmpl",
-		"breadcrumbs.tmpl",
-		"music/index.html"}
-	web.Render(w, data, tmpls...)
+func AddRoutes(mux *http.ServeMux) {
+	mux.HandleFunc("/music", Index)
+	mux.HandleFunc("/music/artists", Artists2)
+	mux.HandleFunc("/music/artist", Artist)
+	mux.HandleFunc("/music/album", Album)
+	mux.HandleFunc("/music/items", Items)
+	mux.HandleFunc("/music/filter", Filter)
+	//mux.HandleFunc("/music/playsong", Playsong)
 }
 
-// old view render style doesnt work ...
+func Index(w http.ResponseWriter, r *http.Request) {
+	tmpls := []string{
+		"ttown/base.html",
+		"music/index.html"}
+	web.Render(w, nil, tmpls...)
+}
+
 func Items(w http.ResponseWriter, r *http.Request) {
 	data, _ := web.TmplData(r)
 
@@ -44,6 +49,7 @@ func Items(w http.ResponseWriter, r *http.Request) {
 	var items []model.Item
 	data["items"] = items
 }
+
 
 func Artists(w http.ResponseWriter, r *http.Request) {
 	data, _ := web.TmplData(r)
@@ -74,17 +80,14 @@ func Artist(w http.ResponseWriter, r *http.Request) {
 	lg.Log.Printf("Artist() artist:%s", artist.Name)
 	data["artist"] = artist
 
-	albums, err := artist.Albums()
-	if err != nil {
-		panic(err)
-	}
-	data["albums"] = albums
+//	albums, err := artist.Albums()
+//	if err != nil {
+//		panic(err)
+//	}
+//	data["albums"] = albums
 
-	data["breadcrumbs"] = breadcrumbs.New().Append("Home", "/").AppendActive("Music")
 	tmpls := []string{
-		"base.html",
-		"nav.tmpl",
-		"breadcrumbs.tmpl",
+		"ttown/base.html",
 		"music/artist.html"}
 	web.Render(w, data, tmpls...)
 }
@@ -109,7 +112,11 @@ func Album(w http.ResponseWriter, r *http.Request) {
 	}
 	data["items"] = items
 
-	//web.RenderPage(w, "album", data)
+	tmpls := []string{
+		"ttown/base.html",
+		"music/album.html"}
+
+	web.Render(w, data, tmpls...)
 }
 
 func Filter(w http.ResponseWriter, r *http.Request) {
@@ -129,20 +136,22 @@ func Filter(w http.ResponseWriter, r *http.Request) {
 	web.Render(w, data, tmpls...)
 }
 
-func Music(w http.ResponseWriter, r *http.Request) {
+func Artists2(w http.ResponseWriter, r *http.Request) {
 	data, _ := web.TmplData(r)
 	data["A_Z"] = views.A_Z
 	data["token"] = nosurf.Token(r)
 	tmpls := []string{
 		"ttown/base.html",
 		"a_z_select.tmpl",
-		"ttown/music.html"}
+		"music/artists.html"}
 
 	if "POST" == r.Method {
 		//views.LogFormData(r)
 		artist_startswith := r.PostFormValue("artist_startswith")
 		artists, err := model.GetArtists(artist_startswith)
 		data["artists"] = artists
+		data["artist_startswith"] = artist_startswith
+		data["a_z_select_value"] =  artist_startswith 
 		lg.Log.Printf("len artists:%v", len(artists))
 		if err != nil {
 			lg.Log.Printf("err:%v", err)

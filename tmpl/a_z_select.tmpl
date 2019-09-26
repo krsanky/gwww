@@ -1,9 +1,11 @@
 {{define "a_z_select"}}
-<!-- a_z_select -->
+
 {{range .A_Z}} 
-<option>{{.}}</option>
-{{/*
-<option {{if eq $.artist_startswith .}} selected{{end}}>{{.}}</option>
-*/}}
+	{{if $.a_z_select_value }}
+	<option {{if eq $.a_z_select_value .}} selected{{end}}>{{.}}</option>
+	{{else}}
+	<option>{{.}}</option>
+	{{end}}
 {{end}}
+
 {{end}}

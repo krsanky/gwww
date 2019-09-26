@@ -1,15 +1,40 @@
 {{define "title"}}Artists{{end}}
 
 {{define "main"}}
-{{template "breadcrumbs" .}}
+{{/*
 {{template "artists_pagination" .}}
-
 <ul>
 {{- range .artists}}
 	<li><a href="{{.Url}}">{{.Name}}</a></li>
 {{- end}}
 </ul>
-{{template "artists_pagination" .}}
+*/}}
 
+<button type="submit" value="Submit2" form=musicform123>update</button>
+
+<form id=musicform123 method=post action=/music/artists>
+	<input type="hidden" name="csrf_token" value="{{.token}}"> 
+
+<ul>
+<li>
+<label class="form-label">Artist starts with</label>
+<select name="artist_startswith" class="form-select">
+	<option value="{{.artist_startswith}}">letter</option>
+	{{template "a_z_select" .}}
+</select>
+</li>
+
+</ul>
+
+</form>
+
+<button form=musicform123 type="submit" value="Submit">submit</button>
+
+<ul>
+{{range .artists}}
+<li><a href="{{.Url}}">{{.Name}}</a></li>
+{{end}}
+</ul>
 
 {{end}}
+

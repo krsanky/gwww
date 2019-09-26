@@ -4,7 +4,6 @@ import (
 	"net/http"
 
 	"oldcode.org/home/wise/repo/go/oldcode.org/gow/lg"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/music"
 	"oldcode.org/home/wise/repo/go/oldcode.org/gow/urt"
 	"oldcode.org/home/wise/repo/go/oldcode.org/gow/web"
 )
@@ -13,7 +12,7 @@ func AddRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("/ttown", Index)
 	mux.HandleFunc("/ttown/msg", Msg)
 	mux.HandleFunc("/ttown/urtctf", Urtctf)
-	mux.HandleFunc("/ttown/music", music.Music)
+	//mux.HandleFunc("/ttown/music", music.Music)
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {

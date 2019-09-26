@@ -78,7 +78,7 @@ func (a *Artist) String() string {
 
 func (a *Artist) Url() string {
 	name_part := url.QueryEscape(a.Name)
-	url := strings.Join([]string{"/artist?a=", name_part, ""}, "")
+	url := strings.Join([]string{"/music/artist?a=", name_part, ""}, "")
 	return url
 }
 
