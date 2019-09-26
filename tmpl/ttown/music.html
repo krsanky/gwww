@@ -19,4 +19,10 @@
 </form>
 
 <button form=musicform123 type="submit" value="Submit">submit</button>
+
+<p>results:</p>
+{{range .artists}}
+<li>{{.Name}}
+{{end}}
+
 {{end}}

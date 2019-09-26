@@ -142,6 +142,7 @@ func Music(w http.ResponseWriter, r *http.Request) {
 		//views.LogFormData(r)
 		artist_startswith := r.PostFormValue("artist_startswith")
 		artists, err := model.GetArtists(artist_startswith)
+		data["artists"] = artists
 		lg.Log.Printf("len artists:%v", len(artists))
 		if err != nil {
 			lg.Log.Printf("err:%v", err)
