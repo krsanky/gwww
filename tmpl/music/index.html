@@ -1,21 +1,12 @@
 {{define "title"}}music/index{{end}}
 
-{{define "breadcrumbs_block"}}
-	{{template "breadcrumbs" .}}
-{{end}}
+{{define "breadcrumbs_block"}}{{template "breadcrumbs" .}}{{end}}
 
 {{define "main"}}
 
-<h2>Music</h2>
-
 <ul>
-<li><a href="/music/filter" role="button" class="btn btn-primary btn-lg btn-block">Filter</a>
-<li><a href="/music/items" role="button" class="btn btn-primary btn-lg btn-block">Items</a>
 <li><a href="/music/artists" role="button" class="btn btn-secondary btn-lg btn-block">Artists</a>
-<li><a href="/music/albums" role="button" class="btn btn-c1 btn-lg btn-block">Albums</a>
-<li><a href="/music/playsong" role="button" class="btn btn-c1 btn-lg btn-block">Play Song</a>
 </ul>
-
 
 {{end}}
 

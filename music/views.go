@@ -1,6 +1,7 @@
 package music
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -14,7 +15,7 @@ import (
 
 func AddRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("/music", Index)
-	mux.HandleFunc("/music/artists", Artists2)
+	mux.HandleFunc("/music/artists", Artists)
 	mux.HandleFunc("/music/artist", Artist)
 	mux.HandleFunc("/music/album", Album)
 	mux.HandleFunc("/music/items", Items)
@@ -24,7 +25,7 @@ func AddRoutes(mux *http.ServeMux) {
 
 func Index(w http.ResponseWriter, r *http.Request) {
 	data, _ := web.TmplData(r)
-	data["breadcrumbs"] = breadcrumbs.New().Append("Home", "/").AppendActive("Message")
+	data["breadcrumbs"] = breadcrumbs.New().Append("Home", "/").AppendActive("Music")
 	tmpls := []string{
 		"ttown/base.html",
 		"breadcrumbs.tmpl",
@@ -53,28 +54,6 @@ func Items(w http.ResponseWriter, r *http.Request) {
 	data["items"] = items
 }
 
-
-func Artists(w http.ResponseWriter, r *http.Request) {
-	data, _ := web.TmplData(r)
-	artists, err := model.GetAllArtists()
-	if err != nil {
-		panic(err)
-	}
-	data["artists"] = artists
-
-	bcs := breadcrumbs.New().Append("Home", "/")
-	bcs.Append("Music", "/music")
-	bcs.AppendActive("Artists")
-	data["breadcrumbs"] = bcs
-	tmpls := []string{
-		"base.html",
-		"nav.tmpl",
-		"breadcrumbs.tmpl",
-		"music/artists_pagination.tmpl",
-		"music/artists.html"}
-	web.Render(w, data, tmpls...)
-}
-
 func Artist(w http.ResponseWriter, r *http.Request) {
 	data, _ := web.TmplData(r)
 
@@ -82,6 +61,12 @@ func Artist(w http.ResponseWriter, r *http.Request) {
 	artist := q.Get("a")
 	lg.Log.Printf("Artist() artist:%s", artist)
 	data["artist"] = artist
+
+	bcs := breadcrumbs.New().Append("Home", "/")
+	bcs.Append("Music", "/music")
+	bcs.Append("Artists", "/music/artists")
+	bcs.AppendActive(artist)
+	data["breadcrumbs"] = bcs
 
 	albums, err := model.Albums(artist)
 	if err != nil {
@@ -91,6 +76,7 @@ func Artist(w http.ResponseWriter, r *http.Request) {
 
 	tmpls := []string{
 		"ttown/base.html",
+		"breadcrumbs.tmpl",
 		"music/artist.html"}
 	web.Render(w, data, tmpls...)
 }
@@ -109,6 +95,13 @@ func Album(w http.ResponseWriter, r *http.Request) {
 	}
 	data["album"] = album
 
+	bcs := breadcrumbs.New().Append("Home", "/")
+	bcs.Append("Music", "/music")
+	bcs.Append("Artists", "/music/artists")
+	bcs.Append(album.AlbumArtist, fmt.Sprintf("/music/artist?a=%s", album.AlbumArtist))
+	bcs.AppendActive(album.Title)
+	data["breadcrumbs"] = bcs
+
 	items, err := album.Items()
 	if err != nil {
 		lg.Log.Printf("err:%s", err.Error())
@@ -117,6 +110,7 @@ func Album(w http.ResponseWriter, r *http.Request) {
 
 	tmpls := []string{
 		"ttown/base.html",
+		"breadcrumbs.tmpl",
 		"music/album.html"}
 
 	web.Render(w, data, tmpls...)
@@ -139,12 +133,19 @@ func Filter(w http.ResponseWriter, r *http.Request) {
 	web.Render(w, data, tmpls...)
 }
 
-func Artists2(w http.ResponseWriter, r *http.Request) {
+func Artists(w http.ResponseWriter, r *http.Request) {
 	data, _ := web.TmplData(r)
 	data["A_Z"] = views.A_Z
 	data["token"] = nosurf.Token(r)
+
+	bcs := breadcrumbs.New().Append("Home", "/")
+	bcs.Append("Music", "/music")
+	bcs.AppendActive("Artists")
+	data["breadcrumbs"] = bcs
+
 	tmpls := []string{
 		"ttown/base.html",
+		"breadcrumbs.tmpl",
 		"a_z_select.tmpl",
 		"music/artists.html"}
 
@@ -154,7 +155,7 @@ func Artists2(w http.ResponseWriter, r *http.Request) {
 		artists, err := model.GetArtists(artist_startswith)
 		data["artists"] = artists
 		data["artist_startswith"] = artist_startswith
-		data["a_z_select_value"] =  artist_startswith 
+		data["a_z_select_value"] = artist_startswith
 		lg.Log.Printf("len artists:%v", len(artists))
 		if err != nil {
 			lg.Log.Printf("err:%v", err)

@@ -6,7 +6,6 @@ import (
 	"strings"
 
 	"oldcode.org/home/wise/repo/go/oldcode.org/gow/db"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/lg"
 )
 
 type Artist struct {
@@ -80,29 +79,4 @@ func (a *Artist) Url() string {
 	name_part := url.QueryEscape(a.Name)
 	url := strings.Join([]string{"/music/artist?a=", name_part, ""}, "")
 	return url
-}
-
-func Albums(artist string) ([]Album, error) {
-	lg.Log.Printf(".Albums() for %s", artist)
-	albums := make([]Album, 0)
-
-	rows, err := db.DBX.Queryx(`
-SELECT id, album, albumartist
-FROM albums
-WHERE albumartist = $1
-`, artist)
-	if err != nil {
-		return nil, err
-	}
-	for rows.Next() {
-		a := Album{}
-		err = rows.StructScan(&a)
-		if err != nil {
-			lg.Log.Printf("err:%s", err.Error())
-		}
-		lg.Log.Printf("Artist.Albums(): %d %s", a.Id, a.Title)
-		albums = append(albums, a)
-	}
-
-	return albums, nil
 }

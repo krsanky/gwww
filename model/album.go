@@ -63,3 +63,28 @@ ORDER by track
 
 	return items, nil
 }
+
+func Albums(artist string) ([]Album, error) {
+	lg.Log.Printf(".Albums() for %s", artist)
+	albums := make([]Album, 0)
+
+	rows, err := db.DBX.Queryx(`
+SELECT id, album, albumartist
+FROM albums
+WHERE albumartist = $1
+`, artist)
+	if err != nil {
+		return nil, err
+	}
+	for rows.Next() {
+		a := Album{}
+		err = rows.StructScan(&a)
+		if err != nil {
+			lg.Log.Printf("err:%s", err.Error())
+		}
+		lg.Log.Printf("Artist.Albums(): %d %s", a.Id, a.Title)
+		albums = append(albums, a)
+	}
+
+	return albums, nil
+}
