@@ -1,3 +1,16 @@
+/*
+		return template.HTML(fmt.Sprintf("<li class='breadcrumb-item active'>%s</li>",
+		return template.HTML(fmt.Sprintf("<li class='breadcrumb-item'><a href='%s'>%s</a></li>",
+*/
+ol.breadcrumb {
+	list-style-type: none;
+	padding-left: 0;
+	/*margin: 0;*/
+}
+ol.breadcrumb li {
+	/*float: left;*/
+	display: inline;
+}
 
 body {
 	background-color: #f0f0f0;
@@ -37,10 +50,18 @@ a:active, a:hover {
 
 img{border:0;max-width: 100%;}
 
-header,code,pre,kbd,samp,h1,h2,h3,h4,h5,h6{font-family:monospace;overflow-x:auto;}
-header{margin: 2em 0 2em;}
+/*header,*/
+code,pre,kbd,samp,h1,h2,h3,h4,h5,h6{font-family:monospace;overflow-x:auto;}
+header 	{
+	margin: 2em 0 2em;
+/*	border-bottom: 1px dashed green;*/
+}
 
-h1,h2,h3,h4,h5,h6{line-height:1.5em;margin:0 0 .5em}
+h1,h2,h3,h4,h5,h6 {
+	font-family: inherit;
+	line-height: 1.5em;
+	margin: 0 0 .5em;
+}
 h1{font-size:2em}
 h2{font-size:1.5em}
 h3{font-size:1.3em}

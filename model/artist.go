@@ -100,7 +100,7 @@ WHERE albumartist = $1
 		if err != nil {
 			lg.Log.Printf("err:%s", err.Error())
 		}
-		lg.Log.Printf("Artist.Albums(): %d %s", a.ID, a.Title)
+		lg.Log.Printf("Artist.Albums(): %d %s", a.Id, a.Title)
 		albums = append(albums, a)
 	}
 

@@ -23,10 +23,13 @@ func AddRoutes(mux *http.ServeMux) {
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
+	data, _ := web.TmplData(r)
+	data["breadcrumbs"] = breadcrumbs.New().Append("Home", "/").AppendActive("Message")
 	tmpls := []string{
 		"ttown/base.html",
+		"breadcrumbs.tmpl",
 		"music/index.html"}
-	web.Render(w, nil, tmpls...)
+	web.Render(w, data, tmpls...)
 }
 
 func Items(w http.ResponseWriter, r *http.Request) {
@@ -100,15 +103,15 @@ func Album(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		lg.Log.Printf("err:%s", err.Error())
 	}
-	album, err := model.AlbumByID(id)
+	album, err := model.AlbumById(id)
 	if err != nil {
-		lg.Log.Printf("AlbumByID() err:%s", err.Error())
+		lg.Log.Printf("AlbumById() err:%s", err.Error())
 	}
 	data["album"] = album
 
 	items, err := album.Items()
 	if err != nil {
-		lg.Log.Printf("AlbumByID() err:%s", err.Error())
+		lg.Log.Printf("err:%s", err.Error())
 	}
 	data["items"] = items
 

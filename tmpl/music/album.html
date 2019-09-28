@@ -1,9 +1,22 @@
 {{define "main"}}
 
 <ul>
-{{range .artists}}
-<li>{{.Name}}
+{{range .items}}
+<li>{{.Track}} {{.Title}} {{.Artist}}
 {{end}}
 </ul>
+
+{{/*
+type Item struct {
+	Id          int
+	AlbumId     int `db:"album_id"`
+	Path        string
+	Title       string
+	Artist      string
+	AlbumArtist string
+	Track       int
+	TrackTotal  int
+	Media       string
+*/}}
 
 {{end}}

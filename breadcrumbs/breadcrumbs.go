@@ -47,7 +47,7 @@ func (bc *BCItem) LI() template.HTML {
 		return template.HTML(fmt.Sprintf("<li class='breadcrumb-item active'>%s</li>",
 			bc.Name))
 	} else {
-		return template.HTML(fmt.Sprintf("<li class='breadcrumb-item'><a href='%s'>%s</a></li>",
+		return template.HTML(fmt.Sprintf("<li class='breadcrumb-item'><a href='%s'>%s</a> &gt;</li>",
 			bc.Path, bc.Name))
 	}
 }

@@ -10,10 +10,6 @@
 <!-- base extra_head -->
 <meta name="my-meta" content="base my meta">
 {{end}}
-<style>
-header {
-	border-bottom: 1px dashed green;
-</style>
 </head>
 
 <body>
@@ -30,6 +26,7 @@ header {
 {{end}}
 
 <a href="/old-index">mobile-site</a>
+{{block "breadcrumbs_block" .}}{{end}}
 </header>
 
 
