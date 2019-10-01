@@ -1,0 +1,38 @@
+{{define "title"}}canvas thing{{end}}
+
+
+{{define "main"}}
+
+<h3>Canvas Thing</h3>
+
+
+<form method="post">
+	<input type="hidden" name="csrf_token" value="{{.token}}"> 
+
+<table>
+	<tr>
+	<td>height</td>
+	<td>
+	<input type=text name=height size=4></input>
+	</td>
+	</tr>
+
+	<tr>
+	<td>width</td>
+	<td>
+	<input type=text name=width size=4></input>
+	</td>
+	</tr>
+
+	<tr>
+	<td colspan=2>
+	<button type=submit>submit</button>
+	</td>
+	</tr>
+</table>
+
+</form>
+
+
+{{end}}
+

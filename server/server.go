@@ -9,6 +9,7 @@ import (
 	"github.com/justinas/nosurf"
 	"oldcode.org/home/wise/repo/go/oldcode.org/gow/account"
 	account_view "oldcode.org/home/wise/repo/go/oldcode.org/gow/account/view"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/canv_thing"
 	"oldcode.org/home/wise/repo/go/oldcode.org/gow/db"
 	"oldcode.org/home/wise/repo/go/oldcode.org/gow/geo"
 	"oldcode.org/home/wise/repo/go/oldcode.org/gow/lg"
