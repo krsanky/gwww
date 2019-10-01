@@ -50,6 +50,7 @@ func Serve(sfile string) {
 	geo.AddRoutes(mux)
 	zz.AddRoutes(mux)
 	ttown.AddRoutes(mux)
+	canv_thing.AddRoutes(mux)
 
 	// ORDER MATTERS ... acccount depends on session
 	h := nosurf.NewPure(mux)
