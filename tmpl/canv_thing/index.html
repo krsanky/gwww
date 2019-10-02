@@ -1,5 +1,20 @@
 {{define "title"}}canvas thing{{end}}
 
+{{define "extra_body"}}
+<script>
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+ctx.moveTo(0, 0);
+ctx.lineTo(200, 100);
+ctx.stroke(); 
+
+ctx.beginPath();
+ctx.arc(95, 50, 40, 0, 2 * Math.PI);
+ctx.stroke(); 
+console.log("workled?");
+</script>
+{{end}}
+
 
 {{define "main"}}
 
@@ -30,6 +45,9 @@
 	</td>
 	</tr>
 </table>
+
+<canvas id="myCanvas" width="{{.width}}" height="{{.height}}" style="border:1px solid green;">
+</canvas> 
 
 </form>
 
