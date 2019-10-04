@@ -14,28 +14,16 @@
 
 <body>
 <div style="height:100%; position:absolute; width:100%;">
-
-
 <div class="txt-container">
-<div class="txt-header">.: <a href="/">[home]</a> <a href="#data.up">[..]</a> | data.ip :.</div>
+<div class="txt-header">.: <a href="/">[home]</a> <a href="/account/login2">[..]</a> | <a href=/univ>[univ-style]</a> :.</div>
 <div class="txt-content">
-
-
-{{block "main" .}}
-
-
-
-
-
-{{end}}
-
-
-<div style="text-align: right">// Powered by <a target="_blank" href="//openbsd.org">OpenBSD</a></div>
+{{- block "main" . -}}
+{{- end -}}
+<div style="text-align: right">// Powered by <a target="_blank" href="//resume.oldcode.org">Pkw</a></div>
 </div>
 </div>
-
-
 
 </div>
 </body>
+
 </html>

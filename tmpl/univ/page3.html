@@ -1,0 +1,18 @@
+{{- define "main" -}}
+<pre><code>#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+from cffi import FFI
+
+ffi = FFI()
+ffi.cdef(&quot;&quot;&quot;
+    int add(int x, int y);
+&quot;&quot;&quot;)
+lib = ffi.dlopen(&quot;./lib_d3npa_ffi.so&quot;)
+
+def add(x, y):
+    return lib.add(x, y)
+</code></pre>
+
+
+{{end}}
+
