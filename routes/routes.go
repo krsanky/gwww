@@ -1,5 +1,7 @@
 package routes
 
+// make HasRoutes interface ?
+
 //This is the main routes.
 //A package can supply its own AddRoutes() function.
 //Look at server package for adding the routes.
@@ -13,6 +15,8 @@ import (
 )
 
 func AddRoutes(mux *http.ServeMux) {
+	mux.HandleFunc("/resume", views.Resume)
+	mux.HandleFunc("/resume/", views.Resume)
 	mux.HandleFunc("/old", views.Index)
 	mux.HandleFunc("/old-index", views.Index)
 	mux.HandleFunc("/msg", views.Msg)

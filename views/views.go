@@ -56,3 +56,13 @@ func Msg(w http.ResponseWriter, r *http.Request) {
 func DirectMsg(w http.ResponseWriter, r *http.Request) {
 
 }
+
+func Resume(w http.ResponseWriter, r *http.Request) {
+	tmpls := []string{
+		"ttown/base.html",
+		"resume.html"}
+	web.Render(w, nil, tmpls...)
+}
+
+
+
