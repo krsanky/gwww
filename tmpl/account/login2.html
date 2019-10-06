@@ -1,23 +1,26 @@
-{{define "extra_head"}}
-<meta name="my-meta" content="index my meta">
-<style>
-header {
-	border-bottom: 1px dashed green;
-}
-</style>
-{{end}}
-
 {{- define "main" -}}
 <form method=post action=/account/login2>
 <input type="hidden" name="csrf_token" value="{{.token}}"> 
 <fieldset>
     <legend>Login</legend>
-    <label for=username>Username</label>
-    <input id=username type="text" name="username" value="">
-    <label for=password>Password</label>
-    <input id=password type="text" name="password" value="">
+	
+	<table>
 
+	<tr>
+	<td>Username</td>
+    <td><input id=username type="text" name="username" value=""></td>
+	<tr/>
+
+	<tr>
+    <td>Password</td>
+    <td><input id=password type="text" name="password" value=""></td>
+	<tr/>
+
+	<tr>
+	<td colspan=2>
 	<input type="submit" value="Submit">
+	</td>
+	<tr/>
 </fieldset>
 
 
