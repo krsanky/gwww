@@ -89,7 +89,7 @@ func Login2(w http.ResponseWriter, r *http.Request) {
 
 	tmpls := []string{
 		"univ/base.html",
-		"ttown/login.html"}
+		"account/login2.html"}
 	web.Render(w, data, tmpls...)
 }
 
