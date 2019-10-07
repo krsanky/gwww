@@ -6,3 +6,4 @@ URT_RADIO_RAW/
 settings.toml
 music.dump.sql*
 page_to_steal/
+db/dump/
