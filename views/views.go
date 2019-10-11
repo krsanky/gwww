@@ -2,6 +2,7 @@ package views
 
 import (
 	"net/http"
+	"os/exec"
 	"strings"
 
 	"oldcode.org/home/wise/repo/go/oldcode.org/gow/breadcrumbs"
@@ -21,11 +22,11 @@ func LogFormData(r *http.Request) {
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
-//	if r.URL.Path != "/" {
-//		lg.Log.Printf("views.Index(): NOT FOUND %s", r.URL.Path)
-//		http.NotFound(w, r)
-//		return
-//	}
+	//	if r.URL.Path != "/" {
+	//		lg.Log.Printf("views.Index(): NOT FOUND %s", r.URL.Path)
+	//		http.NotFound(w, r)
+	//		return
+	//	}
 	tmpls := []string{
 		"base.html",
 		"nav.tmpl",
@@ -64,5 +65,17 @@ func Resume(w http.ResponseWriter, r *http.Request) {
 	web.Render(w, nil, tmpls...)
 }
 
-
-
+func Phoon(w http.ResponseWriter, r *http.Request) {
+	data, _ := web.TmplData(r)
+	out, err := exec.Command("phoon").Output()
+	if err != nil {
+		lg.Log.Printf("ERR:%s", err.Error)
+		data["phoon"] = "err"
+	} else {
+		data["phoon"] = string(out)
+	}
+	tmpls := []string{
+		"ttown/base.html",
+		"phoon.html"}
+	web.Render(w, data, tmpls...)
+}
