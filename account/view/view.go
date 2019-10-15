@@ -88,7 +88,7 @@ func Login2(w http.ResponseWriter, r *http.Request) {
 	lg.Log.Printf("LoginPage() token[%s]", data["token"])
 
 	tmpls := []string{
-		"ttown/base.html",
+		"base.html",
 		"account/login2.html"}
 	web.Render(w, data, tmpls...)
 }

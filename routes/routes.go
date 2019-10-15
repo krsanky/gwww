@@ -9,7 +9,6 @@ package routes
 import (
 	"net/http"
 
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/ttown"
 	v1 "oldcode.org/home/wise/repo/go/oldcode.org/gow/v1"
 	"oldcode.org/home/wise/repo/go/oldcode.org/gow/views"
 )
@@ -18,7 +17,7 @@ func AddRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("/resume", views.Resume)
 	mux.HandleFunc("/resume/", views.Resume)
 	mux.HandleFunc("/phoon", views.Phoon)
-	mux.HandleFunc("/links", ttown.Index)
+	mux.HandleFunc("/links", views.Links)
 	mux.HandleFunc("/old", views.Index)
 	mux.HandleFunc("/old-index", views.Index)
 	mux.HandleFunc("/msg", views.Msg)

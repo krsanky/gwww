@@ -34,6 +34,15 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	web.Render(w, nil, tmpls...)
 }
 
+func Links(w http.ResponseWriter, r *http.Request) {
+	lg.Log.Printf("ttown.Index() method:%s", r.Method)
+	data, _ := web.TmplData(r)
+	tmpls := []string{
+		"base.html",
+		"links.html"}
+	web.Render(w, data, tmpls...)
+}
+
 func Msg(w http.ResponseWriter, r *http.Request) {
 	// look for something in session like "flash_msg" ?
 	// read the msg param
@@ -60,7 +69,7 @@ func DirectMsg(w http.ResponseWriter, r *http.Request) {
 
 func Resume(w http.ResponseWriter, r *http.Request) {
 	tmpls := []string{
-		"ttown/base.html",
+		"base.html",
 		"resume.html"}
 	web.Render(w, nil, tmpls...)
 }
@@ -75,7 +84,7 @@ func Phoon(w http.ResponseWriter, r *http.Request) {
 		data["phoon"] = string(out)
 	}
 	tmpls := []string{
-		"ttown/base.html",
+		"base.html",
 		"phoon.html"}
 	web.Render(w, data, tmpls...)
 }

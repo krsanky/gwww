@@ -13,7 +13,7 @@ func AddRoutes(mux *http.ServeMux) {
 func Index(w http.ResponseWriter, r *http.Request) {
 	data, _ := web.TmplData(r)
 	tmpls := []string{
-		"ttown/base.html",
+		"base.html",
 		"scales/index.html"}
 	web.Render(w, data, tmpls...)
 }

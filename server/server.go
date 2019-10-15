@@ -14,6 +14,7 @@ import (
 	"oldcode.org/home/wise/repo/go/oldcode.org/gow/geo"
 	"oldcode.org/home/wise/repo/go/oldcode.org/gow/lg"
 	"oldcode.org/home/wise/repo/go/oldcode.org/gow/music"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/phrase"
 	"oldcode.org/home/wise/repo/go/oldcode.org/gow/routes"
 	"oldcode.org/home/wise/repo/go/oldcode.org/gow/scales"
 	"oldcode.org/home/wise/repo/go/oldcode.org/gow/session"
@@ -56,6 +57,7 @@ func Serve(sfile string) {
 	canv_thing.AddRoutes(mux)
 	univ.AddRoutes(mux)
 	scales.AddRoutes(mux)
+	phrase.AddRoutes(mux)
 
 	// ORDER MATTERS ... acccount depends on session
 	h := nosurf.NewPure(mux)

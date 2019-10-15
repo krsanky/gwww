@@ -1,23 +1,22 @@
-package canv_thing
+package phrase
 
 import (
 	"net/http"
 
-	"github.com/justinas/nosurf"
+	"oldcode.org/home/wise/repo/go/oldcode.org/gow/breadcrumbs"
 	"oldcode.org/home/wise/repo/go/oldcode.org/gow/web"
 )
 
 func AddRoutes(mux *http.ServeMux) {
-	mux.HandleFunc("/canv-thing", Index)
+	mux.HandleFunc("/phrase", Index)
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
 	data, _ := web.TmplData(r)
-	data["token"] = nosurf.Token(r)
-	data["width"] = "200" 
-	data["height"] ="100"
+	data["breadcrumbs"] = breadcrumbs.New().Append("Home", "/").AppendActive("Phrase")
 	tmpls := []string{
 		"base.html",
-		"canv_thing/index.html"}
+		"breadcrumbs.tmpl",
+		"phrase/index.html"}
 	web.Render(w, data, tmpls...)
 }
