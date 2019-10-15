@@ -13,6 +13,5 @@ require (
 	github.com/lib/pq v1.2.0
 	github.com/mattn/go-sqlite3 v1.11.0 // indirect
 	github.com/pelletier/go-toml v1.4.0
-	golang.org/x/tools v0.0.0-20191007185444-6536af71d98a // indirect
 	google.golang.org/appengine v1.6.2 // indirect
 )
