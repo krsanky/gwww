@@ -18,8 +18,6 @@ func AddRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("/resume/", views.Resume)
 	mux.HandleFunc("/phoon", views.Phoon)
 	mux.HandleFunc("/links", views.Links)
-	mux.HandleFunc("/old", views.Index)
-	mux.HandleFunc("/old-index", views.Index)
 	mux.HandleFunc("/msg", views.Msg)
 	mux.HandleFunc("/circle", views.Circle)
 	mux.HandleFunc("/dm", views.DirectMsg)
@@ -29,5 +27,5 @@ func AddRoutes(mux *http.ServeMux) {
 	//mux.HandleFunc("/page4",
 	//		func(w http.ResponseWriter, r *http.Request) { web.RenderPage(w, "page4", nil) })
 
-	mux.HandleFunc("/", views.Phoon)
+	mux.HandleFunc("/", views.Index)
 }

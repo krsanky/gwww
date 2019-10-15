@@ -22,16 +22,18 @@ func LogFormData(r *http.Request) {
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
-	//	if r.URL.Path != "/" {
-	//		lg.Log.Printf("views.Index(): NOT FOUND %s", r.URL.Path)
-	//		http.NotFound(w, r)
-	//		return
-	//	}
+	data, _ := web.TmplData(r)
+	out, err := exec.Command("phoon").Output()
+	if err != nil {
+		lg.Log.Printf("ERR:%s", err.Error)
+		data["phoon"] = "err"
+	} else {
+		data["phoon"] = string(out)
+	}
 	tmpls := []string{
 		"base.html",
-		"nav.tmpl",
 		"index.html"}
-	web.Render(w, nil, tmpls...)
+	web.Render(w, data, tmpls...)
 }
 
 func Links(w http.ResponseWriter, r *http.Request) {
