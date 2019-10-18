@@ -1,7 +1,3 @@
-{{define "extra_head"}}
-
-<link rel="stylesheet" href="/static/codemirror/lib/codemirror.css">
-{{/* <link rel="stylesheet" href="/static/codemirror/theme/zenburn.css"> */}}
 <link rel=stylesheet href="/static/codemirror/theme/3024-day.css">
 <link rel=stylesheet href="/static/codemirror/theme/3024-night.css">
 <link rel=stylesheet href="/static/codemirror/theme/abcdef.css">
@@ -63,33 +59,6 @@
 <link rel=stylesheet href="/static/codemirror/theme/yeti.css">
 <link rel=stylesheet href="/static/codemirror/theme/yonce.css">
 <link rel=stylesheet href="/static/codemirror/theme/zenburn.css">
-
-<script src="/static/codemirror/lib/codemirror.js"></script>
-<script src="/static/codemirror/mode/javascript/javascript.js"></script>
-<script src="/static/codemirror/addon/selection/active-line.js"></script>
-<script src="/static/codemirror/addon/edit/matchbrackets.js"></script>
-
-<style>
-.CodeMirror {
-	border: 1px solid green; 
-	font-size: 13px
-}
-</style>
-
-{{end}}
-
-
-{{define "main"}}
-
-<form method=post action=/phrase>
-<input type="hidden" name="csrf_token" value="{{.token}}"> 
-
-<textarea id="code" name="code">
-asd
-asd
-asd
-123
-</textarea>
 
 <p>Select a theme: <select onchange="cm_set_theme()" id=cm_theme_select>
     <option selected>default</option>
@@ -158,18 +127,7 @@ asd
 </select>
 </p>
 
-</form>
-{{end}}
 
-{{define "extra_body"}}
-<script>
-console.log("set theme ...");
-
-var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-	lineNumbers: true,
-//	styleActiveLine: true,
-	matchBrackets: true
-});
 
 var input = document.getElementById("cm_theme_select");
 var theme = 'colorforth';
@@ -178,7 +136,3 @@ function cm_set_theme() {
 	editor.setOption("theme", theme);
 //	location.hash = "#" + theme;
 }
-
-</script>
-
-{{end}}

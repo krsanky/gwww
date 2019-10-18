@@ -6,9 +6,9 @@ import (
 	"html/template"
 	"net/http"
 
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/db"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/lg"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/session"
+	"oldcode.org/home/wise/repo/go/gow/db"
+	"oldcode.org/home/wise/repo/go/gow/lg"
+	"oldcode.org/home/wise/repo/go/gow/session"
 )
 
 type User struct {

@@ -1,0 +1,76 @@
+{{define "title"}}Phrase{{end}}
+
+{{define "breadcrumbs_block"}}{{template "breadcrumbs" .}}{{end}}
+
+{{define "extra_head"}}
+
+<link rel="stylesheet" href="/static/codemirror/lib/codemirror.css">
+<link rel=stylesheet href="/static/codemirror/theme/colorforth.css">
+
+
+<style>
+.CodeMirror {
+	border: 1px solid green; 
+	font-size: 13px;
+/*	height: auto;*/
+}
+
+a.el {
+	font-size: 13px;
+	font-family: monospace;
+}
+</style>
+
+<script src="/static/codemirror/lib/codemirror.js"></script>
+<script src="/static/codemirror/mode/javascript/javascript.js"></script>
+<script src="/static/codemirror/addon/selection/active-line.js"></script>
+<script src="/static/codemirror/addon/edit/matchbrackets.js"></script>
+<script src="/static/codemirror/keymap/vim.js"></script>
+{{end}}
+
+
+{{define "main"}}
+
+<p>{{if .error}}error:{{.error}}{{end}}</p>
+
+<form method=post action=/phrase>
+<input type="hidden" name="csrf_token" value="{{.token}}"> 
+
+Path:<br/>
+<input name="Path" type="text" value=""><br/>
+Tags:<br/>
+<input name="Tags" type="text" value="">
+<br/>
+
+Order:<br/>
+<select name=Order>
+	<option selected>0</option>
+	<option>1</option>
+	<option>2</option>
+	<option>3</option>
+	<option>4</option>
+	<option>5</option>
+	<option>10</option>
+	<option>20</option>
+	<option>30</option>
+	<option>40</option>
+</select>
+<br/>
+
+<a class="el" href="#1">[link]</a>
+<a class="el" href="#2">[link-2]</a>
+<textarea id="cm_editor" name=Phrase></textarea>
+<br/>
+<input type=submit value=Save>
+</form>
+{{end}}
+
+{{define "extra_body"}}
+<script>
+console.log("cm stuff ...");
+</script>
+<script src="/static/edit.js"></script>
+{{end}}
+
+
+

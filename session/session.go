@@ -5,8 +5,8 @@ import (
 
 	"github.com/alexedwards/scs/postgresstore"
 	"github.com/alexedwards/scs/v2"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/db"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/lg"
+	"oldcode.org/home/wise/repo/go/gow/db"
+	"oldcode.org/home/wise/repo/go/gow/lg"
 )
 
 var Session *scs.Session

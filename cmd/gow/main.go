@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"os"
 
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/db"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/model"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/server"
+	"oldcode.org/home/wise/repo/go/gow/db"
+	"oldcode.org/home/wise/repo/go/gow/model"
+	"oldcode.org/home/wise/repo/go/gow/server"
 )
 
 func main() {
@@ -23,7 +23,8 @@ func main() {
 	if len(os.Args) > 2 {
 		switch arg1 := os.Args[1]; arg1 {
 		case "web":
-			server.Serve(os.Args[2]) // settings file
+			settings := os.Args[2]
+			server.Serve(settings)
 		case "db":
 			dbstuff()
 		case "tmpl":

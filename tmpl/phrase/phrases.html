@@ -1,0 +1,20 @@
+{{define "title"}}Phrases{{end}}
+
+{{define "breadcrumbs_block"}}{{template "breadcrumbs" .}}{{end}}
+
+{{define "main"}}
+
+{{if .error}}<p>{{.error}}</p>{{end}}
+
+{{if .phrases}}
+<ul>
+{{range .phrases}}
+<li>{{.}}</li>
+{{end}}
+</ul>
+{{end}}
+
+{{end}}
+
+
+

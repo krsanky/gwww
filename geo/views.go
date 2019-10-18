@@ -3,8 +3,8 @@ package geo
 import (
 	"net/http"
 
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/breadcrumbs"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/web"
+	"oldcode.org/home/wise/repo/go/gow/breadcrumbs"
+	"oldcode.org/home/wise/repo/go/gow/web"
 )
 
 func AddRoutes(mux *http.ServeMux) {

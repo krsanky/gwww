@@ -6,8 +6,8 @@ import (
 
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/lg"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/settings"
+	"oldcode.org/home/wise/repo/go/gow/lg"
+	"oldcode.org/home/wise/repo/go/gow/settings"
 )
 
 var DB *sql.DB

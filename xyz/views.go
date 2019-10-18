@@ -7,10 +7,10 @@ import (
 
 	"github.com/gorilla/schema"
 	"github.com/justinas/nosurf"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/account"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/breadcrumbs"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/lg"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/web"
+	"oldcode.org/home/wise/repo/go/gow/account"
+	"oldcode.org/home/wise/repo/go/gow/breadcrumbs"
+	"oldcode.org/home/wise/repo/go/gow/lg"
+	"oldcode.org/home/wise/repo/go/gow/web"
 )
 
 func AddRoutes(mux *http.ServeMux) {

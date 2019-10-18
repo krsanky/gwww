@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"html/template"
 
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/lg"
+	"oldcode.org/home/wise/repo/go/gow/lg"
 )
 
 type BCList struct {

@@ -3,8 +3,8 @@ package account
 import (
 	"net/http"
 
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/lg"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/session"
+	"oldcode.org/home/wise/repo/go/gow/lg"
+	"oldcode.org/home/wise/repo/go/gow/session"
 )
 
 var UserIdString = "_account__user_id_"
