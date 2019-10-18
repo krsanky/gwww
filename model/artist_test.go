@@ -10,7 +10,7 @@ import (
 )
 
 func TestMain(m *testing.M) {
-	settings.Init("/home/wise/GO/gow/settings.toml")
+	settings.Init("/home/wise/data/GO/gow/settings.toml")
 	os.Exit(m.Run())
 }
 

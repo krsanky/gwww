@@ -25,7 +25,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	data, _ := web.TmplData(r)
 	out, err := exec.Command("phoon").Output()
 	if err != nil {
-		lg.Log.Printf("ERR:%s", err.Error)
+		lg.Log.Printf("ERR:%s", err.Error())
 		data["phoon"] = "err"
 	} else {
 		data["phoon"] = string(out)
@@ -80,7 +80,7 @@ func Phoon(w http.ResponseWriter, r *http.Request) {
 	data, _ := web.TmplData(r)
 	out, err := exec.Command("phoon").Output()
 	if err != nil {
-		lg.Log.Printf("ERR:%s", err.Error)
+		lg.Log.Printf("ERR:%s", err.Error())
 		data["phoon"] = "err"
 	} else {
 		data["phoon"] = string(out)
