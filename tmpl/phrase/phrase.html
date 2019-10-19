@@ -37,9 +37,9 @@ a.el {
 <input type="hidden" name="csrf_token" value="{{.token}}"> 
 
 Path:<br/>
-<input name="Path" type="text" value=""><br/>
+<input name="Path" type="text" value="{{.phrase.Path}}"><br/>
 Tags:<br/>
-<input name="Tags" type="text" value="">
+<input name="Tags" type="text" value="{{.phrase.Tags}}">
 <br/>
 
 Order:<br/>
@@ -59,7 +59,7 @@ Order:<br/>
 
 <a class="el" href="#1">[link]</a>
 <a class="el" href="#2">[link-2]</a>
-<textarea id="cm_editor" name=Phrase></textarea>
+<textarea id="cm_editor" name=Phrase>{{.phrase.Phrase}}</textarea>
 <br/>
 <input type=submit value=Save>
 </form>

@@ -3,6 +3,7 @@ package phrase
 import (
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/gorilla/schema"
 	"github.com/justinas/nosurf"
@@ -12,13 +13,41 @@ import (
 )
 
 func AddRoutes(mux *http.ServeMux) {
-	mux.HandleFunc("/phrase", PhraseView)
 	mux.HandleFunc("/phrases", Phrases)
+	mux.HandleFunc("/phrase/edit", Edit)
+	mux.HandleFunc("/phrase", PhraseView)
+}
+
+func Edit(w http.ResponseWriter, r *http.Request) {
+	data, _ := web.TmplData(r)
+	bcs := breadcrumbs.New().Append("Home", "/").Append("Phrases", "/phrases")
+	bcs.AppendActive("Edit")
+	data["breadcrumbs"] = bcs
+	data["token"] = nosurf.Token(r)
+
+	data["phrase"] = Phrase{}
+	pid_ := r.URL.Query().Get("p")
+	pid, _ := strconv.Atoi(pid_)
+	lg.Log.Printf("phrase.Edit() p:%d", pid)
+	phr, err := GetPhrase(pid)
+	if err != nil {
+		data["error"] = err.Error()
+	} else {
+		data["phrase"] = phr
+	}
+
+	tmpls := []string{
+		"base.html",
+		"breadcrumbs.tmpl",
+		"phrase/phrase.html"}
+	web.Render(w, data, tmpls...)
 }
 
 func PhraseView(w http.ResponseWriter, r *http.Request) {
 	data, _ := web.TmplData(r)
-	data["breadcrumbs"] = breadcrumbs.New().Append("Home", "/").AppendActive("Phrase")
+	bcs := breadcrumbs.New().Append("Home", "/").Append("Phrases", "/phrases")
+	bcs.AppendActive("Edit")
+	data["breadcrumbs"] = bcs
 	data["token"] = nosurf.Token(r)
 
 	if "POST" == r.Method {
@@ -60,9 +89,9 @@ func Phrases(w http.ResponseWriter, r *http.Request) {
 
 	ps, err := GetPhrases()
 	if err != nil {
-		data["phrases"] = ps
+		data["error"] = fmt.Sprintf("ERR GetPhrases():%s", err.Error())
 	} else {
-		//data["error"] = fmt.Sprintf("ERR GetPhrases():%s", err.Error())
+		data["phrases"] = ps
 	}
 
 	tmpls := []string{
