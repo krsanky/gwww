@@ -17,6 +17,7 @@ func AddRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("/urt/radio", Radio)
 	mux.HandleFunc("/urt/radio/key", RadioKey)
 	mux.HandleFunc("/urt/servers", Servers)
+	mux.HandleFunc("/urt/urtctf", Urtctf)
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
@@ -114,4 +115,15 @@ func UrtCtf(page_data map[string]interface{}) {
 	//}
 
 	page_data["players"] = players
+}
+
+func Urtctf(w http.ResponseWriter, r *http.Request) {
+	data, _ := web.TmplData(r)
+	data["breadcrumbs"] = breadcrumbs.New().Append("Home", "/").AppendActive("Urtctf")
+	UrtCtf(data)
+	tmpls := []string{
+		"base.html",
+		"breadcrumbs.tmpl",
+		"urt/urtctf.html"}
+	web.Render(w, data, tmpls...)
 }

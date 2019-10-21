@@ -88,6 +88,11 @@ func Phrases(w http.ResponseWriter, r *http.Request) {
 	data["breadcrumbs"] = breadcrumbs.New().Append("Home", "/").AppendActive("Phrases")
 	data["token"] = nosurf.Token(r)
 
+	if "POST" == r.Method {
+		pathpre := r.FormValue("pathpre")
+		lg.Log.Printf("pathpre[%s] len:%d", pathpre, len(pathpre))
+	}
+
 	ps, err := GetPhrases()
 	if err != nil {
 		data["error"] = fmt.Sprintf("ERR GetPhrases():%s", err.Error())

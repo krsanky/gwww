@@ -8,10 +8,12 @@
 
 <form method=post>
 <input type="hidden" name="csrf_token" value="{{.token}}"> 
-Path:<br/>
+Path starts with:<br/>
 <input type=text name=pathpre><br/>
 Tags:<br/>
 <input type=text name=tags><br/>
+<input type=submit value=filter>
+<br/>
 </form>
 
 {{if .phrases}}
