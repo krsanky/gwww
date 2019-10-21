@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 
 	"oldcode.org/home/wise/repo/go/gow/db"
 	"oldcode.org/home/wise/repo/go/gow/model"
@@ -31,15 +32,32 @@ func test_phrase() {
 	}
 }
 
-func main() {
-	//	for i, a := range os.Args[1:] {
-	//		fmt.Printf("%d:%s ", i, a)
-	//	}
-	fmt.Printf("gow_test...\n")
+func dbstuff() {
+	db.Drivers()
+	db.TestDB()
+	as, err := model.GetRawArtists()
+	if err != nil {
+		panic(err)
+	}
+	for _, a := range as {
+		fmt.Printf("a:%s\n", a)
+	}
+}
 
+func main() {
 	settings.Init("settings.toml")
 	db.InitDB()
-
-	//db_artists()
-	test_phrase()
+	if len(os.Args) > 1 {
+		switch arg1 := os.Args[1]; arg1 {
+		case "tmpl":
+			TmplTest()
+		case "db":
+			//db_artists()
+			dbstuff()
+		default:
+			test_phrase()
+		}
+	} else {
+		test_phrase()
+	}
 }

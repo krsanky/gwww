@@ -17,7 +17,6 @@ func AddRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("/resume", views.Resume)
 	mux.HandleFunc("/resume/", views.Resume)
 	mux.HandleFunc("/phoon", views.Phoon)
-	mux.HandleFunc("/links", views.Links)
 	mux.HandleFunc("/msg", views.Msg)
 	mux.HandleFunc("/circle", views.Circle)
 	mux.HandleFunc("/dm", views.DirectMsg)

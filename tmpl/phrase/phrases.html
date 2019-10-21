@@ -6,6 +6,14 @@
 
 {{if .error}}<p>{{.error}}</p>{{end}}
 
+<form method=post>
+<input type="hidden" name="csrf_token" value="{{.token}}"> 
+Path:<br/>
+<input type=text name=pathpre><br/>
+Tags:<br/>
+<input type=text name=tags><br/>
+</form>
+
 {{if .phrases}}
 <ul>
 {{range .phrases}}

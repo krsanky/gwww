@@ -54,6 +54,7 @@ func GetPhrase(id int) (Phrase, error) {
 	return p, nil
 }
 
+// path string, tags []string
 func GetPhrases() ([]Phrase, error) {
 	var ps []Phrase
 	//db := db.DBX.Unsafe()
