@@ -3,7 +3,7 @@
 name="gow"
 daemon="/home/wise/go/bin/gow"
 gow_user="wise"
-gow_settings="settings.toml"
+gow_settings="/home/wise/data/GO/gow/settings.toml"
 
 rc_stop() {
 	echo "stopping..."

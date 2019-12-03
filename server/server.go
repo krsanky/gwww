@@ -38,7 +38,7 @@ func Serve(sfile string) {
 	// get rid of this dir stuff...
 	dir, _ := os.Getwd()
 	lg.Log.Printf("server.Serve() dir:%s", dir)
-	os.Chdir("/home/wise/go/src/oldcode.org/gow")
+	os.Chdir("/home/wise/data/GO/gow")
 	dir, _ = os.Getwd()
 	lg.Log.Printf("--now dir:%s", dir)
 
