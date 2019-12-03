@@ -7,10 +7,10 @@ import (
 
 	"github.com/gorilla/schema"
 	"github.com/justinas/nosurf"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/account"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/breadcrumbs"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/lg"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/web"
+	"oldcode.org/home/wise/repo/go/gow/account"
+	"oldcode.org/home/wise/repo/go/gow/breadcrumbs"
+	"oldcode.org/home/wise/repo/go/gow/lg"
+	"oldcode.org/home/wise/repo/go/gow/web"
 )
 
 func AddRoutes(mux *http.ServeMux) {
@@ -21,6 +21,7 @@ func AddRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("/xyz/add-user", AddUser)
 	mux.HandleFunc("/xyz/send-email", SendEmail)
 	mux.HandleFunc("/xyz/colors", Colors)
+	mux.HandleFunc("/xyz/post-test", PostTest)
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
@@ -178,5 +179,20 @@ func Colors(w http.ResponseWriter, r *http.Request) {
 		"nav.tmpl",
 		"breadcrumbs.tmpl",
 		"xyz/colors.html"}
+	web.Render(w, data, tmpls...)
+}
+
+func PostTest(w http.ResponseWriter, r *http.Request) {
+	data, _ := web.TmplData(r)
+	bcs := breadcrumbs.New()
+	bcs.Append("Home", "/")
+	bcs.Append("XYZ", "/xyz")
+	bcs.AppendActive("Post Test")
+	data["breadcrumbs"] = bcs
+	tmpls := []string{
+		"base.html",
+		"nav.tmpl",
+		"breadcrumbs.tmpl",
+		"xyz/post_test.html"}
 	web.Render(w, data, tmpls...)
 }

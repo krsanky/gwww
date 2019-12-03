@@ -9,15 +9,14 @@ package routes
 import (
 	"net/http"
 
-	v1 "oldcode.org/home/wise/repo/go/oldcode.org/gow/v1"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/views"
+	v1 "oldcode.org/home/wise/repo/go/gow/v1"
+	"oldcode.org/home/wise/repo/go/gow/views"
 )
 
 func AddRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("/resume", views.Resume)
 	mux.HandleFunc("/resume/", views.Resume)
 	mux.HandleFunc("/phoon", views.Phoon)
-	mux.HandleFunc("/links", views.Links)
 	mux.HandleFunc("/msg", views.Msg)
 	mux.HandleFunc("/circle", views.Circle)
 	mux.HandleFunc("/dm", views.DirectMsg)

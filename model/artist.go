@@ -5,7 +5,7 @@ import (
 	"net/url"
 	"strings"
 
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/db"
+	"oldcode.org/home/wise/repo/go/gow/db"
 )
 
 type Artist struct {

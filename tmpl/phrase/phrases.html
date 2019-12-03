@@ -1,0 +1,30 @@
+{{define "title"}}Phrases{{end}}
+
+{{define "breadcrumbs_block"}}{{template "breadcrumbs" .}}{{end}}
+
+{{define "main"}}
+
+{{if .error}}<p>{{.error}}</p>{{end}}
+
+<form method=post>
+<input type="hidden" name="csrf_token" value="{{.token}}"> 
+Path starts with:<br/>
+<input type=text name=pathpre><br/>
+Tags:<br/>
+<input type=text name=tags><br/>
+<input type=submit value=filter>
+<br/>
+</form>
+
+{{if .phrases}}
+<ul>
+{{range .phrases}}
+<li><a href="{{.Url}}">{{.String}}</a></li>
+{{end}}
+</ul>
+{{end}}
+
+{{end}}
+
+
+

@@ -2,14 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>{{block "title" .}}ttown{{end}}</title>
+<title>{{block "title" .}}oldcode{{end}}</title>
 <link rel="stylesheet" type="text/css" href="/static/normalize.css">
 <link rel="stylesheet" type="text/css" href="/static/ttown.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-{{block "extra_head" .}}
-<!-- base extra_head -->
-<meta name="my-meta" content="base my meta">
-{{end}}
+
+<script src="/static/jquery-3.3.1.min.js"></script>
+{{block "extra_head" .}}{{end}}
 </head>
 
 <body>
@@ -43,6 +42,7 @@
 */}}
 
 {{end}}
+
 
 {{block "extra_body" .}}{{end}}
 </body>

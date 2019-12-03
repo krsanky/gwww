@@ -5,9 +5,9 @@ import (
 	"os/exec"
 	"strings"
 
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/breadcrumbs"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/lg"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/web"
+	"oldcode.org/home/wise/repo/go/gow/breadcrumbs"
+	"oldcode.org/home/wise/repo/go/gow/lg"
+	"oldcode.org/home/wise/repo/go/gow/web"
 )
 
 var A_Z = []string{"A", "B", "C", "D", "E", "F", "G", "H", "I",
@@ -25,7 +25,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	data, _ := web.TmplData(r)
 	out, err := exec.Command("phoon").Output()
 	if err != nil {
-		lg.Log.Printf("ERR:%s", err.Error)
+		lg.Log.Printf("ERR:%s", err.Error())
 		data["phoon"] = "err"
 	} else {
 		data["phoon"] = string(out)
@@ -33,15 +33,6 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	tmpls := []string{
 		"base.html",
 		"index.html"}
-	web.Render(w, data, tmpls...)
-}
-
-func Links(w http.ResponseWriter, r *http.Request) {
-	lg.Log.Printf("ttown.Index() method:%s", r.Method)
-	data, _ := web.TmplData(r)
-	tmpls := []string{
-		"base.html",
-		"links.html"}
 	web.Render(w, data, tmpls...)
 }
 
@@ -80,7 +71,7 @@ func Phoon(w http.ResponseWriter, r *http.Request) {
 	data, _ := web.TmplData(r)
 	out, err := exec.Command("phoon").Output()
 	if err != nil {
-		lg.Log.Printf("ERR:%s", err.Error)
+		lg.Log.Printf("ERR:%s", err.Error())
 		data["phoon"] = "err"
 	} else {
 		data["phoon"] = string(out)

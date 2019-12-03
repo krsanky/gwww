@@ -5,12 +5,12 @@ import (
 	"os"
 	"testing"
 
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/db"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/settings"
+	"oldcode.org/home/wise/repo/go/gow/db"
+	"oldcode.org/home/wise/repo/go/gow/settings"
 )
 
 func TestMain(m *testing.M) {
-	settings.Init("/home/wise/GO/gow/settings.toml")
+	settings.Init("/home/wise/data/GO/gow/settings.toml")
 	os.Exit(m.Run())
 }
 

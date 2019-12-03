@@ -4,26 +4,25 @@ import (
 	"net"
 	"net/http"
 	"net/http/fcgi"
-	"os"
 
 	"github.com/justinas/nosurf"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/account"
-	account_view "oldcode.org/home/wise/repo/go/oldcode.org/gow/account/view"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/canv_thing"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/db"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/geo"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/lg"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/music"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/phrase"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/routes"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/scales"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/session"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/settings"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/ttown"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/univ"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/urt"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/xyz"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/zz"
+	"oldcode.org/home/wise/repo/go/gow/account"
+	account_view "oldcode.org/home/wise/repo/go/gow/account/view"
+	"oldcode.org/home/wise/repo/go/gow/canv_thing"
+	"oldcode.org/home/wise/repo/go/gow/db"
+	"oldcode.org/home/wise/repo/go/gow/geo"
+	"oldcode.org/home/wise/repo/go/gow/lg"
+	"oldcode.org/home/wise/repo/go/gow/music"
+	"oldcode.org/home/wise/repo/go/gow/phrase"
+	"oldcode.org/home/wise/repo/go/gow/routes"
+	"oldcode.org/home/wise/repo/go/gow/scales"
+	"oldcode.org/home/wise/repo/go/gow/session"
+	"oldcode.org/home/wise/repo/go/gow/settings"
+	"oldcode.org/home/wise/repo/go/gow/ttown"
+	"oldcode.org/home/wise/repo/go/gow/univ"
+	"oldcode.org/home/wise/repo/go/gow/urt"
+	"oldcode.org/home/wise/repo/go/gow/xyz"
+	"oldcode.org/home/wise/repo/go/gow/zz"
 )
 
 //try:
@@ -35,14 +34,12 @@ func Serve(sfile string) {
 		panic(err)
 	}
 
-	// get rid of this dir stuff...
-	dir, _ := os.Getwd()
-	lg.Log.Printf("server.Serve() dir:%s", dir)
-	os.Chdir("/home/wise/data/GO/gow")
-	dir, _ = os.Getwd()
-	lg.Log.Printf("--now dir:%s", dir)
-
-	db.InitDB()
+//	dir, _ := os.Getwd()
+//	lg.Log.Printf("server.Serve() dir:%s", dir)
+//	os.Chdir("/home/wise/data/GO/gow")
+//	dir, _ = os.Getwd()
+//	lg.Log.Printf("--now dir:%s", dir)
+	db.InitDB() // This is kinda important
 
 	//mux is a handler, because ServeMux implements ServeHTTP()
 	mux := http.NewServeMux()

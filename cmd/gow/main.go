@@ -4,16 +4,10 @@ import (
 	"fmt"
 	"os"
 
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/db"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/model"
-	"oldcode.org/home/wise/repo/go/oldcode.org/gow/server"
+	"oldcode.org/home/wise/repo/go/gow/server"
 )
 
 func main() {
-	//	for i, a := range os.Args[1:] {
-	//		fmt.Printf("%d:%s ", i, a)
-	//	}
-
 	if len(os.Args) == 2 {
 		fmt.Printf("2 arg\n")
 		usage()
@@ -23,11 +17,8 @@ func main() {
 	if len(os.Args) > 2 {
 		switch arg1 := os.Args[1]; arg1 {
 		case "web":
-			server.Serve(os.Args[2]) // settings file
-		case "db":
-			dbstuff()
-		case "tmpl":
-			TmplTest()
+			settings := os.Args[2]
+			server.Serve(settings)
 		default:
 			usage()
 		}
@@ -36,21 +27,8 @@ func main() {
 	}
 }
 
-func dbstuff() {
-	db.Drivers()
-	db.InitDB()
-	db.TestDB()
-	as, err := model.GetRawArtists()
-	if err != nil {
-		panic(err)
-	}
-	for _, a := range as {
-		fmt.Printf("a:%s\n", a)
-	}
-}
-
 func usage() {
 	fmt.Println()
-	fmt.Printf("gow [web|db|tmpl]\n")
+	fmt.Printf("gow [web]\n")
 	fmt.Println()
 }
