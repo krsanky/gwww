@@ -3,7 +3,7 @@ package formstuff
 import (
 	"net/http"
 
-	"oldcode.org/home/wise/repo/go/gow/lg"
+	"oldcode.org/repo/go/gow/lg"
 )
 
 func Index(w http.ResponseWriter, r *http.Request) {

@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"os"
 
-	"oldcode.org/home/wise/repo/go/gow/db"
-	"oldcode.org/home/wise/repo/go/gow/model"
-	"oldcode.org/home/wise/repo/go/gow/phrase"
-	"oldcode.org/home/wise/repo/go/gow/settings"
+	"oldcode.org/repo/go/gow/db"
+	"oldcode.org/repo/go/gow/model"
+	"oldcode.org/repo/go/gow/phrase"
+	"oldcode.org/repo/go/gow/settings"
 )
 
 func db_artists() {

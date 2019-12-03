@@ -8,9 +8,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"oldcode.org/home/wise/repo/go/gow/account"
-	"oldcode.org/home/wise/repo/go/gow/breadcrumbs"
-	"oldcode.org/home/wise/repo/go/gow/lg"
+	"oldcode.org/repo/go/gow/account"
+	"oldcode.org/repo/go/gow/breadcrumbs"
+	"oldcode.org/repo/go/gow/lg"
 )
 
 var GlobalFuncMap template.FuncMap

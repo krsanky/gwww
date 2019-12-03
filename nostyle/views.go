@@ -6,7 +6,7 @@ import (
 	"strings"
 	"text/template"
 
-	"oldcode.org/home/wise/repo/go/gow/lg"
+	"oldcode.org/repo/go/gow/lg"
 )
 
 var tmpls map[string]*template.Template

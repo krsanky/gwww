@@ -6,23 +6,23 @@ import (
 	"net/http/fcgi"
 
 	"github.com/justinas/nosurf"
-	"oldcode.org/home/wise/repo/go/gow/account"
-	account_view "oldcode.org/home/wise/repo/go/gow/account/view"
-	"oldcode.org/home/wise/repo/go/gow/canv_thing"
-	"oldcode.org/home/wise/repo/go/gow/db"
-	"oldcode.org/home/wise/repo/go/gow/geo"
-	"oldcode.org/home/wise/repo/go/gow/lg"
-	"oldcode.org/home/wise/repo/go/gow/music"
-	"oldcode.org/home/wise/repo/go/gow/phrase"
-	"oldcode.org/home/wise/repo/go/gow/routes"
-	"oldcode.org/home/wise/repo/go/gow/scales"
-	"oldcode.org/home/wise/repo/go/gow/session"
-	"oldcode.org/home/wise/repo/go/gow/settings"
-	"oldcode.org/home/wise/repo/go/gow/ttown"
-	"oldcode.org/home/wise/repo/go/gow/univ"
-	"oldcode.org/home/wise/repo/go/gow/urt"
-	"oldcode.org/home/wise/repo/go/gow/xyz"
-	"oldcode.org/home/wise/repo/go/gow/zz"
+	"oldcode.org/repo/go/gow/account"
+	account_view "oldcode.org/repo/go/gow/account/view"
+	"oldcode.org/repo/go/gow/canv_thing"
+	"oldcode.org/repo/go/gow/db"
+	"oldcode.org/repo/go/gow/geo"
+	"oldcode.org/repo/go/gow/lg"
+	"oldcode.org/repo/go/gow/music"
+	"oldcode.org/repo/go/gow/phrase"
+	"oldcode.org/repo/go/gow/routes"
+	"oldcode.org/repo/go/gow/scales"
+	"oldcode.org/repo/go/gow/session"
+	"oldcode.org/repo/go/gow/settings"
+	"oldcode.org/repo/go/gow/ttown"
+	"oldcode.org/repo/go/gow/univ"
+	"oldcode.org/repo/go/gow/urt"
+	"oldcode.org/repo/go/gow/xyz"
+	"oldcode.org/repo/go/gow/zz"
 )
 
 //try:
@@ -34,11 +34,6 @@ func Serve(sfile string) {
 		panic(err)
 	}
 
-//	dir, _ := os.Getwd()
-//	lg.Log.Printf("server.Serve() dir:%s", dir)
-//	os.Chdir("/home/wise/data/GO/gow")
-//	dir, _ = os.Getwd()
-//	lg.Log.Printf("--now dir:%s", dir)
 	db.InitDB() // This is kinda important
 
 	//mux is a handler, because ServeMux implements ServeHTTP()
@@ -56,12 +51,14 @@ func Serve(sfile string) {
 	scales.AddRoutes(mux)
 	phrase.AddRoutes(mux)
 
-	// ORDER MATTERS ... acccount depends on session
+	// ORDER MATTERS and it's kind of reversed
 	h := nosurf.NewPure(mux)
 	//h = M1(h, "->h1")
+	h = account.EnforceAdminUser(h)
 	h = account.AddUser(h)
 	session.Init()
 	h = session.Session.LoadAndSave(h)
+
 	fcgi.Serve(listener, h)
 }
 

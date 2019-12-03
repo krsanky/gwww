@@ -3,7 +3,7 @@ package v1
 import (
 	"net/http"
 
-	"oldcode.org/home/wise/repo/go/gow/lg"
+	"oldcode.org/repo/go/gow/lg"
 )
 
 var tab = `

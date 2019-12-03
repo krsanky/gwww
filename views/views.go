@@ -5,9 +5,9 @@ import (
 	"os/exec"
 	"strings"
 
-	"oldcode.org/home/wise/repo/go/gow/breadcrumbs"
-	"oldcode.org/home/wise/repo/go/gow/lg"
-	"oldcode.org/home/wise/repo/go/gow/web"
+	"oldcode.org/repo/go/gow/breadcrumbs"
+	"oldcode.org/repo/go/gow/lg"
+	"oldcode.org/repo/go/gow/web"
 )
 
 var A_Z = []string{"A", "B", "C", "D", "E", "F", "G", "H", "I",

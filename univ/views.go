@@ -3,7 +3,7 @@ package univ
 import (
 	"net/http"
 
-	"oldcode.org/home/wise/repo/go/gow/web"
+	"oldcode.org/repo/go/gow/web"
 )
 
 func AddRoutes(mux *http.ServeMux) {

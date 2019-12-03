@@ -5,8 +5,8 @@ import (
 	"os"
 	"testing"
 
-	"oldcode.org/home/wise/repo/go/gow/db"
-	"oldcode.org/home/wise/repo/go/gow/settings"
+	"oldcode.org/repo/go/gow/db"
+	"oldcode.org/repo/go/gow/settings"
 )
 
 func TestMain(m *testing.M) {

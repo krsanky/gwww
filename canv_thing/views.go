@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/justinas/nosurf"
-	"oldcode.org/home/wise/repo/go/gow/web"
+	"oldcode.org/repo/go/gow/web"
 )
 
 func AddRoutes(mux *http.ServeMux) {

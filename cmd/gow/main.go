@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"oldcode.org/home/wise/repo/go/gow/server"
+	"oldcode.org/repo/go/gow/server"
 )
 
 func main() {

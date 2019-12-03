@@ -9,8 +9,8 @@ package routes
 import (
 	"net/http"
 
-	v1 "oldcode.org/home/wise/repo/go/gow/v1"
-	"oldcode.org/home/wise/repo/go/gow/views"
+	v1 "oldcode.org/repo/go/gow/v1"
+	"oldcode.org/repo/go/gow/views"
 )
 
 func AddRoutes(mux *http.ServeMux) {

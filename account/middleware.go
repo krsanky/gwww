@@ -3,8 +3,8 @@ package account
 import (
 	"net/http"
 
-	"oldcode.org/home/wise/repo/go/gow/lg"
-	"oldcode.org/home/wise/repo/go/gow/session"
+	"oldcode.org/repo/go/gow/lg"
+	"oldcode.org/repo/go/gow/session"
 )
 
 var UserIdString = "_account__user_id_"
@@ -29,8 +29,27 @@ func AddUser(h http.Handler) http.Handler {
 			lg.Log.Printf("AddUser() added user_id:%d to r.Context()", user.Id)
 			h.ServeHTTP(w, r.WithContext(ctx))
 		} else {
-			lg.Log.Printf("NO USER")
+			lg.Log.Printf("AddUser() NO USER")
 			h.ServeHTTP(w, r)
 		}
 	})
+}
+
+func EnforceAdminUser(h http.Handler) http.Handler {
+
+	h2 := func(w http.ResponseWriter, r *http.Request) {
+
+		u, ok := UserFromContext(r.Context()) 
+		if ! ok {
+			lg.Log.Printf("ERR: problem with UserFromContex()")
+		} else {
+			lg.Log.Printf("User EnforceSuperUser ?:%s", u)
+		}
+
+		lg.Log.Printf("EnforceAdminUser()")
+		h.ServeHTTP(w, r)
+		//http.Redirect(w, r,
+	}
+
+	return http.HandlerFunc(h2)
 }

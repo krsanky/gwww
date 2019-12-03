@@ -1,4 +1,4 @@
-module oldcode.org/home/wise/repo/go/gow
+module oldcode.org/repo/go/gow
 
 go 1.12
 

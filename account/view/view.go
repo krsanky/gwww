@@ -4,11 +4,11 @@ import (
 	"net/http"
 
 	"github.com/justinas/nosurf"
-	"oldcode.org/home/wise/repo/go/gow/account"
-	"oldcode.org/home/wise/repo/go/gow/email"
-	"oldcode.org/home/wise/repo/go/gow/lg"
-	"oldcode.org/home/wise/repo/go/gow/views"
-	"oldcode.org/home/wise/repo/go/gow/web"
+	"oldcode.org/repo/go/gow/account"
+	"oldcode.org/repo/go/gow/email"
+	"oldcode.org/repo/go/gow/lg"
+	"oldcode.org/repo/go/gow/views"
+	"oldcode.org/repo/go/gow/web"
 )
 
 func AddRoutes(mux *http.ServeMux) {

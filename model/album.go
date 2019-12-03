@@ -3,8 +3,8 @@ package model
 import (
 	"fmt"
 
-	"oldcode.org/home/wise/repo/go/gow/db"
-	"oldcode.org/home/wise/repo/go/gow/lg"
+	"oldcode.org/repo/go/gow/db"
+	"oldcode.org/repo/go/gow/lg"
 )
 
 type Album struct {
