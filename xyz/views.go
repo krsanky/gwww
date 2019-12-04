@@ -10,21 +10,25 @@ import (
 	"oldcode.org/repo/go/gow/account"
 	"oldcode.org/repo/go/gow/breadcrumbs"
 	"oldcode.org/repo/go/gow/lg"
+	"oldcode.org/repo/go/gow/secure"
 	"oldcode.org/repo/go/gow/web"
 )
 
 func AddRoutes(mux *http.ServeMux) {
-	mux.HandleFunc("/xyz", Index)
-	mux.HandleFunc("/xyz/users", Users)
-	mux.HandleFunc("/xyz/user", User)
-	mux.HandleFunc("/xyz/become", Become)
-	mux.HandleFunc("/xyz/add-user", AddUser)
-	mux.HandleFunc("/xyz/send-email", SendEmail)
-	mux.HandleFunc("/xyz/colors", Colors)
-	mux.HandleFunc("/xyz/post-test", PostTest)
+	//mux.Handle("/xyz", http.HandlerFunc(Index))
+	mux.Handle("/xyz", secure.SuperOnlyFunc(Index))
+
+	mux.Handle("/xyz/users", secure.SuperOnlyFunc(Users))
+	mux.Handle("/xyz/user", secure.SuperOnlyFunc(User))
+	mux.Handle("/xyz/become", secure.SuperOnlyFunc(Become))
+	mux.Handle("/xyz/add-user", secure.SuperOnlyFunc(AddUser))
+	mux.Handle("/xyz/send-email", secure.SuperOnlyFunc(SendEmail))
+	mux.Handle("/xyz/colors", secure.SuperOnlyFunc(Colors))
+	mux.Handle("/xyz/post-test", secure.SuperOnlyFunc(PostTest))
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
+	lg.Log.Printf("xyz.Index...")
 	data, err := web.TmplData(r)
 	if err != nil {
 		lg.Log.Printf("err:%s", err)

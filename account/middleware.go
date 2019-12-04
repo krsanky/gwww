@@ -35,21 +35,3 @@ func AddUser(h http.Handler) http.Handler {
 	})
 }
 
-func EnforceAdminUser(h http.Handler) http.Handler {
-
-	h2 := func(w http.ResponseWriter, r *http.Request) {
-
-		u, ok := UserFromContext(r.Context()) 
-		if ! ok {
-			lg.Log.Printf("ERR: problem with UserFromContex()")
-		} else {
-			lg.Log.Printf("User EnforceSuperUser ?:%s", u)
-		}
-
-		lg.Log.Printf("EnforceAdminUser()")
-		h.ServeHTTP(w, r)
-		//http.Redirect(w, r,
-	}
-
-	return http.HandlerFunc(h2)
-}

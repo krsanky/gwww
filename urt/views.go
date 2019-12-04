@@ -41,8 +41,7 @@ func RadioFrame(w http.ResponseWriter, r *http.Request) {
 func Radio(w http.ResponseWriter, r *http.Request) {
 	data, _ := web.TmplData(r)
 	bcs := breadcrumbs.New().Append("Home", "/")
-	bcs.Append("URT", "/urt")
-	bcs.AppendActive("Radio")
+	bcs.AppendActive("URT-Radio")
 	data["breadcrumbs"] = bcs
 
 	if "POST" == r.Method {

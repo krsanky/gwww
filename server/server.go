@@ -25,8 +25,6 @@ import (
 	"oldcode.org/repo/go/gow/zz"
 )
 
-//try:
-//https://github.com/alexedwards/stack
 func Serve(sfile string) {
 	settings.Init(sfile)
 	listener, err := net.Listen("tcp", "127.0.0.1:8088")
@@ -54,7 +52,7 @@ func Serve(sfile string) {
 	// ORDER MATTERS and it's kind of reversed
 	h := nosurf.NewPure(mux)
 	//h = M1(h, "->h1")
-	h = account.EnforceAdminUser(h)
+	//h = secure.HHHEnforceSuperUser(h)
 	h = account.AddUser(h)
 	session.Init()
 	h = session.Session.LoadAndSave(h)
