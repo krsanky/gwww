@@ -14,6 +14,7 @@ import (
 	"oldcode.org/repo/go/gow/lg"
 	"oldcode.org/repo/go/gow/music"
 	"oldcode.org/repo/go/gow/phrase"
+	"oldcode.org/repo/go/gow/radio"
 	"oldcode.org/repo/go/gow/routes"
 	"oldcode.org/repo/go/gow/scales"
 	"oldcode.org/repo/go/gow/session"
@@ -48,6 +49,7 @@ func Serve(sfile string) {
 	univ.AddRoutes(mux)
 	scales.AddRoutes(mux)
 	phrase.AddRoutes(mux)
+	radio.AddRoutes(mux)
 
 	// ORDER MATTERS and it's kind of reversed
 	h := nosurf.NewPure(mux)
