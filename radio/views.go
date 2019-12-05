@@ -1,6 +1,7 @@
 package radio
 
 import (
+	"encoding/json"
 	"io/ioutil"
 	"net/http"
 	"time"
@@ -25,8 +26,13 @@ import (
 		"stream_start_iso8601":"2019-12-05T17:29:47+0000","title":"King Diamond - Tea","dummy":null}}}
 
 */
-type icestats struct {
-	Location string
+
+type Icestats struct {
+	Location string `json:"location"`
+}
+
+type JsonTop struct {
+	Stats Icestats `json:"icestats"`
 }
 
 func AddRoutes(mux *http.ServeMux) {
@@ -43,6 +49,7 @@ func Status(w http.ResponseWriter, r *http.Request) {
 	var res *http.Response
 	var err error
 	var body []byte
+	stats := JsonTop{}
 
 	client := http.Client{Timeout: time.Second * 2}
 	res, err = client.Get(url)
@@ -56,6 +63,9 @@ func Status(w http.ResponseWriter, r *http.Request) {
 		goto Render
 	}
 	data["res_body"] = string(body)
+	json.Unmarshal(body, &stats)
+	//lg.Log.Printf("stats.Location:%s", stats.Location)
+	data["stats"] = stats
 
 Render:
 	tmpls := []string{
