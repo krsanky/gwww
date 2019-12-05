@@ -8,6 +8,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <script src="/static/jquery-3.3.1.min.js"></script>
+<script src="/static/jspanel.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/jspanel.css">
+
 {{block "extra_head" .}}{{end}}
 </head>
 
@@ -21,9 +24,9 @@
 {{else}}
 <a href="/account/login2">login</a>
 {{end}}
+<a class="jspanel-link" data-thing1="123..." href="#">jspanel</a>
 
 {{/* 
-<a href="/">home</a>
 <a href="/old-index">mobile-site</a> 
 */}}
 </span>
@@ -43,7 +46,16 @@
 
 {{end}}
 
+<script>
 
+$(function(){
+console.log("jpanel?");
+$('.jspanel-link').click(function(){
+	alert('click:' + $(this).data('thing1'));
+	jsPanel.create();
+});
+});
+</script>
 {{block "extra_body" .}}{{end}}
 </body>
 </html>
