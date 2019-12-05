@@ -94,4 +94,16 @@ footer{text-align: center;border-top:solid #e2e5e9 0.1em;margin:2em 0; font-size
 	font-size: .8em;
 }
 
+/* music */
+
+table.album {
+	/*margin: 0;*/
+	/*padding: 0 5px; the whole table*/
+	border-spacing: 0;
+}
+
+table.album td {
+	/*background-color: gray;*/
+	padding: 0 5px; 
+}
 

@@ -2,11 +2,14 @@
 
 {{define "main"}}
 
-<ul>
+<table class=album>
 {{range .items}}
-<li>{{.Track}} {{.Title}} {{.Artist}}
+<tr>
+<td>{{.Track}}</td>
+<td>{{.Title}}</td>
+</tr>
 {{end}}
-</ul>
+</table>
 
 {{/*
 type Item struct {
