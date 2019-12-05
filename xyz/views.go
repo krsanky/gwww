@@ -16,15 +16,15 @@ import (
 
 func AddRoutes(mux *http.ServeMux) {
 	//mux.Handle("/xyz", http.HandlerFunc(Index))
-	mux.Handle("/xyz", secure.SuperOnlyFunc(Index))
+	mux.Handle("/xyz", secure.SuperOnly(Index))
 
-	mux.Handle("/xyz/users", secure.SuperOnlyFunc(Users))
-	mux.Handle("/xyz/user", secure.SuperOnlyFunc(User))
-	mux.Handle("/xyz/become", secure.SuperOnlyFunc(Become))
-	mux.Handle("/xyz/add-user", secure.SuperOnlyFunc(AddUser))
-	mux.Handle("/xyz/send-email", secure.SuperOnlyFunc(SendEmail))
-	mux.Handle("/xyz/colors", secure.SuperOnlyFunc(Colors))
-	mux.Handle("/xyz/post-test", secure.SuperOnlyFunc(PostTest))
+	mux.Handle("/xyz/users", secure.SuperOnly(Users))
+	mux.Handle("/xyz/user", secure.SuperOnly(User))
+	mux.Handle("/xyz/become", secure.SuperOnly(Become))
+	mux.Handle("/xyz/add-user", secure.SuperOnly(AddUser))
+	mux.Handle("/xyz/send-email", secure.SuperOnly(SendEmail))
+	mux.Handle("/xyz/colors", secure.SuperOnly(Colors))
+	mux.Handle("/xyz/post-test", secure.SuperOnly(PostTest))
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
