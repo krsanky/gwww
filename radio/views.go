@@ -19,20 +19,29 @@ import (
 	"server_start_iso8601":"2019-12-01T23:14:27+0000",
 	"source":
 		{"audio_info":"bitrate=128;channels=2;samplerate=44100","bitrate":128,"channels":2,
-		"genre":"RockNRoll","listener_peak":2,"listeners":0,"listenurl":"http://radio.oldcode.org:8000/stream",
+		"genre":"RockNRoll","listener_peak":2,"listeners":0,
+		"listenurl":"http://radio.oldcode.org:8000/stream",
 		"samplerate":44100,"server_description":"This is a stream description",
 		"server_name":"My Stream","server_type":"audio/mpeg",
-		"server_url":"http://www.oddsock.org","stream_start":"Thu, 05 Dec 2019 17:29:47 +0000",
-		"stream_start_iso8601":"2019-12-05T17:29:47+0000","title":"King Diamond - Tea","dummy":null}}}
-
+		"server_url":"http://www.oddsock.org",
+		"stream_start":"Thu, 05 Dec 2019 17:29:47 +0000",
+		"stream_start_iso8601":"2019-12-05T17:29:47+0000",
+		"title":"King Diamond - Tea",
+		"dummy":null}}}
 */
 
-type Icestats struct {
+type IceSource struct {
+	ListenUrl string `json:"listenurl"`
+	Title string `json:"title"`
+}
+
+type IceStats struct {
 	Location string `json:"location"`
+	Source IceSource `json:"source"`
 }
 
 type JsonTop struct {
-	Stats Icestats `json:"icestats"`
+	Stats IceStats `json:"icestats"`
 }
 
 func AddRoutes(mux *http.ServeMux) {

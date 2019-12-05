@@ -4,8 +4,13 @@
 {{template "breadcrumbs" .}}
 <h3>radio - status</h3>
 
-<pre>{{.res_body}}</pre>
-<pre>{{.stats.Stats.Location}}</pre>
+<ul>
+<li>{{.stats.Stats.Location}}</li>
+<li>{{.stats.Stats.Source.ListenUrl}}</li>
+<li>{{.stats.Stats.Source.Title}}</li>
+</ul>
+
+<p>{{.res_body}}</p>
 
 {{end}}
 
