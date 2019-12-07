@@ -77,7 +77,7 @@ func Login2(w http.ResponseWriter, r *http.Request) {
 
 		ok := account.AuthUser(w, r, username, password)
 		if ok {
-			http.Redirect(w, r, "/ttown/msg?m=loggedin", 303)
+			http.Redirect(w, r, "/msg?m=loggedin", 303)
 			return
 		} else {
 			data["error"] = "No match"
@@ -95,7 +95,7 @@ func Login2(w http.ResponseWriter, r *http.Request) {
 
 func Logout(w http.ResponseWriter, r *http.Request) {
 	account.Logout(w, r)
-	http.Redirect(w, r, "/ttown/msg?m=loggedout", 303)
+	http.Redirect(w, r, "/msg?m=loggedout", 303)
 }
 
 func HandleRegister(w http.ResponseWriter, r *http.Request) {

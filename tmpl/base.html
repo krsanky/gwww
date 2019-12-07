@@ -21,10 +21,10 @@
 <span class="top_links">
 {{if .page_user}}
 <a class="nav-link" href="/account/logout">logout</a>
+<a class="jspanel-link" data-thing1="123..." href="#">jspanel</a>
 {{else}}
 <a href="/account/login2">login</a>
 {{end}}
-<a class="jspanel-link" data-thing1="123..." href="#">jspanel</a>
 
 {{/* 
 <a href="/old-index">mobile-site</a> 
@@ -49,12 +49,24 @@
 <script>
 
 $(function(){
-console.log("jpanel?");
+var jsp_opts = {
+	content: '<h3>content...</h3>',
+	theme: 'dark filled',
+};
 $('.jspanel-link').click(function(){
-	alert('click:' + $(this).data('thing1'));
-	jsPanel.create();
+	jsPanel.create(jsp_opts);
 });
 });
+/*
+theme: {
+        bgPanel: 'rgb(65, 126, 128)',
+        bgContent: '#67989A',
+        colorHeader: '#f0f0f0',
+        colorContent: '#333',
+		border: ...
+    },
+*/
+
 </script>
 {{block "extra_body" .}}{{end}}
 </body>

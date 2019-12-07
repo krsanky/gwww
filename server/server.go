@@ -19,7 +19,6 @@ import (
 	"oldcode.org/repo/go/gow/scales"
 	"oldcode.org/repo/go/gow/session"
 	"oldcode.org/repo/go/gow/settings"
-	"oldcode.org/repo/go/gow/ttown"
 	"oldcode.org/repo/go/gow/univ"
 	"oldcode.org/repo/go/gow/urt"
 	"oldcode.org/repo/go/gow/xyz"
@@ -44,7 +43,6 @@ func Serve(sfile string) {
 	urt.AddRoutes(mux)
 	geo.AddRoutes(mux)
 	zz.AddRoutes(mux)
-	ttown.AddRoutes(mux)
 	canv_thing.AddRoutes(mux)
 	univ.AddRoutes(mux)
 	scales.AddRoutes(mux)
