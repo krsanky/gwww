@@ -12,6 +12,7 @@ type Phrase struct {
 	Id     int
 	Phrase string
 	Path   string
+	Source string
 	Tags   string
 	Order  int `schema:"order_" db:"order_"`
 }
@@ -37,10 +38,10 @@ func (p *Phrase) Insert() error {
 	lg.Log.Printf("INSERT phrase ...")
 
 	sql := `INSERT INTO phrase
-(phrase, tags, path, order_)
-VALUES ($1, $2, $3, $4)`
+(phrase, tags, path, order_, source)
+VALUES ($1, $2, $3, $4, $5)`
 	_, err := db.DBX.Exec(sql,
-		p.Phrase, p.Tags, p.Path, p.Order)
+		p.Phrase, p.Tags, p.Path, p.Order, p.Source)
 
 	return err
 }
@@ -54,7 +55,6 @@ func GetPhrase(id int) (Phrase, error) {
 	return p, nil
 }
 
-// path string, tags []string
 func GetPhrases() ([]Phrase, error) {
 	var ps []Phrase
 	//db := db.DBX.Unsafe()

@@ -5,6 +5,7 @@ import (
 	"os/exec"
 	"strings"
 
+	svg "github.com/ajstarks/svgo"
 	"oldcode.org/repo/go/gow/breadcrumbs"
 	"oldcode.org/repo/go/gow/lg"
 	"oldcode.org/repo/go/gow/web"
@@ -80,4 +81,26 @@ func Phoon(w http.ResponseWriter, r *http.Request) {
 		"base.html",
 		"phoon.html"}
 	web.Render(w, data, tmpls...)
+}
+
+func Projects(w http.ResponseWriter, r *http.Request) {
+	data, _ := web.TmplData(r)
+	bcs := breadcrumbs.New()
+	bcs.Append("Home", "/")
+	bcs.Append("Projects", "")
+	bcs.SetLastActive()
+	data["breadcrumbs"] = bcs
+	tmpls := []string{
+		"base.html",
+		"breadcrumbs.tmpl",
+		"projects.html"}
+	web.Render(w, data, tmpls...)
+}
+
+func Circle(w http.ResponseWriter, req *http.Request) {
+	w.Header().Set("Content-Type", "image/svg+xml")
+	s := svg.New(w)
+	s.Start(500, 500)
+	s.Circle(250, 250, 125, "fill:none;stroke:black")
+	s.End()
 }

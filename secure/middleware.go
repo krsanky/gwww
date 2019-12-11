@@ -46,10 +46,3 @@ func SuperOnly(handler func(http.ResponseWriter, *http.Request)) http.Handler {
 	return SuperOnlyMiddleware(http.HandlerFunc(handler))
 }
 
-func SuperOnlyByPrefix(h http.HandlerFunc, p string) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		lg.Log.Printf("p:%s", p)
-		h.ServeHTTP(w, r)
-	}
-}
-

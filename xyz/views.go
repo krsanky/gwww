@@ -25,14 +25,12 @@ func AddRoutes(mux *http.ServeMux) {
 	mux.Handle("/xyz/send-email", secure.SuperOnly(SendEmail))
 	mux.Handle("/xyz/colors", secure.SuperOnly(Colors))
 	mux.Handle("/xyz/post-test", secure.SuperOnly(PostTest))
+	mux.Handle("/xyz/tdquote", secure.SuperOnly(TDQuote))
+	mux.Handle("/xyz/semantic-ui", secure.SuperOnly(SemanticUI))
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
-	lg.Log.Printf("xyz.Index...")
-	data, err := web.TmplData(r)
-	if err != nil {
-		lg.Log.Printf("err:%s", err)
-	}
+	data, _ := web.TmplData(r)
 	bcs := breadcrumbs.New()
 	bcs.Append("Home", "/")
 	bcs.Append("XYZ", "/xyz")
@@ -198,5 +196,38 @@ func PostTest(w http.ResponseWriter, r *http.Request) {
 		"nav.tmpl",
 		"breadcrumbs.tmpl",
 		"xyz/post_test.html"}
+	web.Render(w, data, tmpls...)
+}
+
+func TDQuote(w http.ResponseWriter, r *http.Request) {
+	lg.Log.Printf("xyz.TDQuote...")
+	data, _ := web.TmplData(r)
+	bcs := breadcrumbs.New()
+	bcs.Append("Home", "/")
+	bcs.Append("XYZ", "/xyz")
+	bcs.Append("TD Quote", "/xyz/tdquote")
+	bcs.SetLastActive()
+	data["breadcrumbs"] = bcs
+	tmpls := []string{
+		"base.html",
+		"nav.tmpl",
+		"breadcrumbs.tmpl",
+		"xyz/tdquote.html"}
+	web.Render(w, data, tmpls...)
+}
+
+func SemanticUI(w http.ResponseWriter, r *http.Request) {
+	data, _ := web.TmplData(r)
+	bcs := breadcrumbs.New()
+	bcs.Append("Home", "/")
+	bcs.Append("XYZ", "/xyz")
+	bcs.Append("Semantic UI Test", "")
+	bcs.SetLastActive()
+	data["breadcrumbs"] = bcs
+	tmpls := []string{
+		"base-sem.html",
+		"nav.tmpl",
+		"breadcrumbs.tmpl",
+		"xyz/semantic-ui.html"}
 	web.Render(w, data, tmpls...)
 }

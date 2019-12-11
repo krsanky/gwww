@@ -1,5 +1,13 @@
 console.log("loading initial javascript from script.js");
 
+const C123 = "C-123";
+let var1 = "123123";
+
+function testf1() {
+	console.log("testf1()...");
+}
+testf1();
+
 $(function() {
 	console.log("jquerys .ready() is ready");
 });
@@ -21,3 +29,15 @@ $(function() {
 */
 console.log("last line in script.js");
 
+var tick = function() {
+	return {
+		method1: function(a, b) {
+			console.log(a, b);
+		},
+		method2: function(a, b) {
+			console.log("method2: a:" + a + " b:" + b);
+		},
+	};
+} ();
+
+tick.method2("Aasdasd", "Bqwe123");
