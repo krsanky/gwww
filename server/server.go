@@ -27,10 +27,6 @@ import (
 
 func Serve(sfile string) {
 	settings.Init(sfile)
-	listener, err := net.Listen("tcp", "127.0.0.1:8088")
-	if err != nil {
-		panic(err)
-	}
 
 	db.InitDB() // This is kinda important
 
@@ -56,6 +52,12 @@ func Serve(sfile string) {
 	h = account.AddUser(h)
 	session.Init()
 	h = session.Session.LoadAndSave(h)
+
+
+	listener, err := net.Listen("tcp", "127.0.0.1:8088")
+	if err != nil {
+		panic(err)
+	}
 
 	fcgi.Serve(listener, h)
 }

@@ -19,6 +19,8 @@ github.com/justinas/nosurf v0.0.0-20190416172904-05988550ea18 h1:ci3v0mUqcCewO25
 github.com/justinas/nosurf v0.0.0-20190416172904-05988550ea18/go.mod h1:Aucr5I5chr4OCuuVB4LTuHVrKHBuyRSo7vM2hqrcb7E=
 github.com/krsanky/go-urt-server-query v0.0.0-20190916212708-38708b7130b1 h1:rjKRRtB9OIuJkrM4mSv7SpgetiQUzTdJLWLp+mGyGPI=
 github.com/krsanky/go-urt-server-query v0.0.0-20190916212708-38708b7130b1/go.mod h1:qeh9OfCfs6frWLEc3fT+adHdkWhphISjihOOhAe4bHM=
+github.com/krsanky/lorem v0.0.0-20191211111331-41cb40cb2712 h1:6EA3O11j9Pi4w0rsYfFOErshQ46ueY+7stdZVosClTs=
+github.com/krsanky/lorem v0.0.0-20191211111331-41cb40cb2712/go.mod h1:5ga8ADItgEWxeF/JlImpmeDhQ9h0hy511T9DwDbbMc4=
 github.com/lib/pq v1.0.0/go.mod h1:5WUZQaWbwv1U+lTReE5YruASi9Al49XbQIvNi/34Woo=
 github.com/lib/pq v1.1.0/go.mod h1:5WUZQaWbwv1U+lTReE5YruASi9Al49XbQIvNi/34Woo=
 github.com/lib/pq v1.2.0 h1:LXpIM/LZ5xGFhOpXAQUIMM1HdyqzVYM13zNdjCEEcA0=

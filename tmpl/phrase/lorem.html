@@ -1,6 +1,33 @@
-{{define "main"}}
-{{template "breadcrumbs" .}}
-<h2>lorem</h2>
+{{define "extra_head"}}
+<style>
+.flex-grid {
+	display: flex;
+}
+.col {
+	margin: 2px;
+	padding: 2px;
+	border: 1px solid purple;
+	flex: 1;
+}
+</style>
+{{end}}
 
+{{define "main"}}
+
+{{template "breadcrumbs" .}}
+
+{{lorem true}}
+
+<div class=flex-grid>
+<div class=col>
+{{lorems}}
+</div>
+<div class=col>
+{{lorems}}
+</div>
+<div class=col>
+{{lorems}}
+</div>
+</div>
 {{end}}
 

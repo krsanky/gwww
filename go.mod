@@ -10,6 +10,7 @@ require (
 	github.com/jmoiron/sqlx v1.2.0
 	github.com/justinas/nosurf v0.0.0-20190416172904-05988550ea18
 	github.com/krsanky/go-urt-server-query v0.0.0-20190916212708-38708b7130b1
+	github.com/krsanky/lorem v0.0.0-20191211111331-41cb40cb2712
 	github.com/lib/pq v1.2.0
 	github.com/mattn/go-sqlite3 v1.11.0 // indirect
 	github.com/pelletier/go-toml v1.4.0

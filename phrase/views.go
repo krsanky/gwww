@@ -23,7 +23,8 @@ func AddRoutes(mux *http.ServeMux) {
 
 func Index(w http.ResponseWriter, r *http.Request) {
 	data, _ := web.TmplData(r)
-	bcs := breadcrumbs.New().Append("Home", "/").AppendActive("Phrase")
+	bcs := breadcrumbs.New().Append("Home", "/").Append("Projects", "/projects")
+	bcs.AppendActive("Phrase")
 	data["breadcrumbs"] = bcs
 	tmpls := []string{
 		"base.html",
@@ -34,7 +35,9 @@ func Index(w http.ResponseWriter, r *http.Request) {
 
 func Edit(w http.ResponseWriter, r *http.Request) {
 	data, _ := web.TmplData(r)
-	bcs := breadcrumbs.New().Append("Home", "/").Append("Phrase", "/phrase")
+	bcs := breadcrumbs.New().Append("Home", "/")
+	bcs.Append("Projects", "/projects")
+	bcs.Append("Phrase", "/phrase")
 	bcs.AppendActive("Edit")
 	data["breadcrumbs"] = bcs
 	data["token"] = nosurf.Token(r)
@@ -59,7 +62,9 @@ func Edit(w http.ResponseWriter, r *http.Request) {
 
 func New(w http.ResponseWriter, r *http.Request) {
 	data, _ := web.TmplData(r)
-	bcs := breadcrumbs.New().Append("Home", "/").Append("Phrase", "/phrase")
+	bcs := breadcrumbs.New().Append("Home", "/")
+	bcs.Append("Projects", "/projects")
+	bcs.Append("Phrase", "/phrase")
 
 	if strings.HasSuffix(r.URL.Path, "new") {
 		bcs.AppendActive("New")
@@ -105,7 +110,9 @@ Render:
 
 func Phrases(w http.ResponseWriter, r *http.Request) {
 	data, _ := web.TmplData(r)
-	bcs := breadcrumbs.New().Append("Home", "/").Append("Phrase", "/phrase")
+	bcs := breadcrumbs.New().Append("Home", "/")
+	bcs.Append("Projects", "/projects")
+	bcs.Append("Phrase", "/phrase")
 	bcs.AppendActive("List")
 	data["breadcrumbs"] = bcs
 	data["token"] = nosurf.Token(r)
@@ -132,7 +139,9 @@ func Phrases(w http.ResponseWriter, r *http.Request) {
 func Lorem(w http.ResponseWriter, r *http.Request) {
 	data, _ := web.TmplData(r)
 
-	bcs := breadcrumbs.New().Append("Home", "/").Append("Phrase", "/phrase")
+	bcs := breadcrumbs.New().Append("Home", "/")
+	bcs.Append("Projects", "/projects")
+	bcs.Append("Phrase", "/phrase")
 	bcs.AppendActive("Lorem")
 	data["breadcrumbs"] = bcs
 

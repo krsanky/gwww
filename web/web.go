@@ -11,6 +11,7 @@ import (
 	"oldcode.org/repo/go/gow/account"
 	"oldcode.org/repo/go/gow/breadcrumbs"
 	"oldcode.org/repo/go/gow/lg"
+	phr_tmpl "oldcode.org/repo/go/gow/phrase/tmpl"
 )
 
 var GlobalFuncMap template.FuncMap
@@ -34,6 +35,8 @@ func init() {
 		"input_checked": InputChecked,
 		"test1":         Test1,
 	}
+	phr_tmpl.AddFuncs(GlobalFuncMap)
+
 }
 
 func TmplData(r *http.Request) (map[string]interface{}, error) {
@@ -75,8 +78,11 @@ func Render(w http.ResponseWriter, data interface{}, tmpls ...string) {
 		name := filepath.Base(tmpls[0])
 		t := template.New(name)
 
+		// TODO: wherever GlobalFuncMap is, put this stanza there
+		//     initialized omce.
 		t.Funcs(GlobalFuncMap)
 		breadcrumbs.AddFuncs(t)
+		//phrase.AddTemplateFuncs(GlobalFuncMap)
 
 		_, err = t.ParseFiles(tmpls...)
 		if err != nil {
@@ -110,8 +116,4 @@ func LastInPath(u *url.URL) string {
 	}
 	lg.Log.Printf("return:")
 	return ""
-}
-
-func CookieTest() {
-
 }

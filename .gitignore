@@ -2,6 +2,8 @@
 *.db
 tmpl2/
 log.txt
+go.sum
+
 URT_RADIO_RAW/
 settings.toml
 music.dump.sql*
