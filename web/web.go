@@ -36,7 +36,7 @@ func init() {
 		"test1":         Test1,
 	}
 	phr_tmpl.AddFuncs(GlobalFuncMap)
-
+	breadcrumbs.AddFuncs(GlobalFuncMap)
 }
 
 func TmplData(r *http.Request) (map[string]interface{}, error) {
@@ -77,12 +77,7 @@ func Render(w http.ResponseWriter, data interface{}, tmpls ...string) {
 		// which is a feature I don't use in this setup
 		name := filepath.Base(tmpls[0])
 		t := template.New(name)
-
-		// TODO: wherever GlobalFuncMap is, put this stanza there
-		//     initialized omce.
 		t.Funcs(GlobalFuncMap)
-		breadcrumbs.AddFuncs(t)
-		//phrase.AddTemplateFuncs(GlobalFuncMap)
 
 		_, err = t.ParseFiles(tmpls...)
 		if err != nil {

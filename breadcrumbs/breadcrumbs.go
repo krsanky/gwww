@@ -21,16 +21,8 @@ func New() *BCList {
 	return &BCList{}
 }
 
-var funcMap template.FuncMap
-
-func init() {
-	funcMap = template.FuncMap{
-		"active": bc_active,
-	}
-}
-
-func AddFuncs(t *template.Template) {
-	t.Funcs(funcMap)
+func AddFuncs(fm template.FuncMap) {
+	fm["active"] = bc_active
 }
 
 func bc_active(a bool) template.HTML {
