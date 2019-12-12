@@ -16,17 +16,25 @@
 
 {{template "breadcrumbs" .}}
 
-{{lorem true}}
+{{lorem_ws 3 true}}
+<br/>
+{{lorem_ws 2 false}}
+
+<pre>
+{{lorem_w}}
+
+{{lorem_p}}
+</pre>
 
 <div class=flex-grid>
 <div class=col>
-{{lorems}}
+{{lorem_s}}
 </div>
 <div class=col>
-{{lorems}}
+{{lorem_ps 3 true}}
 </div>
 <div class=col>
-{{lorems}}
+{{lorem_ps 2 false}}
 </div>
 </div>
 {{end}}
