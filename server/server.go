@@ -19,19 +19,17 @@ import (
 	"oldcode.org/repo/go/gow/scales"
 	"oldcode.org/repo/go/gow/session"
 	"oldcode.org/repo/go/gow/settings"
+	"oldcode.org/repo/go/gow/stocks"
 	"oldcode.org/repo/go/gow/univ"
 	"oldcode.org/repo/go/gow/urt"
 	"oldcode.org/repo/go/gow/xyz"
 	"oldcode.org/repo/go/gow/zz"
 )
 
-func Serve(sfile string) {
-	settings.Init(sfile)
-
-	db.InitDB() // This is kinda important
-
+func setupRoutes() *http.ServeMux {
 	//mux is a handler, because ServeMux implements ServeHTTP()
 	mux := http.NewServeMux()
+
 	routes.AddRoutes(mux)
 	account_view.AddRoutes(mux)
 	xyz.AddRoutes(mux)
@@ -44,6 +42,17 @@ func Serve(sfile string) {
 	scales.AddRoutes(mux)
 	phrase.AddRoutes(mux)
 	radio.AddRoutes(mux)
+	stocks.AddRoutes(mux)
+
+	return mux
+}
+
+func Serve(sfile string) {
+	settings.Init(sfile)
+
+	db.InitDB()
+
+	mux := setupRoutes()
 
 	// ORDER MATTERS and it's kind of reversed
 	h := nosurf.NewPure(mux)
@@ -52,7 +61,6 @@ func Serve(sfile string) {
 	h = account.AddUser(h)
 	session.Init()
 	h = session.Session.LoadAndSave(h)
-
 
 	listener, err := net.Listen("tcp", "127.0.0.1:8088")
 	if err != nil {
