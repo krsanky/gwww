@@ -14,12 +14,12 @@ func main() {
 	}
 	fn := os.Args[1]
 /*
-	fmt.Printf("arg0:%s\n", os.Args[0]) // cms name
+	fmt.Printf("arg0:%s\n", os.Args[0]) // program name
 	fmt.Printf("download this: ftp://ftp.nasdaqtrader.com/symboldirectory/nasdaqlisted.txt\n")
 */
 
-	err := stocks.LoadFromFile(fn)
-	if err != nil {
-		panic(err)
-	}
+	//err := stocks.LoadFromFile(fn)
+	stocks.Init(fn)
+	stocks.GetColumnNames() 
+	stocks.Cleanup()
 }

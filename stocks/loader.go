@@ -2,6 +2,7 @@ package stocks
 
 import (
 	"bufio"
+	"encoding/csv"
 	"fmt"
 	"os"
 )
@@ -46,6 +47,62 @@ as the first field, followed by all delimiters to round out the
 row.  An example: File Creation Time: 1217200717:03|||||
 */
 
+var filename string
+var columns []string
+var file *os.File
+
+func Init(filename string) {
+	var err error
+	file, err = os.Open(filename)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("file:%v\n", file)
+}
+
+func Cleanup() {
+	err := file.Close()
+	if err != nil {
+		panic(err)
+	}
+}
+
+func FixColumnNames(cols []string) []string {
+	var fixed []string
+	for _, s := range cols {
+		fixed = append(fixed, s+"-123")
+	}
+	return fixed
+}
+
+func GetColumnNames() {
+	/* Read 1 line from file:
+	scanner := bufio.NewScanner(file)
+	scanner.Scan()
+	if scanner.Err() != nil {
+		panic(scanner.Err())
+	}
+	line := scanner.Text()
+	fmt.Printf("%s\n", line)
+	// Symbol|Security Name|Market Category|Test Issue|Financial Status|Round Lot Size|ETF|NextShares
+	*/
+
+	r := csv.NewReader(file)
+	r.Comma = '|'
+
+	cols, err := r.Read()
+	if err != nil {
+		panic(err)
+	}
+
+	fixed := FixColumnNames(cols)
+	fmt.Printf("col-1:%s col1-1:%s\n", fixed[0], cols[0])
+	for i := 0; i < len(cols); i++ {
+		fmt.Printf("cols:%s fixed:%s\n", cols[i], fixed[i])
+	}
+}
+
+// depr.
 func LoadFromFile(filename string) error {
 	f, err := os.Open(filename)
 	defer f.Close()
@@ -56,8 +113,15 @@ func LoadFromFile(filename string) error {
 	//r := bufio.NewReader(f)
 
 	scanner := bufio.NewScanner(f)
+	run1 := true
 	for scanner.Scan() {
-		fmt.Printf("<<<<<<%s>>>>>>\n", scanner.Text())
+		if run1 {
+			fmt.Printf("<<<<<<%s>>>>>>\n", scanner.Text())
+			run1 = false
+			continue
+		} else {
+			break
+		}
 	}
 	if err = scanner.Err(); err != nil {
 		panic(err)
