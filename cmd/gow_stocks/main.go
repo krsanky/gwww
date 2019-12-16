@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"os"
 
+	"oldcode.org/repo/go/gow/db"
+	"oldcode.org/repo/go/gow/settings"
 	"oldcode.org/repo/go/gow/stocks"
 )
 
@@ -13,13 +15,15 @@ func main() {
 		os.Exit(1)
 	}
 	fn := os.Args[1]
-/*
-	fmt.Printf("arg0:%s\n", os.Args[0]) // program name
-	fmt.Printf("download this: ftp://ftp.nasdaqtrader.com/symboldirectory/nasdaqlisted.txt\n")
-*/
 
-	//err := stocks.LoadFromFile(fn)
+	settings.Init("settings.toml")
+
+	db.Init()
 	stocks.Init(fn)
-	stocks.GetColumnNames() 
-	stocks.Cleanup()
+	defer stocks.Cleanup()
+	//stocks.GetColumnNames()
+	err := stocks.ProcessNasdaqFile()
+	if err != nil {
+		panic(err)
+	}
 }

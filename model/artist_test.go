@@ -25,7 +25,7 @@ func HHHTestGetArtists(t *testing.T) {
 }
 
 func TestGetRawArtists(t *testing.T) {
-	db.InitDB()
+	db.Init()
 	as, err := GetRawArtists()
 	if err != nil {
 		t.Errorf("err:")

@@ -1,6 +1,5 @@
-CREATE TABLE stock_symbols (                                                                     
-    id SERIAL PRIMARY KEY,
-	symbol TEXT NOT NULL,
+CREATE TABLE stock (                                                                     
+	symbol TEXT NOT NULL PRIMARY KEY,
 	name TEXT NOT NULL DEFAULT ''
 );
 

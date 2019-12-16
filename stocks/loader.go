@@ -4,7 +4,9 @@ import (
 	"bufio"
 	"encoding/csv"
 	"fmt"
+	"io"
 	"os"
+	"strings"
 )
 
 /*
@@ -45,6 +47,17 @@ can be used to determine the timeliness of the associated data.
 The row contains the words File Creation Time followed by mmddyyyyhhmm
 as the first field, followed by all delimiters to round out the
 row.  An example: File Creation Time: 1217200717:03|||||
+
+ZUMZ|Zumiez Inc. - Common Stock|Q|N|N|100|N|N
+ZVO|Zovio Inc. - Common Stock|Q|N|N|100|N|N
+ZVZZC|NASDAQ TEST STOCK Nextshares Test Security|G|Y|N|100||Y
+ZVZZT|NASDAQ TEST STOCK|G|Y|N|100||N
+ZWZZT|NASDAQ TEST STOCK|S|Y|N|100||N
+ZXYZ.A|Nasdaq Symbology Test Common Stock|Q|Y|N|100||N
+ZXZZT|NASDAQ TEST STOCK|G|Y|N|100||N
+ZYNE|Zynerba Pharmaceuticals, Inc. - Common Stock|G|N|N|100|N|N
+ZYXI|Zynex, Inc. - Common Stock|S|N|N|100|N|N
+File Creation Time: 1213201911:01|||||||
 */
 
 var filename string
@@ -57,7 +70,6 @@ func Init(filename string) {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Printf("file:%v\n", file)
 }
 
 func Cleanup() {
@@ -70,23 +82,14 @@ func Cleanup() {
 func FixColumnNames(cols []string) []string {
 	var fixed []string
 	for _, s := range cols {
-		fixed = append(fixed, s+"-123")
+		tmp := strings.ToLower(s)
+		tmp = strings.ReplaceAll(tmp, " ", "_")
+		fixed = append(fixed, tmp)
 	}
 	return fixed
 }
 
 func GetColumnNames() {
-	/* Read 1 line from file:
-	scanner := bufio.NewScanner(file)
-	scanner.Scan()
-	if scanner.Err() != nil {
-		panic(scanner.Err())
-	}
-	line := scanner.Text()
-	fmt.Printf("%s\n", line)
-	// Symbol|Security Name|Market Category|Test Issue|Financial Status|Round Lot Size|ETF|NextShares
-	*/
-
 	r := csv.NewReader(file)
 	r.Comma = '|'
 
@@ -95,15 +98,44 @@ func GetColumnNames() {
 		panic(err)
 	}
 
-	fixed := FixColumnNames(cols)
-	fmt.Printf("col-1:%s col1-1:%s\n", fixed[0], cols[0])
+	columns := FixColumnNames(cols)
 	for i := 0; i < len(cols); i++ {
-		fmt.Printf("cols:%s fixed:%s\n", cols[i], fixed[i])
+		fmt.Printf("cols:%s columns[i]:%s\n", cols[i], columns[i])
 	}
 }
 
-// depr.
-func LoadFromFile(filename string) error {
+func ProcessNasdaqFile() error {
+	r := csv.NewReader(file)
+	r.Comma = '|'
+
+	// throw away 1st line
+	_, err := r.Read()
+	if err != nil {
+		panic(err)
+	}
+
+	for {
+		r, err := r.Read()
+		if err == io.EOF {
+			break
+		} else if err != nil {
+			return(err)
+		}
+		if isLast(r[0]) {
+			fmt.Printf("LAST LINE--")
+			break
+		}
+		fmt.Printf("r0:%s\n", r[0])
+		s := Stock{r[0], r[1]}
+		err = s.Insert()
+		if err != nil {
+			panic(err)
+		}
+	}
+	return nil	
+}
+
+func LoadFromFile2(filename string) error {
 	f, err := os.Open(filename)
 	defer f.Close()
 	if err != nil {
@@ -128,4 +160,8 @@ func LoadFromFile(filename string) error {
 	}
 
 	return nil
+}
+
+func isLast(line string) bool {
+	return strings.HasPrefix(line, "File Creation Time:")
 }

@@ -60,7 +60,7 @@ func nil_string_test() {
 
 func main() {
 	settings.Init("settings.toml")
-	db.InitDB()
+	db.Init()
 	if len(os.Args) > 1 {
 		switch arg1 := os.Args[1]; arg1 {
 		case "tmpl":

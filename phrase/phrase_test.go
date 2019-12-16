@@ -15,7 +15,7 @@ func TestMain(m *testing.M) {
 }
 
 func TestGetPhrases(t *testing.T) {
-	db.InitDB()
+	db.Init()
 	ps, err := GetPhrases()
 	if err != nil {
 		t.Errorf("err:")

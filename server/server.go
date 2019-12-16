@@ -50,7 +50,7 @@ func setupRoutes() *http.ServeMux {
 func Serve(sfile string) {
 	settings.Init(sfile)
 
-	db.InitDB()
+	db.Init()
 
 	mux := setupRoutes()
 

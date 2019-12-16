@@ -19,7 +19,7 @@ func handle_err(e error) {
 	}
 }
 
-func InitDB() {
+func Init() {
 	lg.Log.Printf("init pg db start ...")
 
 	password := settings.GetString("db.password")
