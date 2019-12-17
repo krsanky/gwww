@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"oldcode.org/repo/go/gow/breadcrumbs"
+	"oldcode.org/repo/go/gow/lg"
 	"oldcode.org/repo/go/gow/web"
 )
 
@@ -16,6 +17,11 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	bcs := breadcrumbs.New().Append("Home", "/").Append("Projects", "/projects")
 	bcs.AppendActive("Stocks")
 	data["breadcrumbs"] = bcs
+	stocks, err := GetAll()
+	if err != nil {
+		lg.Log.Printf("ERR:%v", err)
+	}
+	data["stocks"] = stocks
 	tmpls := []string{
 		"base.html",
 		"breadcrumbs.tmpl",

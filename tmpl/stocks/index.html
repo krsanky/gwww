@@ -1,7 +1,22 @@
+{{define "extra_head"}}
+<style>
+.long {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+</style>
+{{end}}
+
 {{define "main"}}
+
 {{template "breadcrumbs" .}}
 
-<h2>Stocks</h2>
+<table>
+{{range .stocks}}
+<tr class=long><td>{{.Symbol}}</td><td class="long">{{.Name}}</td></tr>
+{{end}}
+</table>
 
 {{end}}
 

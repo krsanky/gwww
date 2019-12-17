@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
-	"strings"
 
 	"github.com/gorilla/schema"
 	"github.com/justinas/nosurf"
@@ -14,11 +13,12 @@ import (
 )
 
 func AddRoutes(mux *http.ServeMux) {
-	mux.HandleFunc("/phrase/edit", Edit)
-	mux.HandleFunc("/phrase/lorem", Lorem)
-	mux.HandleFunc("/phrase/list", Phrases)
-	mux.HandleFunc("/phrase/new", New)
 	mux.HandleFunc("/phrase", Index)
+	mux.HandleFunc("/phrase/new", New)
+	mux.HandleFunc("/phrase/edit", Edit)
+	mux.HandleFunc("/phrase/edit/handle", Handler)
+	mux.HandleFunc("/phrase/list", Phrases)
+	mux.HandleFunc("/phrase/lorem", Lorem)
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
@@ -33,6 +33,21 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	web.Render(w, data, tmpls...)
 }
 
+func New(w http.ResponseWriter, r *http.Request) {
+	data, _ := web.TmplData(r)
+	bcs := breadcrumbs.New().Append("Home", "/")
+	bcs.Append("Projects", "/projects")
+	bcs.Append("Phrase", "/phrase")
+	bcs.AppendActive("New")
+	data["breadcrumbs"] = bcs
+	data["token"] = nosurf.Token(r)
+	tmpls := []string{
+		"base.html",
+		"breadcrumbs.tmpl",
+		"phrase/phrase.html"}
+	web.Render(w, data, tmpls...)
+}
+
 func Edit(w http.ResponseWriter, r *http.Request) {
 	data, _ := web.TmplData(r)
 	bcs := breadcrumbs.New().Append("Home", "/")
@@ -42,15 +57,14 @@ func Edit(w http.ResponseWriter, r *http.Request) {
 	data["breadcrumbs"] = bcs
 	data["token"] = nosurf.Token(r)
 
-	data["phrase"] = Phrase{}
 	pid_ := r.URL.Query().Get("p")
 	pid, _ := strconv.Atoi(pid_)
 	lg.Log.Printf("phrase.Edit() p:%d", pid)
-	phr, err := GetPhrase(pid)
+	phrase, err := GetPhrase(pid)
 	if err != nil {
 		data["error"] = err.Error()
 	} else {
-		data["phrase"] = phr
+		data["phrase"] = phrase
 	}
 
 	tmpls := []string{
@@ -60,52 +74,29 @@ func Edit(w http.ResponseWriter, r *http.Request) {
 	web.Render(w, data, tmpls...)
 }
 
-func New(w http.ResponseWriter, r *http.Request) {
-	data, _ := web.TmplData(r)
-	bcs := breadcrumbs.New().Append("Home", "/")
-	bcs.Append("Projects", "/projects")
-	bcs.Append("Phrase", "/phrase")
-
-	if strings.HasSuffix(r.URL.Path, "new") {
-		bcs.AppendActive("New")
-	} else {
-		bcs.AppendActive("Edit")
-	}
-
-	data["breadcrumbs"] = bcs
-	data["token"] = nosurf.Token(r)
-
-	if "POST" == r.Method {
-		err := r.ParseForm()
-		if err != nil {
-			lg.Log.Printf("ERR:%v", err)
-			data["error"] = fmt.Sprintf("ERR:%v", err)
-			goto Render
-		}
-		phrase := &Phrase{}
-		decoder := schema.NewDecoder()
-		decoder.IgnoreUnknownKeys(true)
-		err = decoder.Decode(phrase, r.PostForm)
-		if err != nil {
-			lg.Log.Printf("ERR:%v", err)
-			data["error"] = fmt.Sprintf("ERR schema:%v", err)
-			goto Render
-		}
-		err = phrase.Insert()
-		if err != nil {
-			data["error"] = fmt.Sprintf("ERR insert:%v", err)
-			goto Render
-		}
-		http.Redirect(w, r, "/msg?m=phrase+inserted", 303)
+func Handler(w http.ResponseWriter, r *http.Request) {
+	if "POST" != r.Method {
 		return
 	}
+	err := r.ParseForm()
+	if err != nil {
+		lg.Log.Printf("ERR:%v", err)
+		return
+	}
+	phrase := new(Phrase)
+	decoder := schema.NewDecoder()
+	decoder.IgnoreUnknownKeys(true)
+	lg.Log.Printf("pf:%v", r.PostForm)
+	err = decoder.Decode(phrase, r.PostForm)
+	if err != nil {
+		lg.Log.Printf("ERR:%v", err)
+	}
+	lg.Log.Printf("phrase.Id:%d path:%s", phrase.Id, phrase.Path)
+	//if phrase.Id == 0 //NEW else EDIT
 
-Render:
-	tmpls := []string{
-		"base.html",
-		"breadcrumbs.tmpl",
-		"phrase/phrase.html"}
-	web.Render(w, data, tmpls...)
+	//NEW
+	phrase.Insert()
+	http.Redirect(w, r, "/msg?m=new-phrase-inserted", 303)
 }
 
 func Phrases(w http.ResponseWriter, r *http.Request) {

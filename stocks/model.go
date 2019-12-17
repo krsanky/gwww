@@ -18,7 +18,6 @@ func (s *Stock) String() string {
 
 func (s *Stock) Insert() error {
 	sql := `INSERT INTO stock (symbol, name) VALUES ($1, $2)`
-	lg.Log.Printf("stocks.Insert().......")
 	_, err := db.DBX.Exec(sql, s.Symbol, s.Name)
 	return err
 }

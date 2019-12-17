@@ -14,7 +14,7 @@ type Phrase struct {
 	Path   string
 	Source string
 	Tags   string
-	Order  int `schema:"order_" db:"order_"`
+	Order  int `db:"order_"`
 }
 
 func (p *Phrase) String() string {
@@ -35,7 +35,7 @@ func (p *Phrase) Url() string {
 }
 
 func (p *Phrase) Insert() error {
-	lg.Log.Printf("INSERT phrase ...")
+	lg.Log.Printf("INSERT phrase: %s", p.String())
 
 	sql := `INSERT INTO phrase
 (phrase, tags, path, order_, source)

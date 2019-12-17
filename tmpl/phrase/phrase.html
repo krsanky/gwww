@@ -33,8 +33,9 @@ a.el {
 
 <p>{{if .error}}error:{{.error}}{{end}}</p>
 
-<form method=post action=/phrase>
+<form method=post action=/phrase/edit/handle>
 <input type="hidden" name="csrf_token" value="{{.token}}"> 
+<input type="hidden" name="phrase_id" value="{{.phrase.Id}}"> 
 
 Path:<br/>
 <input name="Path" type="text" value="{{.phrase.Path}}"><br/>
@@ -42,9 +43,10 @@ Tags:<br/>
 <input name="Tags" type="text" value="{{.phrase.Tags}}">
 <br/>
 
-Order:<br/>
+Order [{{.phrase.Order}}]:<br/>
 <select name=Order>
-	<option selected>0</option>
+	<option selected>-no-selection-</option>
+	<option>0</option>
 	<option>1</option>
 	<option>2</option>
 	<option>3</option>
