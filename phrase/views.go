@@ -17,7 +17,7 @@ func AddRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("/phrase/new", New)
 	mux.HandleFunc("/phrase/edit", Edit)
 	mux.HandleFunc("/phrase/edit/handle", Handler)
-	mux.HandleFunc("/phrase/list", Phrases)
+	mux.HandleFunc("/phrase/list", List)
 	mux.HandleFunc("/phrase/lorem", Lorem)
 }
 
@@ -99,7 +99,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/msg?m=new-phrase-inserted", 303)
 }
 
-func Phrases(w http.ResponseWriter, r *http.Request) {
+func List(w http.ResponseWriter, r *http.Request) {
 	data, _ := web.TmplData(r)
 	bcs := breadcrumbs.New().Append("Home", "/")
 	bcs.Append("Projects", "/projects")
@@ -123,7 +123,7 @@ func Phrases(w http.ResponseWriter, r *http.Request) {
 	tmpls := []string{
 		"base.html",
 		"breadcrumbs.tmpl",
-		"phrase/phrases.html"}
+		"phrase/list.html"}
 	web.Render(w, data, tmpls...)
 }
 

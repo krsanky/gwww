@@ -17,11 +17,14 @@ Tags:<br/>
 </form>
 
 {{if .phrases}}
-<ul>
+<table>
 {{range .phrases}}
-<li><a href="{{.Url}}">{{.String}}</a></li>
+<tr>
+<td><a href="{{.Url}}">{{.Id}}</a><td>
+<td>{{substr 0 35 .Phrase}}</td>
+</tr>
 {{end}}
-</ul>
+<table>
 {{end}}
 
 {{end}}

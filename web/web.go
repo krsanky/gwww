@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/Masterminds/sprig"
 	"oldcode.org/repo/go/gow/account"
 	"oldcode.org/repo/go/gow/breadcrumbs"
 	"oldcode.org/repo/go/gow/lg"
@@ -37,6 +38,10 @@ func init() {
 	}
 	phr_tmpl.AddFuncs(GlobalFuncMap)
 	breadcrumbs.AddFuncs(GlobalFuncMap)
+
+	for k, v := range sprig.FuncMap() {
+		GlobalFuncMap[k] = v
+	}
 }
 
 func TmplData(r *http.Request) (map[string]interface{}, error) {

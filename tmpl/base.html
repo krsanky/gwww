@@ -12,6 +12,13 @@
 <script src="/static/script.js"></script>
 <link rel="stylesheet" type="text/css" href="/static/jspanel.css">
 
+<style>
+.main_title {
+	color: none;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+</style>
 {{block "extra_head" .}}{{end}}
 </head>
 
@@ -32,7 +39,7 @@
 </span>
 
 {{/*<h1>heartsick for homeboy hoedown</h1>*/}}
-<h1><a href="/" style="color:none;text-decoration:none;text-transform:uppercase;">oldcode.org</a></h1>
+<h1><a href="/" class="main_title">oldcode.org</a></h1>
 
 {{block "breadcrumbs_block" .}}{{end}}
 
