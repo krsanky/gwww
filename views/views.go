@@ -6,9 +6,9 @@ import (
 	"strings"
 
 	svg "github.com/ajstarks/svgo"
-	"oldcode.org/repo/go/gow/breadcrumbs"
-	"oldcode.org/repo/go/gow/lg"
-	"oldcode.org/repo/go/gow/web"
+	"github.com/krsanky/gwww
+	"github.com/krsanky/gwww
+	"github.com/krsanky/gwww
 )
 
 var A_Z = []string{"A", "B", "C", "D", "E", "F", "G", "H", "I",

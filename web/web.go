@@ -9,9 +9,9 @@ import (
 	"strings"
 
 	"github.com/Masterminds/sprig"
-	"oldcode.org/repo/go/gow/account"
-	"oldcode.org/repo/go/gow/breadcrumbs"
-	"oldcode.org/repo/go/gow/lg"
+	"github.com/krsanky/gwww/account"
+	"github.com/krsanky/gwww/breadcrumbs"
+	"github.com/krsanky/gwww/lg"
 	phr_tmpl "oldcode.org/repo/go/gow/phrase/tmpl"
 )
 

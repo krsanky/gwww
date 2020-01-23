@@ -18,4 +18,3 @@ func init() {
 	Log = log.New(f, ":", log.Lshortfile)
 	Log.Println("opening logfile ...")
 }
-

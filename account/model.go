@@ -6,9 +6,9 @@ import (
 	"html/template"
 	"net/http"
 
-	"oldcode.org/repo/go/gow/db"
-	"oldcode.org/repo/go/gow/lg"
-	"oldcode.org/repo/go/gow/session"
+	"github.com/krsanky/gwww/db"
+	"github.com/krsanky/gwww/lg"
+	"github.com/krsanky/gwww/session"
 )
 
 type User struct {

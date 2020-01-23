@@ -6,24 +6,14 @@ import (
 	"net/http/fcgi"
 
 	"github.com/justinas/nosurf"
-	"oldcode.org/repo/go/gow/account"
-	account_view "oldcode.org/repo/go/gow/account/view"
-	"oldcode.org/repo/go/gow/canv_thing"
-	"oldcode.org/repo/go/gow/db"
-	"oldcode.org/repo/go/gow/geo"
-	"oldcode.org/repo/go/gow/lg"
-	"oldcode.org/repo/go/gow/music"
-	"oldcode.org/repo/go/gow/phrase"
-	"oldcode.org/repo/go/gow/radio"
-	"oldcode.org/repo/go/gow/routes"
-	"oldcode.org/repo/go/gow/scales"
-	"oldcode.org/repo/go/gow/session"
-	"oldcode.org/repo/go/gow/settings"
-	"oldcode.org/repo/go/gow/stocks"
-	"oldcode.org/repo/go/gow/univ"
-	"oldcode.org/repo/go/gow/urt"
-	"oldcode.org/repo/go/gow/xyz"
-	"oldcode.org/repo/go/gow/zz"
+	"github.com/krsanky/gwww/account"
+	account_view "github.com/krsanky/gwww/account/view"
+	"github.com/krsanky/gwww/db"
+	"github.com/krsanky/gwww/lg"
+	"github.com/krsanky/gwww/routes"
+	"github.com/krsanky/gwww/session"
+	"github.com/krsanky/gwww/settings"
+	"github.com/krsanky/gwww/xyz"
 )
 
 func setupRoutes() *http.ServeMux {
@@ -33,16 +23,6 @@ func setupRoutes() *http.ServeMux {
 	routes.AddRoutes(mux)
 	account_view.AddRoutes(mux)
 	xyz.AddRoutes(mux)
-	music.AddRoutes(mux)
-	urt.AddRoutes(mux)
-	geo.AddRoutes(mux)
-	zz.AddRoutes(mux)
-	canv_thing.AddRoutes(mux)
-	univ.AddRoutes(mux)
-	scales.AddRoutes(mux)
-	phrase.AddRoutes(mux)
-	radio.AddRoutes(mux)
-	stocks.AddRoutes(mux)
 
 	return mux
 }

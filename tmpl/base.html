@@ -2,78 +2,34 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>{{block "title" .}}oldcode{{end}}</title>
+<title>{{block "title" .}}gwww{{end}}</title>
+{{/*
 <link rel="stylesheet" type="text/css" href="/static/normalize.css">
-<link rel="stylesheet" type="text/css" href="/static/ttown.css">
+*/}}
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+{{/*
 <script src="/static/jquery-3.3.1.min.js"></script>
-<script src="/static/jspanel.js"></script>
-<script src="/static/script.js"></script>
-<link rel="stylesheet" type="text/css" href="/static/jspanel.css">
+*//}
 
-<style>
-.main_title {
-	color: none;
-	text-decoration: none;
-	text-transform: uppercase;
-}
-</style>
 {{block "extra_head" .}}{{end}}
 </head>
 
 <body>
 
-{{block "body" .}}
-
 <span class="top_links">
+{{/*
 {{if .page_user}}
-<a class="nav-link" href="/account/logout">logout</a>
-<a class="jspanel-link" data-thing1="123..." href="#">jspanel</a>
-<a href="/projects">projects</a> 
-<a href="#">hide-right-displays</a> 
-{{else}}
-<a href="/account/login2">login</a>
-{{end}}
-
-</span>
-
-{{/*<h1>heartsick for homeboy hoedown</h1>*/}}
-<h1><a href="/" class="main_title">oldcode.org</a></h1>
+*/}}
+<h1><a href="/">GWWW</a></h1>
 
 {{block "breadcrumbs_block" .}}{{end}}
 
 {{block "main" .}}{{end}}
-
-{{/*
-<footer>
-	<a class="h-card" rel="me author" href="https://oldcode.org/">Paul Wisehart</a> (c) 2019 | <a href="/feed.xml">RSS</a> | <a href="https://github.com/krsanky" rel="me">Github</a>
-</footer>
-*/}}
-
 {{end}}
 
 <script>
-
-$(function(){
-var jsp_opts = {
-	content: '<h3>content...</h3>',
-	theme: 'dark filled',
-};
-$('.jspanel-link').click(function(){
-	jsPanel.create(jsp_opts);
-});
-});
-/*
-theme: {
-        bgPanel: 'rgb(65, 126, 128)',
-        bgContent: '#67989A',
-        colorHeader: '#f0f0f0',
-        colorContent: '#333',
-		border: ...
-    },
-*/
-
+console.log("gwww ...");
 </script>
 {{block "extra_body" .}}{{end}}
 </body>

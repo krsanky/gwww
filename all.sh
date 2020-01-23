@@ -1,2 +1,2 @@
-make && go install ./... && ./gow restart 
+make && go install ./... && ./gwww restart 
 

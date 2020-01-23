@@ -1,39 +1,4 @@
-@import url("https://unpkg.com/spectre.css/dist/spectre.min.css");
-@import url("https://unpkg.com/spectre.css/dist/spectre-exp.min.css");
-@import url("https://unpkg.com/spectre.css/dist/spectre-icons.min.css");
-
-html, body {
-	font-family: monospace; 
 /*
 	color: #333;
 	background-color: #dededa;
 */
-	color: 111;
-	background-color: #eee;
-
-}
-
-ul {
-	list-style-type:none;
-}
-
-.column {
-/*	border: 1px dashed green;*/
-}
-
-header.navbar {
-/*	border-bottom: 1px dashed red;*/
-}
-
-.leftnav {
-/*	border-right: 1px dashed blue;*/
-}
-
-.btn-c1 {
-	background-color: #000;
-	color: #7F3;
-}
-.btn-c1:hover {
-	color: #7F3;
-}
-

@@ -3,8 +3,8 @@ package secure
 import (
 	"net/http"
 
-	"oldcode.org/repo/go/gow/account"
-	"oldcode.org/repo/go/gow/lg"
+	"github.com/krsanky/gwww/account"
+	"github.com/krsanky/gwww/lg"
 )
 /*
 three options to secure a page:

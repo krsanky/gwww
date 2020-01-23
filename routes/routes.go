@@ -9,8 +9,7 @@ package routes
 import (
 	"net/http"
 
-	v1 "oldcode.org/repo/go/gow/v1"
-	"oldcode.org/repo/go/gow/views"
+	"github.com/krsanky/gwww/views"
 )
 
 func AddRoutes(mux *http.ServeMux) {
@@ -22,7 +21,6 @@ func AddRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("/dm", views.DirectMsg)
 	mux.HandleFunc("/projects", views.Projects)
 
-	mux.HandleFunc("/v1/index", v1.Index)
 
 	//mux.HandleFunc("/page4",
 	//		func(w http.ResponseWriter, r *http.Request) { web.RenderPage(w, "page4", nil) })

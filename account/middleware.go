@@ -3,8 +3,8 @@ package account
 import (
 	"net/http"
 
-	"oldcode.org/repo/go/gow/lg"
-	"oldcode.org/repo/go/gow/session"
+	"github.com/krsanky/gwww/lg"
+	"github.com/krsanky/gwww/session"
 )
 
 var UserIdString = "_account__user_id_"

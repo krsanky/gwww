@@ -3,8 +3,6 @@ package breadcrumbs
 import (
 	"fmt"
 	"html/template"
-
-	"oldcode.org/repo/go/gow/lg"
 )
 
 type BCList struct {

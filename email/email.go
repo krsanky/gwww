@@ -7,8 +7,8 @@ import (
 	"os"
 	"text/template"
 
-	"oldcode.org/repo/go/gow/lg"
-	"oldcode.org/repo/go/gow/settings"
+	"github.com/krsanky/gwww/lg"
+	"github.com/krsanky/gwww/settings"
 )
 
 var (

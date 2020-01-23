@@ -1,19 +1,9 @@
+*.prv
 *.zip
 *.db
-tmpl2/
 log.txt
 go.sum
 
-URT_RADIO_RAW/
 settings.toml
-music.dump.sql*
-page_to_steal/
-db/dump/
-wiki/
-jspanel/
-Semantic-UI-CSS/
-static/semantic*
 
-tmpl/base-sem.html
-tmpl/xyz/semantic-ui.html
-nasdaqlisted.txt
+sql/

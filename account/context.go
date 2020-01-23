@@ -4,7 +4,7 @@ import "context"
 
 type key string
 
-var userKey key = "gow_account_user"
+var userKey key = "gwww_account_user"
 
 func ContextWithUser(ctx context.Context, u *User) context.Context {
 	return context.WithValue(ctx, userKey, u)
