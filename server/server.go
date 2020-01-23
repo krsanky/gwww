@@ -7,32 +7,26 @@ import (
 
 	"github.com/justinas/nosurf"
 	"github.com/krsanky/gwww/account"
-	account_view "github.com/krsanky/gwww/account/view"
 	"github.com/krsanky/gwww/db"
 	"github.com/krsanky/gwww/lg"
-	"github.com/krsanky/gwww/routes"
 	"github.com/krsanky/gwww/session"
 	"github.com/krsanky/gwww/settings"
-	"github.com/krsanky/gwww/xyz"
 )
 
-func setupRoutes() *http.ServeMux {
-	//mux is a handler, because ServeMux implements ServeHTTP()
-	mux := http.NewServeMux()
+var mux *http.ServeMux
 
-	routes.AddRoutes(mux)
-	account_view.AddRoutes(mux)
-	xyz.AddRoutes(mux)
+func init() {
+	mux = http.NewServeMux()
+}
 
-	return mux
+func Handle(path string, h http.Handler) {
+	mux.Handle(path, h)
 }
 
 func Serve(sfile string) {
 	settings.Init(sfile)
 
 	db.Init()
-
-	mux := setupRoutes()
 
 	// ORDER MATTERS and it's kind of reversed
 	h := nosurf.NewPure(mux)

@@ -2,9 +2,11 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 	"os"
 
 	"github.com/krsanky/gwww/server"
+	"github.com/krsanky/gwww/views"
 )
 
 func main() {
@@ -18,6 +20,7 @@ func main() {
 		switch arg1 := os.Args[1]; arg1 {
 		case "web":
 			settings := os.Args[2]
+			server.Handle("/", http.HandlerFunc(views.Index))
 			server.Serve(settings)
 		default:
 			usage()
