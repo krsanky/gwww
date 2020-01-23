@@ -3,6 +3,8 @@ package breadcrumbs
 import (
 	"fmt"
 	"html/template"
+
+	"github.com/krsanky/gwww/lg"
 )
 
 type BCList struct {

@@ -12,7 +12,6 @@ import (
 	"github.com/krsanky/gwww/account"
 	"github.com/krsanky/gwww/breadcrumbs"
 	"github.com/krsanky/gwww/lg"
-	phr_tmpl "oldcode.org/repo/go/gow/phrase/tmpl"
 )
 
 var GlobalFuncMap template.FuncMap
@@ -36,7 +35,6 @@ func init() {
 		"input_checked": InputChecked,
 		"test1":         Test1,
 	}
-	phr_tmpl.AddFuncs(GlobalFuncMap)
 	breadcrumbs.AddFuncs(GlobalFuncMap)
 
 	for k, v := range sprig.FuncMap() {

@@ -5,9 +5,9 @@ import (
 	"fmt"
 
 	"github.com/jmoiron/sqlx"
+	"github.com/krsanky/gwww/lg"
+	"github.com/krsanky/gwww/settings"
 	_ "github.com/lib/pq"
-	"oldcode.org/repo/go/gow/lg"
-	"oldcode.org/repo/go/gow/settings"
 )
 
 var DB *sql.DB

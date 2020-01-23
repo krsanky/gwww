@@ -11,13 +11,6 @@ import (
 func dbstuff() {
 	db.Drivers()
 	db.TestDB()
-	as, err := model.GetRawArtists()
-	if err != nil {
-		panic(err)
-	}
-	for _, a := range as {
-		fmt.Printf("a:%s\n", a)
-	}
 }
 
 func func_nil_string_test(str string) {

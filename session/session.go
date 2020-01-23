@@ -5,6 +5,8 @@ import (
 
 	"github.com/alexedwards/scs/postgresstore"
 	"github.com/alexedwards/scs/v2"
+	"github.com/krsanky/gwww/db"
+	"github.com/krsanky/gwww/lg"
 )
 
 var Session *scs.Session
