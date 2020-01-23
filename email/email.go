@@ -42,7 +42,7 @@ func Send_test() {
 		"123 This is the email body.\r\n")
 
 	//asd123 is the real from and sender
-	err := smtp.SendMail(hostp, auth, "gow+test@oldcode.org", to, msg)
+	err := smtp.SendMail(hostp, auth, "gwww+test@oldcode.org", to, msg)
 	if err != nil {
 		lg.Log.Printf("Send_test(): error sending email\n")
 	}

@@ -24,13 +24,6 @@ func LogFormData(r *http.Request) {
 
 func Index(w http.ResponseWriter, r *http.Request) {
 	data, _ := web.TmplData(r)
-	out, err := exec.Command("phoon").Output()
-	if err != nil {
-		lg.Log.Printf("ERR:%s", err.Error())
-		data["phoon"] = "err"
-	} else {
-		data["phoon"] = string(out)
-	}
 	tmpls := []string{
 		"base.html",
 		"index.html"}
