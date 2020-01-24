@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"net/http"
 	"os"
 
 	"github.com/krsanky/gwww/server"
@@ -13,9 +12,9 @@ func main() {
 	fmt.Printf("num args:%d\n", len(os.Args))
 	if len(os.Args) == 2 {
 		settings := os.Args[1]
-		server := server.NewServer()
-		server.Handle("/", http.HandlerFunc(views.Index))
-		server.Serve(settings)
+		server := server.NewServer(settings)
+		server.HandleFunc("/", views.Index)
+		server.Serve()
 	} else {
 		usage()
 	}

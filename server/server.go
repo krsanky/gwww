@@ -18,7 +18,10 @@ type Server struct {
 	mux  *http.ServeMux
 }
 
-func NewServer() *Server {
+func NewServer(sfile string) *Server {
+	settings.Init(sfile)
+	db.Init()
+
 	s := Server{}
 	s.mux = http.NewServeMux()
 	return &s
@@ -28,13 +31,13 @@ func (s Server) Handle(path string, h http.Handler) {
 	s.mux.Handle(path, h)
 }
 
-func (s Server) Serve(sfile string) {
-	settings.Init(sfile)
+func (s Server) HandleFunc(path string, h func(http.ResponseWriter, *http.Request)) {
+	s.mux.Handle(path, http.HandlerFunc(h))
+}
 
-	db.Init()
-
+func (s Server) Serve() {
 	// ORDER MATTERS and it's kind of reversed
-	h := nosurf.NewPure(s.mux) // <-----------------------
+	h := nosurf.NewPure(s.mux) // <----------------------- s.mux depoends on handlers being added
 	//h = M1(h, "->h1")
 	//h = secure.HHHEnforceSuperUser(h)
 	h = account.AddUser(h)
