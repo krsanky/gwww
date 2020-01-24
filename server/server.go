@@ -28,7 +28,6 @@ import (
 )
 
 type Server struct {
-	name string // bogus
 	mux  *http.ServeMux
 }
 
@@ -41,15 +40,15 @@ func NewServer(sfile string) *Server {
 	return &s
 }
 
-func (s Server) Handle(path string, h http.Handler) {
+func (s *Server) Handle(path string, h http.Handler) {
 	s.mux.Handle(path, h)
 }
 
-func (s Server) HandleFunc(path string, h func(http.ResponseWriter, *http.Request)) {
+func (s *Server) HandleFunc(path string, h func(http.ResponseWriter, *http.Request)) {
 	s.mux.Handle(path, http.HandlerFunc(h))
 }
 
-func (s Server) Serve() {
+func (s *Server) Serve() {
 	// ORDER MATTERS and it's kind of reversed
 	h := nosurf.NewPure(s.mux) // <----------------------- s.mux depoends on handlers being added
 	//h = M1(h, "->h1")
