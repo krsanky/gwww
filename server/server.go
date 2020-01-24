@@ -13,23 +13,28 @@ import (
 	"github.com/krsanky/gwww/settings"
 )
 
-var mux *http.ServeMux
-
-func init() {
-	mux = http.NewServeMux()
+type Server struct {
+	name string // bogus
+	mux  *http.ServeMux
 }
 
-func Handle(path string, h http.Handler) {
-	mux.Handle(path, h)
+func NewServer() *Server {
+	s := Server{}
+	s.mux = http.NewServeMux()
+	return &s
 }
 
-func Serve(sfile string) {
+func (s Server) Handle(path string, h http.Handler) {
+	s.mux.Handle(path, h)
+}
+
+func (s Server) Serve(sfile string) {
 	settings.Init(sfile)
 
 	db.Init()
 
 	// ORDER MATTERS and it's kind of reversed
-	h := nosurf.NewPure(mux)
+	h := nosurf.NewPure(s.mux) // <-----------------------
 	//h = M1(h, "->h1")
 	//h = secure.HHHEnforceSuperUser(h)
 	h = account.AddUser(h)

@@ -13,7 +13,7 @@ rc_stop() {
 
 rc_start() {
 	echo "start"
-	$name web $gwww_settings &
+	$name $gwww_settings &
 }
 
 if [ $# -eq 1 ] ; then
