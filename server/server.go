@@ -28,7 +28,7 @@ import (
 )
 
 type Server struct {
-	mux  *http.ServeMux
+	mux *http.ServeMux
 }
 
 func NewServer(sfile string) *Server {
@@ -38,6 +38,11 @@ func NewServer(sfile string) *Server {
 	s := Server{}
 	s.mux = http.NewServeMux()
 	return &s
+}
+
+// for now this is just for to make refactoring easier
+func (s *Server) Mux() *http.ServeMux {
+	return s.mux
 }
 
 func (s *Server) Handle(path string, h http.Handler) {
