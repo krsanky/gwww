@@ -14,7 +14,7 @@ require (
 	github.com/huandu/xstrings v1.3.0 // indirect
 	github.com/imdario/mergo v0.3.8 // indirect
 	github.com/jmoiron/sqlx v1.2.0
-	github.com/justinas/nosurf v1.1.0
+	github.com/justinas/nosurf v1.1.1
 	github.com/lib/pq v1.3.0
 	github.com/mitchellh/copystructure v1.0.0 // indirect
 	github.com/pelletier/go-toml v1.6.0
