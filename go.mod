@@ -19,6 +19,6 @@ require (
 	github.com/mitchellh/copystructure v1.0.0 // indirect
 	github.com/pelletier/go-toml v1.6.0
 	github.com/stretchr/testify v1.4.0 // indirect
-	golang.org/x/crypto v0.0.0-20200117160349-530e935923ad // indirect
+	golang.org/x/crypto v0.1.0 // indirect
 	google.golang.org/appengine v1.6.5 // indirect
 )
